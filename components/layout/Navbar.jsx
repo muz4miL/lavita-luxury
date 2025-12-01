@@ -3,7 +3,8 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Menu, X, ChevronDown } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
+import NavDropdown from './NavDropdown';
 
 const navConfig = [
   { label: 'Home', href: '/' },
@@ -40,7 +41,6 @@ const navConfig = [
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [activeDropdown, setActiveDropdown] = useState(null);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   useEffect(() => {
@@ -60,24 +60,7 @@ export default function Navbar() {
   const toggleDrawer = () => setIsDrawerOpen((prev) => !prev);
   const closeDrawer = () => setIsDrawerOpen(false);
 
-  const renderDropdown = (items, parentLabel) => (
-    <div
-      className={`absolute top-[2.75rem] left-1/2 -translate-x-1/2 min-w-[220px] bg-[rgba(5,17,14,0.98)] border border-[rgba(200,155,123,0.25)] rounded-xl p-4 shadow-[0_30px_60px_rgba(0,0,0,0.35)] transition-all duration-250 ease-out origin-top-center ${activeDropdown === parentLabel
-        ? 'opacity-100 visible translate-y-2 animate-[fadeUp_0.25s_ease_forwards]'
-        : 'opacity-0 invisible'
-        }`}
-    >
-      {items.map((item) => (
-        <Link
-          key={item.label}
-          href={item.href}
-          className="block font-[family-name:var(--font-manrope)] text-[0.82rem] text-[rgba(245,245,245,0.9)] py-[0.35rem] no-underline transition-all duration-300 hover:text-[#c89b7b] hover:translate-x-1"
-        >
-          {item.label}
-        </Link>
-      ))}
-    </div>
-  );
+
 
   return (
     <header
@@ -111,23 +94,11 @@ export default function Navbar() {
           {navConfig.map((item) => {
             if (item.items) {
               return (
-                <div
+                <NavDropdown
                   key={item.label}
-                  className="relative"
-                  onMouseEnter={() => setActiveDropdown(item.label)}
-                  onMouseLeave={() => setActiveDropdown(null)}
-                  onFocus={() => setActiveDropdown(item.label)}
-                >
-                  <button
-                    className="flex items-center gap-[0.35rem] bg-transparent border-none cursor-pointer p-0 font-[family-name:var(--font-manrope)] text-[0.78rem] tracking-[0.18em] uppercase text-[rgba(245,245,245,0.85)] no-underline transition-colors duration-300 hover:text-[#c89b7b]"
-                    type="button"
-                    aria-haspopup="true"
-                  >
-                    <span>{item.label}</span>
-                    <ChevronDown className="w-[14px] h-[14px]" />
-                  </button>
-                  {renderDropdown(item.items, item.label)}
-                </div>
+                  title={item.label}
+                  items={item.items}
+                />
               );
             }
 
