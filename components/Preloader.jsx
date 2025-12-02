@@ -43,14 +43,21 @@ export default function Preloader() {
                         initial={{ y: 0 }}
                         exit={{
                             y: '-100%',
-                            borderBottom: '1px solid rgba(200, 155, 123, 0.2)'
                         }}
                         transition={{
                             duration: 1.2,
                             ease: [0.76, 0, 0.24, 1], // "Cinematic" Ease
                             delay: 0.2
                         }}
-                    />
+                    >
+                        {/* Hairline border that appears during split */}
+                        <motion.div
+                            className="absolute bottom-0 left-0 right-0 h-[1px] bg-[#C89B7B]/20"
+                            initial={{ opacity: 0 }}
+                            exit={{ opacity: 1 }}
+                            transition={{ duration: 0.3, delay: 0.2 }}
+                        />
+                    </motion.div>
 
                     {/* Bottom Curtain - No visible border initially */}
                     <motion.div
@@ -84,7 +91,7 @@ export default function Preloader() {
                                         fill="none"
                                         xmlns="http://www.w3.org/2000/svg"
                                     >
-                                        {/* Outer Octagon */}
+                                        {/* Outer Octagon - Refined stroke */}
                                         <motion.path
                                             d="M 200 50 L 300 100 L 350 200 L 300 300 L 200 350 L 100 300 L 50 200 L 100 100 Z"
                                             stroke="#C89B7B"
@@ -112,9 +119,9 @@ export default function Preloader() {
                                         />
                                     </svg>
 
-                                    {/* B. The Logo Centerpiece - Mathematical Absolute Centering */}
+                                    {/* B. The Logo Centerpiece - Mathematically Centered */}
                                     <motion.div
-                                        className="absolute inset-0 m-auto w-48 h-48 "
+                                        className="absolute inset-0 m-auto w-48 h-48 top-[15%]"
                                         initial={{ opacity: 0, scale: 0.9, filter: 'blur(12px)' }}
                                         animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
                                         transition={{
@@ -131,27 +138,31 @@ export default function Preloader() {
                                             priority
                                         />
 
-                                        {/* The "Liquid Copper" Shimmer - Brand Color with Sharp Skew */}
+                                        {/* Single Premium Glass Shimmer - Clean Sweep */}
                                         <motion.div
-                                            className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-[#C89B7B]/50 to-transparent skew-x-[20deg]"
+                                            className="absolute inset-0 w-[150%] h-full -left-[25%] bg-gradient-to-r from-transparent via-[#C89B7B]/40 to-transparent"
+                                            style={{
+                                                filter: 'blur(20px)',
+                                                transform: 'skewX(-20deg)',
+                                            }}
                                             initial={{ x: '-150%' }}
                                             animate={{ x: '150%' }}
                                             transition={{
                                                 duration: 1.5,
                                                 delay: 1.8,
-                                                ease: "easeInOut"
+                                                ease: [0.16, 1, 0.3, 1]
                                             }}
                                         />
                                     </motion.div>
 
                                     {/* C. The Tagline (Absolute Positioned for perfect spacing) */}
                                     <motion.div
-                                        className="absolute bottom-16 left-1/2 -translate-x-1/2"
+                                        className="absolute bottom-16 left-1/2 -translate-x-1/2 bottom-[5%] "
                                         initial={{ opacity: 0, y: 20 }}
                                         animate={{ opacity: 0.8, y: 0 }}
                                         transition={{ duration: 1, delay: 2.2, ease: "easeOut" }}
                                     >
-                                        <p className="font-[family-name:var(--font-manrope)] text-[10px] md:text-xs tracking-[0.4em] uppercase text-[#C89B7B] whitespace-nowrap">
+                                        <p className="font-[family-name:var(--font-manrope)] text-[10px] md:text-[15px] tracking-[0.4em] uppercase text-[#C89B7B] whitespace-nowrap">
                                             Breathe Life &nbsp;•&nbsp; Breathe Nature
                                         </p>
                                     </motion.div>
@@ -162,8 +173,11 @@ export default function Preloader() {
                     </div>
 
                     {/* --- LAYER 3: Global Texture Overlay (Maintains grain during load) --- */}
-                    <div className="absolute inset-0 opacity-[0.03] pointer-events-none z-[60]"
-                        style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}
+                    <div
+                        className="absolute inset-0 opacity-[0.03] pointer-events-none z-[60]"
+                        style={{
+                            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`
+                        }}
                     />
                 </div>
             )}

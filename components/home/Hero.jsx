@@ -172,7 +172,7 @@ export default function Hero() {
           {/* Elegant Spinner */}
           <div className="relative w-16 h-16">
             <div className="absolute inset-0 border-4 border-white/10 rounded-full"></div>
-            <div className="absolute inset-0 border-4 border-transparent border-t-[#d4af37] rounded-full animate-spin"></div>
+            <div className="absolute inset-0 border-4 border-transparent border-t-[#C89B7B] rounded-full animate-spin"></div>
           </div>
 
           {/* Loading Text */}
@@ -244,7 +244,7 @@ export default function Hero() {
         <div className="max-w-2xl space-y-4 md:space-y-6 animate-[fadeSlideUp_0.8s_cubic-bezier(0.16,1,0.3,1)_0.5s_both]">
 
           {/* Small Tagline - Gold accent */}
-          <p className="text-[#d4af37] tracking-[0.2em] text-xs md:text-sm font-bold uppercase drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
+          <p className="text-[#C89B7B] tracking-[0.2em] text-xs md:text-sm font-bold uppercase drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
             2,804 Meters Above Ordinary
           </p>
 
@@ -261,7 +261,7 @@ export default function Hero() {
 
           {/* CTA Buttons - Consistent gold color (FIX #2) */}
           <div className="flex flex-col sm:flex-row gap-4 pt-4 md:pt-6">
-            <button className="bg-[#d4af37] text-black px-10 md:px-12 py-3.5 md:py-4 text-xs md:text-sm font-[family-name:var(--font-manrope)] font-bold uppercase tracking-[0.2em] hover:bg-white transition-all duration-300 hover:scale-105 shadow-[0_8px_30px_rgba(212,175,55,0.4)] hover:shadow-[0_12px_40px_rgba(255,255,255,0.5)]">
+            <button className="bg-[#C89B7B] text-black px-10 md:px-12 py-3.5 md:py-4 text-xs md:text-sm font-[family-name:var(--font-manrope)] font-bold uppercase tracking-[0.2em] hover:bg-white transition-all duration-300 hover:scale-105 shadow-[0_8px_30px_rgba(200,155,123,0.4)] hover:shadow-[0_12px_40px_rgba(255,255,255,0.5)]">
               Begin Your Journey
             </button>
 
@@ -280,7 +280,7 @@ export default function Hero() {
             className="w-10 md:w-12 h-1 rounded-full bg-white/20 overflow-hidden backdrop-blur-sm"
           >
             <div
-              className="h-full bg-[#d4af37] shadow-[0_0_16px_rgba(212,175,55,0.8)] transition-all duration-500"
+              className="h-full bg-[#C89B7B] shadow-[0_0_16px_rgba(200,155,123,0.8)] transition-all duration-500"
               style={{
                 width: activeSlide === index ? '100%' : '0%'
               }}
@@ -290,12 +290,12 @@ export default function Hero() {
       </div> */}
 
       {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-30 animate-[fadeIn_1s_ease-out_2s_both]">
+      {/* <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-30 animate-[fadeIn_1s_ease-out_2s_both]">
         <div className="w-6 h-10 border-2 border-white/40 rounded-full flex justify-center pt-2 backdrop-blur-sm bg-black/20 shadow-xl">
-          <div className="w-1 h-2 bg-[#d4af37] rounded-full animate-[scrollBounce_2s_ease-in-out_infinite] shadow-[0_0_8px_rgba(212,175,55,0.8)]" />
+          <div className="w-1 h-2 bg-[#C89B7B] rounded-full animate-[scrollBounce_2s_ease-in-out_infinite] shadow-[0_0_8px_rgba(200,155,123,0.8)]" />
         </div>
         <ChevronDown className="w-4 h-4 text-white/50 animate-[scrollChevronBounce_2s_ease-in-out_infinite] drop-shadow-lg" />
-      </div>
+      </div> */}
     </section>
   );
 }
