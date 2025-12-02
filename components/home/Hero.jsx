@@ -2,7 +2,7 @@
 
 import { useRef, useState, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { EffectFade, Autoplay } from 'swiper/modules';
+import { EffectFade } from 'swiper/modules';
 import { ChevronDown } from 'lucide-react';
 
 // Import Swiper styles
@@ -13,6 +13,8 @@ export default function Hero() {
   const swiperRef = useRef(null);
   const videoRefs = useRef([]);
   const [activeSlide, setActiveSlide] = useState(0);
+  const [isVideoReady, setIsVideoReady] = useState(false);
+  const [videosLoaded, setVideosLoaded] = useState([false, false]);
 
   const videos = [
     '/hero-videos/hero1.mp4',
@@ -25,12 +27,21 @@ export default function Hero() {
     }
   };
 
-  // Ensure first video plays on mount + handle browser power-saving
+  // Handle video loading and initial setup
   useEffect(() => {
-    // Small delay to ensure video is ready before playing
-    const playFirstVideo = () => {
-      const firstVideo = videoRefs.current[0];
+    const firstVideo = videoRefs.current[0];
+
+    // Handler for when first video can play through
+    const handleFirstVideoReady = () => {
+      setVideosLoaded(prev => {
+        const newState = [...prev];
+        newState[0] = true;
+        return newState;
+      });
+
+      // Play the first video immediately
       if (firstVideo) {
+        firstVideo.currentTime = 0;
         firstVideo.play()
           .catch(err => {
             // Silently retry if interrupted by power saving
@@ -39,10 +50,31 @@ export default function Hero() {
             }
           });
       }
+
+      // Smooth fade-in after a small buffer to ensure smooth start
+      setTimeout(() => {
+        setIsVideoReady(true);
+      }, 300);
     };
 
-    // Play after component is mounted
-    const timer = setTimeout(playFirstVideo, 100);
+    // Handler for second video
+    const handleSecondVideoReady = () => {
+      setVideosLoaded(prev => {
+        const newState = [...prev];
+        newState[1] = true;
+        return newState;
+      });
+    };
+
+    // Attach event listeners
+    if (firstVideo) {
+      firstVideo.addEventListener('canplaythrough', handleFirstVideoReady, { once: true });
+    }
+
+    const secondVideo = videoRefs.current[1];
+    if (secondVideo) {
+      secondVideo.addEventListener('canplaythrough', handleSecondVideoReady, { once: true });
+    }
 
     // Resume playback when tab becomes visible again
     const handleVisibilityChange = () => {
@@ -54,10 +86,75 @@ export default function Hero() {
     document.addEventListener('visibilitychange', handleVisibilityChange);
 
     return () => {
-      clearTimeout(timer);
+      if (firstVideo) {
+        firstVideo.removeEventListener('canplaythrough', handleFirstVideoReady);
+      }
+      if (secondVideo) {
+        secondVideo.removeEventListener('canplaythrough', handleSecondVideoReady);
+      }
       document.removeEventListener('visibilitychange', handleVisibilityChange);
     };
   }, []);
+
+  // Handle video playback based on active slide - CRITICAL for sequential playback
+  useEffect(() => {
+    const currentVideo = videoRefs.current[activeSlide];
+
+    if (!currentVideo) return;
+
+    // Pause all other videos
+    videoRefs.current.forEach((video, index) => {
+      if (video && index !== activeSlide) {
+        video.pause();
+        video.currentTime = 0; // Reset to beginning for next play
+      }
+    });
+
+    // Play the current video from the beginning
+    currentVideo.currentTime = 0;
+    currentVideo.play().catch(err => {
+      console.log('Video play error:', err);
+    });
+
+  }, [activeSlide]);
+
+  // Handle video end events to trigger next slide
+  useEffect(() => {
+    const handleVideoEnd = (index) => {
+      // When a video ends, move to the next slide
+      if (swiperRef.current && swiperRef.current.swiper) {
+        const swiper = swiperRef.current.swiper;
+
+        // If we're at the last video, go back to first (rewind)
+        if (index === videos.length - 1) {
+          swiper.slideTo(0);
+        } else {
+          swiper.slideNext();
+        }
+      }
+    };
+
+    // Attach ended event listeners to all videos
+    videoRefs.current.forEach((video, index) => {
+      if (video) {
+        const handler = () => handleVideoEnd(index);
+        video.addEventListener('ended', handler);
+
+        // Store handler for cleanup
+        video._endHandler = handler;
+      }
+    });
+
+    return () => {
+      // Cleanup event listeners
+      videoRefs.current.forEach((video) => {
+        if (video && video._endHandler) {
+          video.removeEventListener('ended', video._endHandler);
+          delete video._endHandler;
+        }
+      });
+    };
+  }, [videos.length]);
 
   const handleSlideChange = (swiper) => {
     const newIndex = swiper.activeIndex;
@@ -66,22 +163,40 @@ export default function Hero() {
 
   return (
     <section className="relative w-full h-screen overflow-hidden bg-black">
-      {/* VIDEO CAROUSEL */}
-      <div className="absolute inset-0 w-full h-full">
+      {/* PREMIUM LOADING STATE */}
+      <div
+        className={`absolute inset-0 z-50 flex items-center justify-center bg-black transition-opacity duration-700 ${isVideoReady ? 'opacity-0 pointer-events-none' : 'opacity-100'
+          }`}
+      >
+        <div className="flex flex-col items-center gap-6">
+          {/* Elegant Spinner */}
+          <div className="relative w-16 h-16">
+            <div className="absolute inset-0 border-4 border-white/10 rounded-full"></div>
+            <div className="absolute inset-0 border-4 border-transparent border-t-[#d4af37] rounded-full animate-spin"></div>
+          </div>
+
+          {/* Loading Text */}
+          <p className="text-white/60 text-sm font-[family-name:var(--font-manrope)] tracking-[0.2em] uppercase animate-pulse">
+            Preparing Experience
+          </p>
+        </div>
+      </div>
+
+      {/* VIDEO CAROUSEL - Fades in when ready */}
+      <div
+        className={`absolute inset-0 w-full h-full transition-opacity duration-700 ${isVideoReady ? 'opacity-100' : 'opacity-0'
+          }`}
+      >
         <Swiper
           ref={swiperRef}
-          modules={[EffectFade, Autoplay]}
+          modules={[EffectFade]}
           effect="fade"
           fadeEffect={{ crossFade: true }}
-          speed={1200}
+          speed={1500}
           loop={false}
           rewind={true}
           slidesPerView={1}
-          autoplay={{
-            delay: 8000,
-            disableOnInteraction: false,
-            pauseOnMouseEnter: false,
-          }}
+          allowTouchMove={false}
           onSlideChange={handleSlideChange}
           className="w-full h-full"
         >
@@ -89,8 +204,6 @@ export default function Hero() {
             <SwiperSlide key={`video-${index}`} className="w-full h-full">
               <video
                 ref={(el) => addVideoRef(el, index)}
-                autoPlay
-                loop
                 muted
                 playsInline
                 preload="auto"
