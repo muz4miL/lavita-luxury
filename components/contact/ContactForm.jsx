@@ -100,13 +100,25 @@ const ContactForm = () => {
 
     return (
         <>
+            {/* Override browser autofill styles */}
+            <style jsx>{`
+                input:-webkit-autofill,
+                input:-webkit-autofill:hover,
+                input:-webkit-autofill:focus,
+                input:-webkit-autofill:active {
+                    -webkit-box-shadow: 0 0 0 1000px rgba(0, 0, 0, 0.3) inset !important;
+                    -webkit-text-fill-color: #f5f3f0 !important;
+                    transition: background-color 5000s ease-in-out 0s;
+                    caret-color: #f5f3f0 !important;
+                }
+            `}</style>
             {/* Hero Section */}
             <section
                 ref={heroRef}
                 className="relative h-[45vh] w-full overflow-hidden flex items-center justify-center bg-midnight-pine"
             >
                 {/* Seamless blend from previous section */}
-              <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black/60 to-transparent pointer-events-none z-10" />
+                <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black/60 to-transparent pointer-events-none z-10" />
 
 
                 {/* Noise Texture Overlay */}
@@ -129,15 +141,11 @@ const ContactForm = () => {
 
                 {/* Content with Framer Motion */}
                 <div className="relative z-20 text-center px-4 max-w-4xl mx-auto">
-                    <motion.span
-                        custom={0}
-                        initial="hidden"
-                        animate={heroInView ? "visible" : "hidden"}
-                        variants={heroTextVariants}
-                        className="block text-brushed-copper tracking-[0.3em] text-xs md:text-sm font-bold mb-6 uppercase font-[family-name:var(--font-manrope)]"
-                    >
-                        At Your Service
-                    </motion.span>
+                    <div className="flex items-center justify-center gap-5 mb-5">
+                        <span className="w-10 h-px opacity-60" style={{ background: 'linear-gradient(90deg, transparent 0%, var(--brushed-copper) 100%)' }} />
+                        <span className="font-[family-name:var(--font-manrope)] text-[0.6875rem] tracking-[0.25em] uppercase text-[var(--brushed-copper)] font-semibold">At Your Service</span>
+                        <span className="w-10 h-px opacity-60" style={{ background: 'linear-gradient(90deg, var(--brushed-copper) 0%, transparent 100%)' }} />
+                    </div>
 
                     <motion.h1
                         custom={1}
@@ -183,15 +191,11 @@ const ContactForm = () => {
 
                         {/* LEFT COLUMN - Typography Section */}
                         <div className="space-y-6 lg:pr-8 pb-32">
-                            <motion.p
-                                custom={0}
-                                initial="hidden"
-                                animate={sectionInView ? "visible" : "hidden"}
-                                variants={textVariants}
-                                className="text-brushed-copper text-xs tracking-[0.4em] uppercase font-[family-name:var(--font-manrope)] font-medium opacity-70"
-                            >
-                                At Your Service
-                            </motion.p>
+                            <div className="flex items-center justify-start gap-5 mb-5">
+                                <span className="w-10 h-px opacity-60" style={{ background: 'linear-gradient(90deg, transparent 0%, var(--brushed-copper) 100%)' }} />
+                                <span className="font-[family-name:var(--font-manrope)] text-[0.6875rem] tracking-[0.25em] uppercase text-[var(--brushed-copper)] font-semibold">At Your Service</span>
+                                <span className="w-10 h-px opacity-60" style={{ background: 'linear-gradient(90deg, var(--brushed-copper) 0%, transparent 100%)' }} />
+                            </div>
 
                             <motion.h2
                                 custom={1}
@@ -201,7 +205,7 @@ const ContactForm = () => {
                                 className="font-[family-name:var(--font-playfair)] text-5xl md:text-6xl lg:text-7xl text-alabaster-mist leading-[1.1]"
                             >
                                 Let's Get In{' '}
-                                <span className="italic text-white/90">Touch</span>
+                                <span className="text-white/90">Touch</span>
                             </motion.h2>
 
                             <motion.p
@@ -247,7 +251,7 @@ const ContactForm = () => {
                                         name="name"
                                         required
                                         placeholder="Full Name"
-                                        className="w-full bg-black/20 border border-white/10 rounded-full px-6 py-4 text-alabaster-mist placeholder:text-white/30 focus:outline-none focus:border-brushed-copper focus:bg-black/30 transition-all duration-300 font-[family-name:var(--font-manrope)]"
+                                        className="w-full bg-black/20 border border-white/10 rounded-full px-6 py-4 text-alabaster-mist placeholder:text-white/30 focus:outline-none focus:border-brushed-copper focus:bg-black/30 transition-all duration-300 font-[family-name:var(--font-manrope)] autofill:bg-black/30 autofill:text-alabaster-mist autofill:shadow-[inset_0_0_0px_1000px_rgba(0,0,0,0.3)]"
                                         onChange={handleChange}
                                     />
                                 </div>
@@ -259,7 +263,7 @@ const ContactForm = () => {
                                         name="email"
                                         required
                                         placeholder="Email Address"
-                                        className="w-full bg-black/20 border border-white/10 rounded-full px-6 py-4 text-alabaster-mist placeholder:text-white/30 focus:outline-none focus:border-brushed-copper focus:bg-black/30 transition-all duration-300 font-[family-name:var(--font-manrope)]"
+                                        className="w-full bg-black/20 border border-white/10 rounded-full px-6 py-4 text-alabaster-mist placeholder:text-white/30 focus:outline-none focus:border-brushed-copper focus:bg-black/30 transition-all duration-300 font-[family-name:var(--font-manrope)] autofill:bg-black/30 autofill:text-alabaster-mist autofill:shadow-[inset_0_0_0px_1000px_rgba(0,0,0,0.3)]"
                                         onChange={handleChange}
                                     />
                                 </div>
@@ -270,7 +274,7 @@ const ContactForm = () => {
                                         type="tel"
                                         name="phone"
                                         placeholder="Contact Number"
-                                        className="w-full bg-black/20 border border-white/10 rounded-full px-6 py-4 text-alabaster-mist placeholder:text-white/30 focus:outline-none focus:border-brushed-copper focus:bg-black/30 transition-all duration-300 font-[family-name:var(--font-manrope)]"
+                                        className="w-full bg-black/20 border border-white/10 rounded-full px-6 py-4 text-alabaster-mist placeholder:text-white/30 focus:outline-none focus:border-brushed-copper focus:bg-black/30 transition-all duration-300 font-[family-name:var(--font-manrope)] autofill:bg-black/30 autofill:text-alabaster-mist autofill:shadow-[inset_0_0_0px_1000px_rgba(0,0,0,0.3)]"
                                         onChange={handleChange}
                                     />
                                 </div>
