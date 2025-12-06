@@ -11,10 +11,10 @@ const navConfig = [
   {
     label: 'The Resort',
     items: [
-      { label: 'Our Story', href: '/#our-story' },
-      { label: 'Vertical Garden', href: '/#vertical-garden' },
-      { label: 'Mini Museum', href: '/#mini-museum' },
-      { label: 'Gallery', href: '/#gallery' },
+      { label: 'Our Story', href: '/resort/our-story' },
+      { label: 'Vertical Garden', href: '/resort/vertical-garden' },
+      { label: 'Mini Museum', href: '/resort/mini-museum' },
+      { label: 'Gallery', href: '/resort/gallery' },
     ],
   },
   { label: 'Suites & Investment', href: '/suites' },
