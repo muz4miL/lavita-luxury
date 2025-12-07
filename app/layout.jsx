@@ -1,6 +1,6 @@
 import { Playfair_Display, Manrope } from 'next/font/google';
-import { Navbar, Footer } from '@/components/layout';
-import Preloader from '@/components/Preloader';
+import { Navbar, Footer } from '../components/layout';
+import Preloader from '../components/Preloader';
 import "./globals.css";
 
 const playfair = Playfair_Display({

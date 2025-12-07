@@ -1,4 +1,4 @@
-import { Hero, Intro, BentoGrid, OpenSky, PreFooter } from '@/components/home';
+import { Hero, Intro, BentoGrid, OpenSky, PreFooter } from '../components/home';
 
 export default function Home() {
   return (

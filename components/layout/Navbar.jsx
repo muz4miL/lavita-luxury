@@ -21,7 +21,7 @@ const navConfig = [
   {
     label: 'Experiences',
     items: [
-      { label: 'Stargazing Observatory', href: '/#stargazing-observatory' },
+      { label: 'Stargazing Observatory', href: '/experiences/observatory' },
       { label: 'Jeep Forest Ride', href: '/#jeep-forest-ride' },
       { label: 'Night Skiing', href: '/#night-skiing' },
       { label: 'Wildlife Sanctuary', href: '/#wildlife-sanctuary' },
