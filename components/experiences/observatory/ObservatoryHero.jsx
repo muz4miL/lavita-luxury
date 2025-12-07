@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import styles from "./ObservatoryHero.module.css";
 
-const observatoryImage = "/images/observatory.jpg"
+const observatoryImage = "/images/observatory-0.jpg"
 
 export default function ObservatoryHero() {
     return (
@@ -114,54 +114,57 @@ export default function ObservatoryHero() {
                     >
                         {/* Octagon Wrapper Container - Position relative for badge anchoring */}
                         <div className="relative w-full h-full">
-                            {/* Outer Border (Thick + Glowing) */}
-                            <div className={`${styles.octagonWrapper} ${styles.outerBorder}`}>
-                                {/* Inner Border (Thin) */}
-                                <div className={`${styles.octagonWrapper} ${styles.innerBorder}`}>
-                                    {/* Octagon Image */}
-                                    <motion.div
-                                        initial={{ scale: 0.9, opacity: 0 }}
-                                        animate={{ scale: 1, opacity: 1 }}
-                                        transition={{ duration: 1, delay: 0.6, ease: "easeOut" }}
-                                        className={`${styles.octagonWrapper} ${styles.imageContainer}`}
-                                    >
-                                        <Image
-                                            src={observatoryImage}
-                                            alt="Observatory stargazing experience"
-                                            fill
-                                            className="object-cover"
-                                        />
-                                    </motion.div>
-                                </div>
-                            </div>
-
-                            {/* Floating Location Badge - Now inside octagon container */}
-                            <motion.div
-                                className={styles.locationBadge}
-                                initial={{ y: 40, opacity: 0 }}
-                                animate={{ y: 0, opacity: 1 }}
-                                transition={{ duration: 1, delay: 0.9, ease: "easeOut" }}
-                            >
-                                {/* Frosted Glass Border */}
-                                <div className="absolute inset-0 border border-white/30 rounded-sm z-10" />
-
-                                {/* Badge Content */}
-                                <div className="w-full h-full bg-gradient-to-br from-white/5 via-black/40 to-black/60 flex flex-col items-center justify-center relative rounded-sm">
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-
-                                    <div className="relative z-10 text-center space-y-2">
-                                        <p className="font-sans text-[0.65rem] tracking-[0.4em] uppercase text-[#C89B7B] font-medium">
-                                            Malam Jabba, PK
-                                        </p>
-                                        <p className="font-serif text-2xl lg:text-3xl text-white italic">
-                                            9,200ft
-                                        </p>
-                                        <p className="font-sans text-[0.6rem] tracking-[0.3em] uppercase text-white/50">
-                                            Elevation
-                                        </p>
+                            {/* Badge + Octagon Wrapper - Invisible container for both */}
+                            <div className={styles.badgeOctagonWrapper}>
+                                {/* Outer Border (Thick + Glowing) */}
+                                <div className={`${styles.octagonWrapper} ${styles.outerBorder}`}>
+                                    {/* Inner Border (Thin) */}
+                                    <div className={`${styles.octagonWrapper} ${styles.innerBorder}`}>
+                                        {/* Octagon Image */}
+                                        <motion.div
+                                            initial={{ scale: 0.9, opacity: 0 }}
+                                            animate={{ scale: 1, opacity: 1 }}
+                                            transition={{ duration: 1, delay: 0.6, ease: "easeOut" }}
+                                            className={`${styles.octagonWrapper} ${styles.imageContainer}`}
+                                        >
+                                            <Image
+                                                src={observatoryImage}
+                                                alt="Observatory stargazing experience"
+                                                fill
+                                                className="object-cover"
+                                            />
+                                        </motion.div>
                                     </div>
                                 </div>
-                            </motion.div>
+
+                                {/* Floating Location Badge - Positioned relative to wrapper */}
+                                <motion.div
+                                    className={styles.locationBadge}
+                                    initial={{ y: 40, opacity: 0 }}
+                                    animate={{ y: 0, opacity: 1 }}
+                                    transition={{ duration: 1, delay: 0.9, ease: "easeOut" }}
+                                >
+                                    {/* Frosted Glass Border */}
+                                    <div className="absolute inset-0 border border-white/30 rounded-sm z-10" />
+
+                                    {/* Badge Content */}
+                                    <div className="w-full h-full bg-gradient-to-br from-white/5 via-black/40 to-black/60 flex flex-col items-center justify-center relative rounded-sm">
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+
+                                        <div className="relative z-10 text-center space-y-2">
+                                            <p className="font-sans text-[0.65rem] tracking-[0.4em] uppercase text-[#C89B7B] font-medium">
+                                                Malam Jabba, PK
+                                            </p>
+                                            <p className="font-serif text-2xl lg:text-3xl text-white italic">
+                                                9,200ft
+                                            </p>
+                                            <p className="font-sans text-[0.6rem] tracking-[0.3em] uppercase text-white/50">
+                                                Elevation
+                                            </p>
+                                        </div>
+                                    </div>
+                                </motion.div>
+                            </div>
                         </div>
                     </motion.div>
                 </div>
