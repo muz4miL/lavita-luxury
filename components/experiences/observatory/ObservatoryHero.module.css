@@ -774,10 +774,8 @@
 
 /* Outer Border - Thick with Glow */
 .outerBorder {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    position: relative;
+    margin: 0 auto;
     width: 90%;
     max-width: 600px;
     aspect-ratio: 1;
@@ -801,6 +799,13 @@
         0 0 180px rgba(184, 115, 51, 0.4),
         inset 0 0 30px rgba(255, 255, 255, 0.2);
     filter: brightness(1.2);
+}
+
+/* Constrain octagon size on intermediate screens to prevent oversizing */
+@media (min-width: 600px) and (max-width: 1023px) {
+    .outerBorder {
+        max-width: 450px;
+    }
 }
 
 /* Inner Border - Thin */
@@ -828,10 +833,10 @@
 /* Floating Location Badge - Frosted Glass */
 .locationBadge {
     position: absolute;
-    /* Mobile: center below octagon */
-    bottom: 4rem;
-    left: 50%;
-    transform: translateX(-50%);
+    /* Mobile: position at bottom-right of octagon */
+    bottom: -1rem;
+    right: 50%;
+    transform: translateX(50%);
     width: 9rem;
     height: 9rem;
     backdrop-filter: blur(12px);
@@ -840,37 +845,22 @@
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
 }
 
+@media (min-width: 640px) {
+    .locationBadge {
+        /* Tablet: start moving to corner */
+        right: 10%;
+        transform: none;
+    }
+}
+
 @media (min-width: 1024px) {
     .locationBadge {
         /* Desktop: position bottom-right with overlap */
-        bottom: 5rem;
-        right: -3rem;
-        left: auto;
-        transform: none;
+        bottom: 2rem;
+        right: -2rem;
         width: 13rem;
         height: 13rem;
     }
 }
 
-@media (max-width: 424px) {
-.outerBorder {
-    position: absolute;
-    top: 30%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 90%;
-    max-width: 600px;
-    aspect-ratio: 1;
-    background: linear-gradient(135deg, #d4935c, #b87333);
-    box-shadow:
-        0 0 40px rgba(212, 147, 92, 0.6),
-        0 0 80px rgba(184, 115, 51, 0.4),
-        inset 0 0 20px rgba(255, 255, 255, 0.1);
-    z-index: 1;
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    /* Flexbox for perfect centering of children */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-}
+/* Remove the duplicate outerBorder styling that was overriding the main styles */
