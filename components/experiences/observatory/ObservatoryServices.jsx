@@ -46,7 +46,7 @@ export default function ObservatoryServices() {
                 {/* Section Header */}
                 <div className={styles.sectionHeader}>
                     {/* Eyebrow */}
-                    <p className={styles.eyebrow}>Hindu Kush Stargazing</p>
+                    <p className={styles.eyebrow}>Stargazing Services Of</p>
 
                     {/* Heading with Planetary O */}
                     <h2 className={styles.heading}>

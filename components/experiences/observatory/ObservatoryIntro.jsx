@@ -106,7 +106,7 @@ export default function ObservatoryIntro() {
                                 variants={imageVariant}
                             >
                                 <Image
-                                    src="/images/observatory-intro.jpg"
+                                    src="/intro_main_resort.png"
                                     alt="Observatory Stargazing Experience"
                                     fill
                                     className="object-cover"
