@@ -153,10 +153,10 @@ export default function ObservatoryHero() {
 
                                         <div className="relative z-10 text-center space-y-2">
                                             <p className="font-sans text-[0.65rem] tracking-[0.4em] uppercase text-[#C89B7B] font-medium">
-                                                Malam Jabba, PK
+                                                Observatory, PK
                                             </p>
                                             <p className="font-serif text-2xl lg:text-3xl text-white italic">
-                                                9,200ft
+                                                200ft
                                             </p>
                                             <p className="font-sans text-[0.6rem] tracking-[0.3em] uppercase text-white/50">
                                                 Elevation

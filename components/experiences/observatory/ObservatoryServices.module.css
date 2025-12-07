@@ -1,0 +1,245 @@
+/* Section Container */
+.section {
+    position: relative;
+    background-color: #000;
+    overflow: hidden;
+}
+
+/* Top Vignette Gradient */
+.topVignette {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 300px;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), transparent);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Section Header */
+.sectionHeader {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 42rem;
+    margin: 0 auto 4rem;
+}
+
+.eyebrow {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.75rem;
+    font-weight: 400;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: #C89B7B;
+    opacity: 0.6;
+    margin-bottom: 1.5rem;
+}
+
+.heading {
+    font-family: var(--font-serif, serif);
+    font-size: 2.5rem;
+    line-height: 1.2;
+    color: rgba(255, 255, 255, 0.95);
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.3em;
+}
+
+.planetaryO {
+    display: inline-block;
+    width: 2.2em;
+    height: 2.2em;
+    border-radius: 50%;
+}
+
+.sectionDescription {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0;
+}
+
+@media (min-width: 1024px) {
+    .heading {
+        font-size: 3rem;
+    }
+}
+
+@media (min-width: 1280px) {
+    .heading {
+        font-size: 3.75rem;
+    }
+}
+
+/* Card Container */
+.card {
+    position: relative;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    overflow: hidden;
+    cursor: pointer;
+    z-index: 2;
+    /* Hardware acceleration for smooth transitions */
+    transform: translateZ(0);
+    will-change: border-color, box-shadow;
+    /* CSS transition for border and glow */
+    transition: border-color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+        box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    padding-bottom: 2%;
+}
+
+/* Desktop Hover Effect */
+@media (min-width: 1024px) {
+    .card:hover {
+        border-color: #C89B7B;
+        box-shadow:
+            0 0 30px rgba(200, 155, 123, 0.3),
+            0 0 60px rgba(200, 155, 123, 0.15),
+            inset 0 0 20px rgba(200, 155, 123, 0.1);
+    }
+}
+
+/* Mobile Active State */
+@media (max-width: 1023px) {
+    .card.active {
+        border-color: #C89B7B;
+        box-shadow:
+            0 0 20px rgba(200, 155, 123, 0.25),
+            0 0 40px rgba(200, 155, 123, 0.12);
+    }
+}
+
+/* Card Image */
+.imageWrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-radius: 6px 6px 0 0;
+}
+
+.cardImage {
+    object-fit: cover;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card:hover .cardImage {
+    transform: scale(1.05);
+}
+
+/* Card Header */
+.cardHeader {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    position: relative;
+    padding: 2rem;
+    padding-bottom: 0;
+}
+
+/* Icon Wrapper */
+.iconWrapper {
+    flex-shrink: 0;
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(200, 155, 123, 0.3);
+    border-radius: 50%;
+    background: rgba(200, 155, 123, 0.05);
+}
+
+.icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    color: #C89B7B;
+}
+
+/* Title */
+.title {
+    flex: 1;
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #fff;
+    line-height: 1.4;
+}
+
+/* Mobile Indicator (Chevron) */
+.mobileIndicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.chevron {
+    transform: translateZ(0);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card.active .chevron {
+    transform: rotate(180deg);
+}
+
+/* Hide indicator on desktop */
+@media (min-width: 1024px) {
+    .mobileIndicator {
+        display: none;
+    }
+}
+
+/* Card Content - Accordion Container */
+.cardContent {
+    /* Mobile: hidden by default, expands when active */
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    /* Hardware-accelerated CSS transition */
+    transform: translateZ(0);
+    will-change: max-height, opacity;
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+        opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Mobile Expanded State */
+@media (max-width: 1023px) {
+    .cardContent.expanded {
+        max-height: 300px;
+        opacity: 1;
+    }
+}
+
+/* Desktop: Always Visible */
+@media (min-width: 1024px) {
+    .cardContent {
+        max-height: none;
+        opacity: 1;
+        overflow: visible;
+        transition: none;
+    }
+}
+
+/* Content Inner */
+.contentInner {
+    padding: 1.5rem 2rem 2rem;
+}
+
+/* Description */
+.description {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0;
+}
