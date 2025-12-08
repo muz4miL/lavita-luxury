@@ -1,6 +1,7 @@
 import { Playfair_Display, Manrope } from 'next/font/google';
 import { Navbar, Footer } from '@/components/layout';
 import Preloader from '@/components/Preloader';
+import SmoothScroll from '@/components/SmoothScroll';
 import "./globals.css";
 
 const playfair = Playfair_Display({
@@ -31,10 +32,12 @@ export default function RootLayout({ children }) {
         <link rel="preload" href="/hero-videos/hero1.mp4" as="video" type="video/mp4" />
       </head>
       <body className="antialiased">
-        <Preloader />
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
+        <SmoothScroll>
+          <Preloader />
+          <Navbar />
+          <main>{children}</main>
+          <Footer />
+        </SmoothScroll>
         {/* Premium Film Grain Noise Texture Overlay */}
         <div
           className="pointer-events-none fixed inset-0 z-[9999]"

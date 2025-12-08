@@ -1,14 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Manrope:wght@200;300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap');
+
 @import "tailwindcss";
+
+
+/* Import Luxury Fonts */
 
 /* ===================================
    Alpine Noir Theme - Lavita Luxury
    =================================== */
 
+/* Lenis Smooth Scroll Setup */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
 :root {
   /* Primary Colors */
-  --midnight-pine: #0F2522;
+  --midnight-pine: #0B1C19;
   --alabaster-mist: #F2F4F6;
   --brushed-copper: #C89B7B;
+  --deep-emerald: #050F0D;
   
   /* Text Colors */
   --text-light: #F5F5F5;
@@ -17,6 +44,11 @@
   /* Semantic Variables */
   --background: var(--midnight-pine);
   --foreground: var(--text-light);
+  
+  /* Font Variables */
+  --font-cormorant: 'Cormorant Garamond', serif;
+  --font-manrope: 'Manrope', sans-serif;
+  --font-playfair: 'Playfair Display', serif;
 }
 
 @theme inline {
@@ -24,6 +56,7 @@
   --color-midnight-pine: var(--midnight-pine);
   --color-alabaster-mist: var(--alabaster-mist);
   --color-brushed-copper: var(--brushed-copper);
+  --color-deep-emerald: var(--deep-emerald);
   --color-text-light: var(--text-light);
   --color-text-dark: var(--text-dark);
   
@@ -34,6 +67,7 @@
   /* Font Families */
   --font-heading: var(--font-playfair);
   --font-body: var(--font-manrope);
+  --font-luxury: var(--font-cormorant);
 }
 
 /* Base Styles */
@@ -51,6 +85,9 @@ body {
   font-family: var(--font-body), system-ui, sans-serif;
   line-height: 1.6;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 /* Typography Utilities */
@@ -58,8 +95,27 @@ body {
   font-family: var(--font-heading), serif;
 }
 
+.heading-luxury {
+  font-family: var(--font-luxury), serif;
+  font-weight: 300;
+  letter-spacing: 0.01em;
+}
+
 .body-sans {
   font-family: var(--font-body), sans-serif;
+}
+
+/* Font Family Classes */
+.font-serif {
+  font-family: var(--font-heading), serif;
+}
+
+.font-cormorant {
+  font-family: var(--font-luxury), serif;
+}
+
+.font-sans {
+  font-family: var(--font-manrope), system-ui, sans-serif;
 }
 
 /* Custom Scrollbar */
@@ -127,4 +183,104 @@ body {
     transform: translateY(6px);
     opacity: 1;
   }
+}
+
+/* Premium Scroll Indicator Animation */
+@keyframes scroll-indicator {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(300%);
+    opacity: 0;
+  }
+}
+
+.animate-scroll-indicator {
+  animation: scroll-indicator 2.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+/* Luxury Text Effects */
+.text-glow {
+  text-shadow: 0 0 30px rgba(200, 155, 123, 0.3);
+}
+
+.text-gold-gradient {
+  background: linear-gradient(to right, #C89B7B, #E6C7A8);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Smooth Transitions */
+.transition-luxury {
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Glass Morphism */
+.glass-morphism {
+  background: rgba(15, 37, 34, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(200, 155, 123, 0.1);
+}
+
+/* Ensure descenders don't get cut off */
+.prevent-descender-cutoff {
+  line-height: 1.15;
+  padding-bottom: 0.125rem;
+}
+
+/* Video Container Styling */
+.video-container-luxury {
+  box-shadow: 
+    0 40px 80px -20px rgba(0, 0, 0, 0.8),
+    0 0 60px rgba(200, 155, 123, 0.15) inset;
+  border-radius: 32px;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* Prevent FOUC (Flash of Unstyled Content) */
+[x-cloak] {
+  display: none !important;
+}
+
+/* Focus Styles for Accessibility */
+:focus-visible {
+  outline: 2px solid var(--brushed-copper);
+  outline-offset: 2px;
+}
+
+/* Smooth GSAP ScrollTrigger */
+html.has-scroll-smooth {
+  overflow: hidden;
+}
+
+html.has-scroll-dragging {
+  user-select: none;
+}
+
+.has-scroll-smooth body {
+  overflow: hidden;
+}
+
+.has-scroll-smooth [data-scroll-container] {
+  min-height: 100vh;
 }
