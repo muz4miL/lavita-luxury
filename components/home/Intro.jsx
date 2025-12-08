@@ -9,7 +9,6 @@ export default function Intro() {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
-  // Animation variants
   const curtainVariant = {
     hidden: { scaleX: 1 },
     visible: {
@@ -54,7 +53,7 @@ export default function Intro() {
       opacity: 1,
       transition: {
         duration: 0.8,
-        delay: 0.4 + (custom * 0.1),
+        delay: 0.4 + custom * 0.1,
         ease: [0.16, 1, 0.3, 1],
       }
     })
@@ -71,10 +70,9 @@ export default function Intro() {
       ref={sectionRef}
       className="relative w-full overflow-x-hidden bg-gradient-to-b from-[#0F2522] via-black to-black min-h-[85vh] flex items-center justify-center py-12 lg:py-16"
     >
-      {/* Seamless blend from Hero */}
+
       <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-black/60 to-transparent pointer-events-none" />
 
-      {/* Noise Texture Overlay */}
       <div
         className="absolute inset-0 opacity-[0.015] pointer-events-none mix-blend-overlay"
         style={{
@@ -83,31 +81,29 @@ export default function Intro() {
       />
 
       <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12 w-full">
-        {/* Grid Layout - Compact & Centered */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center">
 
-          {/* LEFT COLUMN - The Visual Collage */}
+        <div className="flex flex-col lg:grid lg:grid-cols-2 gap-10 lg:gap-12 lg:items-center">
+
+          {/* LEFT COLUMN */}
           <motion.div
             className="relative order-1 lg:order-1"
             initial="hidden"
             animate={isInView ? "visible" : "hidden"}
           >
-            {/* Base Image Container - CONSTRAINED HEIGHT */}
-            <div className="relative h-[450px] lg:h-[500px] w-full overflow-hidden rounded-sm">
-              {/* Curtain Reveal Effect */}
+            <div className="relative h-[450px] lg:h-[500px] w-full overflow-hidden rounded-sm mb-8 lg:mb-0">
+
               <motion.div
                 className="absolute inset-0 bg-black z-20 origin-right"
                 variants={curtainVariant}
               />
 
-              {/* Main Image */}
               <motion.div
                 className="relative w-full h-full"
                 variants={imageVariant}
               >
                 <Image
-                  src="/intro_main_resort.png"
-                  alt="Lavita Luxury Resort Exterior"
+                  src="/intro.png"
+                  alt="Lavita Malam Jabba Location Map"
                   fill
                   className="object-cover"
                   sizes="(max-width: 768px) 100vw, 50vw"
@@ -120,32 +116,28 @@ export default function Intro() {
                 {/* Subtle border */}
                 <div className="absolute inset-0 border border-white/5" />
               </motion.div>
+
             </div>
 
-            {/* Atmospheric Location Badge - 'Frosted Ice' */}
+            {/* FLOATING BADGE */}
             <motion.div
               className="absolute -bottom-6 -right-6 lg:-bottom-8 lg:-right-8 w-44 h-44 lg:w-52 lg:h-52 overflow-hidden rounded-sm shadow-2xl"
               variants={floatingImageVariant}
-              style={{
-                backdropFilter: 'blur(12px)',
-              }}
+              style={{ backdropFilter: 'blur(12px)' }}
             >
-              {/* Frosted Ice Border - Thinner & Clearer */}
               <div className="absolute inset-0 border border-white/30 rounded-sm z-10" />
 
-              {/* Location Context Badge */}
               <div className="w-full h-full bg-gradient-to-br from-white/5 via-black/40 to-black/60 flex flex-col items-center justify-center relative">
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
 
-                {/* Content */}
                 <div className="relative z-10 text-center space-y-2">
-                  <p className="font-[family-name:var(--font-manrope)] text-[0.65rem] tracking-[0.4em] uppercase text-[#C89B7B] font-medium">
+                  <p className="text-[0.65rem] tracking-[0.4em] uppercase text-[#C89B7B] font-medium">
                     Malam Jabba, PK
                   </p>
-                  <p className="font-[family-name:var(--font-playfair)] text-2xl lg:text-3xl text-white italic">
+                  <p className="text-2xl lg:text-3xl text-white italic">
                     9,200ft
                   </p>
-                  <p className="font-[family-name:var(--font-manrope)] text-[0.6rem] tracking-[0.3em] uppercase text-white/50">
+                  <p className="text-[0.6rem] tracking-[0.3em] uppercase text-white/50">
                     Elevation
                   </p>
                 </div>
@@ -153,56 +145,53 @@ export default function Intro() {
             </motion.div>
           </motion.div>
 
-          {/* RIGHT COLUMN - The Narrative - TIGHTER SPACING */}
-          <div className="relative order-2 lg:order-2 flex flex-col justify-center space-y-4 lg:space-y-5">
+          {/* RIGHT COLUMN */}
+          <div className="relative order-2 flex flex-col justify-center space-y-6 lg:space-y-5 text-center lg:text-left">
 
-            {/* Eyebrow - Trust Signal */}
             <motion.div
               custom={0}
               initial="hidden"
               animate={isInView ? "visible" : "hidden"}
               variants={textVariants}
+              className="flex justify-center lg:justify-start"
             >
-              <p className="text-[#C89B7B] text-xs tracking-[0.4em] uppercase font-normal font-[family-name:var(--font-manrope)] opacity-60">
-                Powered by Shelton Group
+              <p className="text-[#C89B7B] text-xs tracking-[0.4em] uppercase opacity-60">
+                Powered by Lavita Developments
               </p>
             </motion.div>
 
-            {/* Headline - Split Text Reveal */}
             <motion.div
               custom={1}
               initial="hidden"
               animate={isInView ? "visible" : "hidden"}
               variants={textVariants}
             >
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-[family-name:var(--font-playfair)] text-white leading-[1.1]">
-                The First Glass-Dome
+              <h2 className="text-3xl md:text-4xl lg:text-5xl text-white leading-[1.1]">
+                The Lavita
                 <br />
                 <span className="italic text-white/90 text-[1.1em]">Sanctuary</span>
               </h2>
             </motion.div>
 
-            {/* Body Copy - TIGHTER */}
             <motion.div
               custom={2}
               initial="hidden"
               animate={isInView ? "visible" : "hidden"}
               variants={textVariants}
             >
-              <p className="text-white/80 text-sm md:text-base font-[family-name:var(--font-manrope)] font-light leading-relaxed max-w-xl">
-                Nestled in the Hindu Kush, Lavita is the region's only fully serviced luxury hotel apartments. A landmark project featuring Pakistan's first:
+              <p className="text-white/80 text-base font-light leading-relaxed max-w-full lg:max-w-xl mx-auto lg:mx-0">
+                Nestled at 9,200ft in the breathtaking Swat Valley, Lavita is the region's only fully-serviced luxury hotel apartment complex.
               </p>
             </motion.div>
 
-            {/* Unique Features Checklist - COMPACT */}
             <motion.div
               custom={3}
               initial="hidden"
               animate={isInView ? "visible" : "hidden"}
               variants={textVariants}
-              className="pt-2"
+              className="pt-4"
             >
-              <div className="flex flex-wrap gap-4 lg:gap-6">
+              <div className="flex flex-wrap gap-6 justify-center lg:justify-start">
                 {features.map((feature, index) => (
                   <motion.div
                     key={feature.label}
@@ -211,15 +200,14 @@ export default function Intro() {
                     animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
                     transition={{
                       duration: 0.6,
-                      delay: 0.8 + (index * 0.1),
+                      delay: 0.8 + index * 0.1,
                       ease: [0.16, 1, 0.3, 1],
                     }}
                   >
-                    {/* Diamond Shape (Rotated Square) - Mountain Peak Aesthetic */}
                     <div className="w-9 h-9 rotate-45 border border-white/10 flex items-center justify-center group-hover:border-[#C89B7B]/40 transition-all duration-300 shrink-0">
                       <feature.icon className="w-4 h-4 text-[#C89B7B] -rotate-45" strokeWidth={1.5} />
                     </div>
-                    <span className="text-white/70 text-sm font-[family-name:var(--font-manrope)] font-medium">
+                    <span className="text-white/70 text-sm font-medium">
                       {feature.label}
                     </span>
                   </motion.div>
@@ -227,7 +215,6 @@ export default function Intro() {
               </div>
             </motion.div>
 
-            {/* Signature - SMALLER */}
             <motion.div
               custom={4}
               initial="hidden"
@@ -235,10 +222,11 @@ export default function Intro() {
               variants={textVariants}
               className="pt-3"
             >
-              <p className="text-[#C89B7B] text-xl md:text-2xl font-[family-name:var(--font-playfair)] italic opacity-60">
+              <p className="hidden md:block text-[#C89B7B] text-xl md:text-2xl italic opacity-60">
                 The Lavita Experience
               </p>
             </motion.div>
+
           </div>
         </div>
       </div>

@@ -307,7 +307,7 @@ export default function HeroVideoParallax() {
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
-    
+
     const playVideo = async () => {
       try {
         video.muted = true;
@@ -318,7 +318,7 @@ export default function HeroVideoParallax() {
     };
 
     playVideo();
-    
+
     // Smooth fade in on load
     if (video) {
       gsap.fromTo(video,
@@ -364,7 +364,7 @@ export default function HeroVideoParallax() {
       >
         {/* Centered Editorial Block Container */}
         <div className="relative w-full max-w-2xl">
-          
+
           {/* Top Luxury Label */}
           <div
             ref={luxuryLabelRef}
@@ -380,37 +380,37 @@ export default function HeroVideoParallax() {
 
           {/* TIGHT EDITORIAL BLOCK */}
           <div className="flex flex-col justify-center">
-            
+
             {/* Vision Label - TIGHT spacing */}
             <div
               ref={visionLabelRef}
               className="mb-6 opacity-0"
             >
-              <span 
+              <span
                 className="text-xs tracking-[0.25em] text-white/70 font-sans uppercase font-light"
               >
                 A VISION OF
               </span>
             </div>
-            
+
             {/* Main Headline - TIGHT STACK */}
             <div className="mb-6 overflow-visible">
               {/* "Timeless" */}
-              <h2 
+              <h2
                 ref={timelessRef}
                 className="text-5xl md:text-6xl lg:text-7xl leading-[1.05] italic text-[#D4AF37] font-light font-serif opacity-0 overflow-visible"
-                style={{ 
+                style={{
                   textShadow: '0 4px 12px rgba(0, 0, 0, 0.5)',
                 }}
               >
                 Timeless
               </h2>
-              
+
               {/* "Elegance" - TIGHT spacing */}
-              <h2 
+              <h2
                 ref={eleganceRef}
                 className="text-5xl md:text-6xl lg:text-7xl leading-[1.05] text-white font-light font-serif opacity-0 overflow-visible mt-2"
-                style={{ 
+                style={{
                   textShadow: '0 4px 12px rgba(0, 0, 0, 0.5)',
                 }}
               >
@@ -419,7 +419,7 @@ export default function HeroVideoParallax() {
             </div>
 
             {/* GOLD DIVIDER - Elegant separation */}
-            <div 
+            <div
               ref={goldDividerRef}
               className="h-[1px] w-20 md:w-24 bg-gradient-to-r from-[#D4AF37] to-[#D4AF37]/60 my-6 md:my-8 opacity-0 transform origin-left scale-x-0"
             />
@@ -453,7 +453,7 @@ export default function HeroVideoParallax() {
       >
         {/* Dark gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-        
+
         <div className="text-center px-4 relative z-10 w-full">
           {/* Micro Labels */}
           <div className="mb-8 md:mb-10">
@@ -461,31 +461,31 @@ export default function HeroVideoParallax() {
               THE FIRST GLASS-DOME RESORT
             </span>
           </div>
-          
+
           {/* Main Headline */}
           <h1 className="mb-8 md:mb-10 font-serif text-4xl md:text-6xl lg:text-7xl font-medium leading-[0.9] text-white px-4">
-            <span 
+            <span
               className="block mb-4 md:mb-6"
-              style={{ 
+              style={{
                 textShadow: '0 2px 12px rgba(0, 0, 0, 0.6)'
               }}
             >
               The Sanctuary
             </span>
-            <span 
+            <span
               className="block text-[#D4AF37] italic font-semibold text-3xl md:text-5xl lg:text-6xl"
-              style={{ 
+              style={{
                 textShadow: '0 2px 12px rgba(0, 0, 0, 0.6)'
               }}
             >
               In The Clouds
             </span>
           </h1>
-          
+
           {/* Elevation Text */}
-          <p 
+          <p
             className="mx-auto max-w-xs md:max-w-md text-xs tracking-[0.3em] text-white/80 font-sans uppercase font-light mt-12 md:mt-14"
-            style={{ 
+            style={{
               textShadow: '0 1px 6px rgba(0, 0, 0, 0.5)'
             }}
           >
@@ -506,9 +506,9 @@ export default function HeroVideoParallax() {
         className="absolute bottom-8 md:bottom-12 left-1/2 z-50 -translate-x-1/2"
       >
         <div className="flex flex-col items-center">
-          <span 
+          <span
             className="mb-3 md:mb-4 text-[10px] md:text-xs tracking-[0.25em] md:tracking-[0.3em] text-white/50 font-sans uppercase font-light"
-            style={{ 
+            style={{
               textShadow: '0 1px 4px rgba(0, 0, 0, 0.5)'
             }}
           >
@@ -519,6 +519,9 @@ export default function HeroVideoParallax() {
           </div>
         </div>
       </div>
+
+      {/* Bottom Gradient Fade - Seamless Transition to Intro Section */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 md:h-40 bg-gradient-to-b from-transparent via-[#0B1C19]/60 to-[#0B1C19] pointer-events-none z-10" />
     </section>
   );
 }
