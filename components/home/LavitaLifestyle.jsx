@@ -34,7 +34,7 @@ export default function LavitaLifestyle() {
     return (
         <section
             ref={sectionRef}
-            className="relative w-full overflow-hidden bg-gradient-to-b from-[#050F0D] via-[#0A1613] to-black py-12 lg:py-16"
+            className="relative w-full overflow-hidden bg-[#0D1512] py-12 lg:py-16"
         >
             {/* Noise Texture Overlay */}
             <div
@@ -48,8 +48,8 @@ export default function LavitaLifestyle() {
                 {/* MOBILE: Flex Column (Image First) | DESKTOP: Grid (Text Left, Image Right) */}
                 <div className="flex flex-col lg:grid lg:grid-cols-12 gap-6 lg:gap-10 lg:items-center">
 
-                    {/* MOBILE ORDER 1 (Image First) | DESKTOP ORDER 2 (Right Column) */}
-                    <div className="order-1 lg:order-2 lg:col-span-7 relative">
+                    {/* MOBILE ORDER 2 (Image) | DESKTOP ORDER 2 (Right Column) */}
+                    <div className="order-2 lg:order-2 lg:col-span-7 relative">
                         {/* Main Hero Image - Full Width on Mobile with Generous Margins */}
                         <motion.div
                             className="relative h-[350px] md:h-[500px] lg:h-[550px] rounded-sm overflow-hidden my-8 lg:my-0"
@@ -78,8 +78,9 @@ export default function LavitaLifestyle() {
                         </motion.div>
 
                         {/* Floating Category Cards - 2x2 Grid on Mobile, Overlapping on Desktop */}
+                        {/* MOBILE ORDER 3 (Content Cards) */}
                         <motion.div
-                            className="relative lg:absolute lg:-bottom-4 lg:-left-8 lg:w-3/4 z-10 mt-6 lg:mt-0"
+                            className="relative lg:absolute lg:-bottom-4 lg:-left-8 lg:w-3/4 z-10 mt-6 lg:mt-0 order-3"
                             initial="hidden"
                             animate={isInView ? "visible" : "hidden"}
                             variants={staggerContainer}
@@ -168,9 +169,9 @@ export default function LavitaLifestyle() {
                         </motion.div>
                     </div>
 
-                    {/* MOBILE ORDER 2 (Content After Image) | DESKTOP ORDER 1 (Left Column) */}
+                    {/* MOBILE ORDER 1 (Text First) | DESKTOP ORDER 1 (Left Column) */}
                     <motion.div
-                        className="order-2 lg:order-1 lg:col-span-5 lg:pr-8 text-center lg:text-left"
+                        className="order-1 lg:order-1 lg:col-span-5 lg:pr-8 text-center lg:text-left"
                         initial="hidden"
                         animate={isInView ? "visible" : "hidden"}
                         variants={fadeInUp}

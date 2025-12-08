@@ -414,7 +414,7 @@ export default function HeroVideoParallax() {
                   textShadow: '0 4px 12px rgba(0, 0, 0, 0.5)',
                 }}
               >
-                Elegance
+                Architecture
               </h2>
             </div>
 
@@ -455,42 +455,55 @@ export default function HeroVideoParallax() {
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
         <div className="text-center px-4 relative z-10 w-full">
-          {/* Micro Labels */}
-          <div className="mb-8 md:mb-10">
-            <span className="text-xs md:text-sm tracking-[0.3em] text-white/90 font-sans uppercase font-light">
-              THE FIRST GLASS-DOME RESORT
-            </span>
-          </div>
-
-          {/* Main Headline */}
-          <h1 className="mb-8 md:mb-10 font-serif text-4xl md:text-6xl lg:text-7xl font-medium leading-[0.9] text-white px-4">
+          {/* Main Headline - Punchy & Commanding */}
+          <h1 className="mb-6 md:mb-8 font-serif text-4xl md:text-6xl lg:text-7xl font-medium leading-[0.95] text-white px-4">
             <span
-              className="block mb-4 md:mb-6"
+              className="block mb-3 md:mb-4 tracking-tight"
               style={{
                 textShadow: '0 2px 12px rgba(0, 0, 0, 0.6)'
               }}
             >
-              The Sanctuary
+              ABOVE THE CLOUDS.
             </span>
             <span
-              className="block text-[#D4AF37] italic font-semibold text-3xl md:text-5xl lg:text-6xl"
+              className="block tracking-tight"
               style={{
                 textShadow: '0 2px 12px rgba(0, 0, 0, 0.6)'
               }}
             >
-              In The Clouds
+              BEYOND THE ORDINARY.
             </span>
           </h1>
 
-          {/* Elevation Text */}
+          {/* Sub-Headline */}
           <p
-            className="mx-auto max-w-xs md:max-w-md text-xs tracking-[0.3em] text-white/80 font-sans uppercase font-light mt-12 md:mt-14"
+            className="mx-auto max-w-lg text-sm md:text-base leading-relaxed text-white/85 font-light px-4 mb-8 md:mb-10"
             style={{
               textShadow: '0 1px 6px rgba(0, 0, 0, 0.5)'
             }}
           >
-            9,200FT ELEVATION • HINDU KUSH
+            Pakistan's first glass-dome sanctuary. Experience five-star living at 9,200ft.
           </p>
+
+          {/* Optional CTA Button */}
+          <div className="flex justify-center">
+            <a
+              href="#discover"
+              className="group inline-flex items-center gap-3 px-8 py-3.5 border border-[#D4AF37]/40 rounded-sm bg-[#D4AF37]/10 backdrop-blur-sm hover:bg-[#D4AF37]/20 hover:border-[#D4AF37]/60 transition-all duration-300"
+            >
+              <span className="text-white text-xs tracking-[0.2em] uppercase font-medium">
+                DISCOVER LAVITA
+              </span>
+              <svg
+                className="w-4 h-4 text-[#D4AF37] transition-transform duration-300 group-hover:translate-x-1"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </a>
+          </div>
         </div>
       </div>
 
@@ -521,7 +534,7 @@ export default function HeroVideoParallax() {
       </div>
 
       {/* Bottom Gradient Fade - Seamless Transition to Intro Section */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 md:h-40 bg-gradient-to-b from-transparent via-[#0B1C19]/60 to-[#0B1C19] pointer-events-none z-10" />
+      <div className="absolute bottom-0 left-0 right-0 h-48 md:h-56 bg-gradient-to-b from-transparent via-[#0D1512]/70 to-[#0D1512] pointer-events-none z-10" />
     </section>
   );
 }

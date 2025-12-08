@@ -68,10 +68,8 @@ export default function Intro() {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full overflow-x-hidden bg-gradient-to-b from-[#0F2522] via-black to-black min-h-[85vh] flex items-center justify-center py-12 lg:py-16"
+      className="relative w-full overflow-x-hidden bg-[#0D1512] min-h-[85vh] flex items-center justify-center py-12 lg:py-16"
     >
-
-      <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-black/60 to-transparent pointer-events-none" />
 
       <div
         className="absolute inset-0 opacity-[0.015] pointer-events-none mix-blend-overlay"
@@ -84,9 +82,9 @@ export default function Intro() {
 
         <div className="flex flex-col lg:grid lg:grid-cols-2 gap-10 lg:gap-12 lg:items-center">
 
-          {/* LEFT COLUMN */}
+          {/* MOBILE ORDER 2 (Image) | DESKTOP ORDER 1 (Left Column) */}
           <motion.div
-            className="relative order-1 lg:order-1"
+            className="relative order-2 lg:order-1"
             initial="hidden"
             animate={isInView ? "visible" : "hidden"}
           >
@@ -145,8 +143,8 @@ export default function Intro() {
             </motion.div>
           </motion.div>
 
-          {/* RIGHT COLUMN */}
-          <div className="relative order-2 flex flex-col justify-center space-y-6 lg:space-y-5 text-center lg:text-left">
+          {/* MOBILE ORDER 1 (Text First) | DESKTOP ORDER 2 (Right Column) */}
+          <div className="relative order-1 lg:order-2 flex flex-col justify-center space-y-6 lg:space-y-5 text-center lg:text-left">
 
             <motion.div
               custom={0}
@@ -189,7 +187,7 @@ export default function Intro() {
               initial="hidden"
               animate={isInView ? "visible" : "hidden"}
               variants={textVariants}
-              className="pt-4"
+              className="pt-4 order-3"
             >
               <div className="flex flex-wrap gap-6 justify-center lg:justify-start">
                 {features.map((feature, index) => (
