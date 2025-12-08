@@ -237,36 +237,85 @@ export default function Hero() {
         }}
       />
 
-      {/* BOTTOM-LEFT "THE FEELING" LAYOUT */}
-      <div className="absolute inset-0 z-20 flex flex-col justify-end pb-16 md:pb-20 lg:pb-24 pl-6 md:pl-12 lg:pl-20">
+      {/* PREMIUM LUXURY TEXT OVERLAY */}
+      <div className="absolute inset-0 z-20 flex flex-col justify-end pb-16 md:pb-20 lg:pb-28 pl-6 md:pl-12 lg:pl-20">
 
-        {/* Main Content Container */}
-        <div className="max-w-2xl space-y-4 md:space-y-6 animate-[fadeSlideUp_0.8s_cubic-bezier(0.16,1,0.3,1)_0.5s_both]">
+        {/* Main Content Container with Glassmorphic Background */}
+        <div className="max-w-3xl">
 
-          {/* Small Tagline - Gold accent */}
-          <p className="text-[#C89B7B] tracking-[0.2em] text-xs md:text-sm font-bold uppercase drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
-            2,804 Meters Above Ordinary
-          </p>
+          {/* Premium Badge with Ornamental Line */}
+          <div className="flex items-center gap-4 mb-6 md:mb-8 animate-[fadeSlideUp_0.8s_cubic-bezier(0.16,1,0.3,1)_0.3s_both]">
+            <div className="relative group">
+              {/* Glassmorphic Badge Container */}
+              <div className="relative px-6 py-2.5 backdrop-blur-md bg-gradient-to-r from-[#C89B7B]/20 to-[#C89B7B]/10 border border-[#C89B7B]/30 rounded-full shadow-[0_8px_32px_rgba(200,155,123,0.15)]">
+                <p className="text-[#C89B7B] tracking-[0.25em] text-[10px] md:text-xs font-bold uppercase">
+                  Vision of
+                </p>
+                {/* Subtle inner glow */}
+                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#C89B7B]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              </div>
+            </div>
+            {/* Decorative Line */}
+            <div className="h-[1px] w-16 md:w-24 bg-gradient-to-r from-[#C89B7B]/50 to-transparent" />
+          </div>
 
-          {/* Main Headline - Immersive, feeling-focused */}
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-[family-name:var(--font-playfair)] text-white leading-[1.1] drop-shadow-[0_6px_24px_rgba(0,0,0,0.9)]">
-            The Sanctuary in the <br />
-            <span className="italic text-white/90">Hindu Kush</span>
-          </h1>
+          {/* Main Headline - Elegant Typography Blocks */}
+          <div className="space-y-3 md:space-y-4 mb-6 md:mb-8 animate-[fadeSlideUp_0.8s_cubic-bezier(0.16,1,0.3,1)_0.5s_both]">
+            {/* First Line - Timeless */}
+            <div className="relative inline-block group">
+              <div className="relative px-8 py-4 md:px-10 md:py-5 backdrop-blur-sm bg-gradient-to-br from-[#C89B7B]/25 via-[#C89B7B]/15 to-transparent border-l-4 border-[#C89B7B] shadow-[0_8px_32px_rgba(0,0,0,0.4)]">
+                <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-[family-name:var(--font-playfair)] text-white leading-none tracking-tight italic">
+                  Timeless
+                </h1>
+                {/* Subtle shine effect on hover */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
+              </div>
+            </div>
 
-          {/* Descriptive Body Text - Generous line spacing (FIX #3) */}
-          <p className="text-gray-200 text-sm md:text-base lg:text-lg font-[family-name:var(--font-manrope)] font-light leading-7 md:leading-8 max-w-lg drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]">
-            Discover the only Glass-Dome Resort in Swat Valley. A seamless blend of five-star hospitality and the raw beauty of the Hindu Kush.
-          </p>
+            {/* Second Line - Elegance */}
+            <div className="relative inline-block group">
+              <div className="relative px-8 py-4 md:px-10 md:py-5 backdrop-blur-sm bg-gradient-to-br from-[#C89B7B]/25 via-[#C89B7B]/15 to-transparent border-l-4 border-[#C89B7B] shadow-[0_8px_32px_rgba(0,0,0,0.4)]">
+                <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-[family-name:var(--font-playfair)] text-white leading-none tracking-tight italic">
+                  Elegance
+                </h1>
+                {/* Subtle shine effect on hover */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
+              </div>
+            </div>
+          </div>
 
-          {/* CTA Buttons - Consistent gold color (FIX #2) */}
-          <div className="flex flex-col sm:flex-row gap-4 pt-4 md:pt-6">
-            <button className="bg-[#C89B7B] text-black px-10 md:px-12 py-3.5 md:py-4 text-xs md:text-sm font-[family-name:var(--font-manrope)] font-bold uppercase tracking-[0.2em] hover:bg-white transition-all duration-300 hover:scale-105 shadow-[0_8px_30px_rgba(200,155,123,0.4)] hover:shadow-[0_12px_40px_rgba(255,255,255,0.5)]">
-              Begin Your Journey
+          {/* Decorative Divider */}
+          <div className="flex items-center gap-3 mb-6 md:mb-8 animate-[fadeSlideUp_0.8s_cubic-bezier(0.16,1,0.3,1)_0.7s_both]">
+            <div className="w-2 h-2 rounded-full bg-[#C89B7B] shadow-[0_0_12px_rgba(200,155,123,0.6)]" />
+            <div className="h-[1px] flex-1 max-w-[120px] bg-gradient-to-r from-[#C89B7B] via-[#C89B7B]/50 to-transparent" />
+          </div>
+
+          {/* Descriptive Text - Premium Glass Card */}
+          <div className="relative max-w-xl mb-8 md:mb-10 animate-[fadeSlideUp_0.8s_cubic-bezier(0.16,1,0.3,1)_0.9s_both]">
+            <div className="relative px-6 py-5 md:px-8 md:py-6 backdrop-blur-md bg-black/30 border border-white/10 rounded-lg shadow-[0_8px_32px_rgba(0,0,0,0.4)]">
+              <p className="text-gray-100 text-sm md:text-base lg:text-lg font-[family-name:var(--font-manrope)] font-light leading-relaxed tracking-wide">
+                Where the Hindu Kush touches the clouds, and every moment paints a new masterpiece on the canvas of your life.
+              </p>
+              {/* Corner accent */}
+              <div className="absolute top-0 right-0 w-16 h-16 border-t-2 border-r-2 border-[#C89B7B]/30 rounded-tr-lg" />
+              <div className="absolute bottom-0 left-0 w-16 h-16 border-b-2 border-l-2 border-[#C89B7B]/30 rounded-bl-lg" />
+            </div>
+          </div>
+
+          {/* CTA Buttons - Premium Design */}
+          <div className="flex flex-col sm:flex-row gap-4 animate-[fadeSlideUp_0.8s_cubic-bezier(0.16,1,0.3,1)_1.1s_both]">
+            {/* Primary CTA */}
+            <button className="group relative overflow-hidden bg-[#C89B7B] text-black px-10 md:px-12 py-4 md:py-5 text-xs md:text-sm font-[family-name:var(--font-manrope)] font-bold uppercase tracking-[0.25em] transition-all duration-500 hover:scale-[1.02] shadow-[0_8px_30px_rgba(200,155,123,0.4)] hover:shadow-[0_12px_50px_rgba(200,155,123,0.6)]">
+              <span className="relative z-10">Explore Below</span>
+              {/* Animated background on hover */}
+              <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
             </button>
 
-            <button className="border-2 border-white/30 backdrop-blur-sm text-white px-10 md:px-12 py-3.5 md:py-4 text-xs md:text-sm font-[family-name:var(--font-manrope)] font-bold uppercase tracking-[0.2em] hover:bg-white hover:text-black transition-all duration-300">
-              View Experiences
+            {/* Secondary CTA */}
+            <button className="group relative overflow-hidden backdrop-blur-md bg-white/5 border-2 border-white/20 text-white px-10 md:px-12 py-4 md:py-5 text-xs md:text-sm font-[family-name:var(--font-manrope)] font-bold uppercase tracking-[0.25em] transition-all duration-500 hover:bg-white hover:text-black hover:border-white shadow-[0_8px_30px_rgba(0,0,0,0.3)]">
+              <span className="relative z-10">Book Your Stay</span>
+              {/* Border glow on hover */}
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 shadow-[inset_0_0_20px_rgba(255,255,255,0.2)]" />
             </button>
           </div>
         </div>
