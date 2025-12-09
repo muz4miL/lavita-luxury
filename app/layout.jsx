@@ -1,3 +1,5 @@
+// app/layout.jsx
+
 import { Playfair_Display, Manrope } from 'next/font/google';
 import { Navbar, Footer } from '@/components/layout';
 import Preloader from '@/components/Preloader';
@@ -18,10 +20,27 @@ const manrope = Manrope({
   weight: ['300', '400', '500', '600', '700'],
 });
 
+// The metadata block now correctly follows the font definitions
 export const metadata = {
-  title: "Lavita Malam Jabba | Ultra-Luxury Mountain Resort",
+  title: "Lavita",
   description: "The only Glass-Dome Resort in Swat Valley. 2804 meters above ordinary. Experience the sanctuary in the Hindu Kush mountains.",
   keywords: "luxury resort, Malam Jabba, Swat Valley, glass dome, mountain resort, Pakistan tourism",
+
+  // CORRECTED ICON PATHS (assuming icons are in public/logo/)
+  icons: {
+    icon: '/logo/favicon.ico',
+    shortcut: '/logo/favicon-16x16.png',
+    apple: '/logo/apple-touch-icon.png',
+    other: [
+      {
+        rel: 'mask-icon',
+        url: '/logo/safari-pinned-tab.svg',
+        color: '#1a473b'
+      },
+    ],
+  },
+
+  manifest: '/logo/site.webmanifest',
 };
 
 export default function RootLayout({ children }) {

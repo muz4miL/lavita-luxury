@@ -90,7 +90,7 @@ export default function HorizontalScrollCarousel() {
         {/* Horizontal Scrolling Track - Optimized with will-change */}
         <motion.div
           style={{ x, willChange: 'transform' }}
-          className="absolute inset-0 flex items-center gap-0 pl-[10vw]"
+          className="absolute inset-0 flex items-center gap-0 pl-[15vw]"
         >
           {experienceItems.map((item, index) => {
             // Alternate between portrait and landscape
@@ -101,15 +101,15 @@ export default function HorizontalScrollCarousel() {
                 key={item.id}
                 className="relative flex-shrink-0 flex items-center"
                 style={{
-                  marginRight: isPortrait ? 'clamp(60px, 10vw, 120px)' : 'clamp(100px, 15vw, 200px)',
+                  marginRight: isPortrait ? 'clamp(40px, 8vw, 80px)' : 'clamp(60px, 12vw, 150px)',
                 }}
               >
                 {/* Vertical Text for Portrait, Horizontal for Landscape */}
                 {isPortrait ? (
                   // Portrait Layout - Vertical Text
-                  <div className="relative flex-shrink-0 h-[70vh] flex items-center justify-center mr-6 md:mr-10" style={{ width: '15vh' }}>
+                  <div className="relative flex-shrink-0 h-[50vh] flex items-center justify-center mr-6 md:mr-8" style={{ width: '10vh' }}>
                     <h3
-                      className="font-playfair text-[10vh] md:text-[12vh] font-light text-white/10 whitespace-nowrap select-none absolute"
+                      className="font-playfair text-[8vh] md:text-[9vh] font-light text-white/10 whitespace-nowrap select-none absolute"
                       style={{
                         writingMode: 'vertical-rl',
                         textOrientation: 'mixed',
@@ -122,19 +122,20 @@ export default function HorizontalScrollCarousel() {
                   </div>
                 ) : (
                   // Landscape Layout - Horizontal Text Above
-                  <div className="absolute -top-24 left-0 z-10">
-                    <h3 className="font-playfair text-5xl md:text-6xl lg:text-7xl font-light text-white/10 whitespace-nowrap select-none tracking-tight">
+                  <div className="absolute -top-16 left-0 z-10">
+                    <h3 className="font-playfair text-4xl md:text-5xl lg:text-6xl font-light text-white/10 whitespace-nowrap select-none tracking-tight">
                       {item.title}
                     </h3>
                   </div>
                 )}
 
-                {/* Image Card - Varied Aspect Ratios */}
+                {/* Image Card - Varied Aspect Ratios - SMALLER SIZES */}
                 <div className="relative flex-shrink-0 group">
                   <div
                     className="relative overflow-hidden rounded-sm"
                     style={{
-                      width: isPortrait ? 'min(40vw, 450px)' : 'min(55vw, 700px)',
+                      // Significantly reduced widths for that "petite" premium look
+                      width: isPortrait ? 'min(25vw, 320px)' : 'min(40vw, 500px)',
                       aspectRatio: isPortrait ? '3/4' : '16/9',
                     }}
                   >
@@ -144,7 +145,7 @@ export default function HorizontalScrollCarousel() {
                       alt={item.title}
                       fill
                       className="object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
-                      sizes={isPortrait ? "(max-width: 768px) 40vw, 450px" : "(max-width: 768px) 55vw, 700px"}
+                      sizes={isPortrait ? "(max-width: 768px) 30vw, 320px" : "(max-width: 768px) 45vw, 500px"}
                     />
 
                     {/* Subtle Border */}
@@ -155,13 +156,13 @@ export default function HorizontalScrollCarousel() {
                   </div>
 
                   {/* Caption Below Image */}
-                  <div className="mt-6" style={{ maxWidth: isPortrait ? 'min(40vw, 450px)' : 'min(55vw, 700px)' }}>
-                    <div className="mb-2">
-                      <span className="text-[#C89B7B] text-xs tracking-[0.25em] uppercase font-medium">
+                  <div className="mt-4" style={{ maxWidth: isPortrait ? 'min(25vw, 320px)' : 'min(40vw, 500px)' }}>
+                    <div className="mb-1">
+                      <span className="text-[#C89B7B] text-[10px] tracking-[0.25em] uppercase font-medium">
                         {item.label}
                       </span>
                     </div>
-                    <p className="text-white/60 text-sm font-light leading-relaxed">
+                    <p className="text-white/60 text-xs md:text-sm font-light leading-relaxed">
                       {item.description}
                     </p>
                   </div>
