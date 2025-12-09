@@ -99,26 +99,79 @@ export default function LavitaLifestyle() {
                         </motion.div>
                     </motion.div>
 
-                    {/* RIGHT COLUMN: IMAGE */}
+                    {/* RIGHT COLUMN: IMAGE (Updated with Centered Diamonds) */}
                     <motion.div
                         initial={{ opacity: 0, scale: 1.05 }}
                         animate={isInView ? { opacity: 1, scale: 1 } : {}}
                         transition={{ duration: 0.9, ease: [0.25, 0.8, 0.25, 1] }}
-                        className="lg:col-span-7 relative w-full h-[380px] md:h-[520px] lg:h-[640px] rounded overflow-hidden"
+                        className="lg:col-span-7 relative w-full h-[380px] md:h-[500px] lg:h-[550px] rounded overflow-hidden group/image"
                     >
                         <Image
-                            src="/lifestyle-hero.jpg"
+                            src="/lifestyle-hero.png"
                             alt="Malam Jabba Adventure"
                             fill
-                            className="object-cover"
+                            className="object-cover transition-transform duration-1000 group-hover/image:scale-105"
                             sizes="100vw"
                             priority
                         />
 
                         {/* Gradient Overlays */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
                         <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-transparent" />
                         <div className="absolute inset-0 border border-white/5" />
+
+                        {/* === DESKTOP DIAMOND OVERLAY (CENTERED) === */}
+                        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 hidden lg:flex gap-6 items-center justify-center w-full">
+                            {[
+                                {
+                                    label: "Winter",
+                                    icon: (
+                                        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                                        </svg>
+                                    )
+                                },
+                                {
+                                    label: "Thrills",
+                                    icon: (
+                                        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                        </svg>
+                                    )
+                                },
+                                {
+                                    label: "Luxury",
+                                    icon: (
+                                        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7" />
+                                        </svg>
+                                    )
+                                },
+                                {
+                                    label: "Heritage",
+                                    icon: (
+                                        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                                        </svg>
+                                    )
+                                },
+                            ].map((item, i) => (
+                                <div key={i} className="group relative cursor-pointer w-20 h-20 flex items-center justify-center">
+                                    {/* Glass Diamond Shape */}
+                                    <div className="absolute inset-0 rotate-45 border border-white/20 bg-white/5 backdrop-blur-md shadow-lg transition-all duration-500 group-hover:bg-[#C89B7B]/10 group-hover:border-[#C89B7B]/50 group-hover:shadow-[#C89B7B]/20" />
+
+                                    {/* Content (No Rotation) */}
+                                    <div className="relative z-10 flex flex-col items-center justify-center gap-1.5">
+                                        <div className="text-[#C89B7B] transition-transform duration-300 group-hover:scale-110 group-hover:text-white">
+                                            {item.icon}
+                                        </div>
+                                        <span className="text-[9px] tracking-[0.2em] uppercase font-medium text-white/80 transition-colors duration-300 group-hover:text-white">
+                                            {item.label}
+                                        </span>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
                     </motion.div>
 
                     {/* MOBILE CARDS */}
