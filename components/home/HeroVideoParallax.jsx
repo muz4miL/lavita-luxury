@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -20,9 +20,33 @@ export default function HeroVideoParallax() {
   const eleganceRef = useRef(null);
   const goldDividerRef = useRef(null);
 
-  // GSAP animations with FIXED timing
+  // State for mobile/desktop
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Check if mobile on mount and resize
   useEffect(() => {
-    if (typeof window === 'undefined' || !sectionRef.current) return;
+    const checkMobile = () => {
+      const mobile = window.innerWidth < 768;
+      setIsMobile(mobile);
+
+      // On mobile, show content immediately
+      if (mobile && revealRef.current && timelessRef.current && eleganceRef.current) {
+        gsap.set([revealRef.current, timelessRef.current, eleganceRef.current, revealSubRef.current], {
+          opacity: 1,
+          y: 0,
+          clipPath: 'inset(0 0 0 0)'
+        });
+      }
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // GSAP animations - DESKTOP ONLY
+  useEffect(() => {
+    if (isMobile || typeof window === 'undefined' || !sectionRef.current) return;
 
     gsap.registerPlugin(ScrollTrigger);
 
@@ -41,273 +65,84 @@ export default function HeroVideoParallax() {
 
       // 0. Scroll indicator fades out fast
       if (scrollIndicatorRef.current) {
-        tl.to(
-          scrollIndicatorRef.current,
-          {
-            opacity: 0,
-            y: -24,
-            duration: 0.3,
-            ease: 'power2.in',
-          },
-          0
-        );
+        tl.to(scrollIndicatorRef.current, { opacity: 0, y: -24, duration: 0.3, ease: 'power2.in' }, 0);
       }
 
       // 1. Initial Overlay fades out
       if (overlayRef.current) {
-        tl.to(
-          overlayRef.current,
-          {
-            opacity: 0,
-            y: '-10%',
-            scale: 0.95,
-            duration: 0.8,
-            ease: 'power2.inOut',
-          },
-          0
-        );
+        tl.to(overlayRef.current, { opacity: 0, y: '-10%', scale: 0.95, duration: 0.8, ease: 'power2.inOut' }, 0);
       }
 
       // 2. Video container transforms to side panel
       if (videoContainerRef.current) {
-        tl.to(
-          videoContainerRef.current,
-          {
-            width: '45vw',
-            height: '75vh',
-            right: '4%',
-            top: '12.5%',
-            borderRadius: '32px',
-            boxShadow:
-              '0 40px 80px -20px rgba(0, 0, 0, 0.8), 0 0 60px rgba(212, 175, 55, 0.1) inset',
-            duration: 1,
-            ease: 'power2.inOut',
-          },
-          0
-        );
+        tl.to(videoContainerRef.current, {
+          width: '45vw', height: '75vh', right: '4%', top: '12.5%',
+          borderRadius: '32px',
+          border: '1px solid rgba(255, 255, 255, 0.1)',
+          boxShadow: '0 60px 120px -30px rgba(0, 0, 0, 0.9), 0 0 60px rgba(200, 155, 123, 0.1) inset',
+          duration: 1, ease: 'power2.inOut',
+        }, 0);
       }
 
       // 3. Anchor line grows
       if (anchorLineRef.current) {
-        tl.fromTo(
-          anchorLineRef.current,
-          { scaleY: 0, opacity: 0 },
-          {
-            scaleY: 1,
-            opacity: 1,
-            duration: 0.6,
-            ease: 'power2.out',
-          },
-          0.4
-        );
+        tl.fromTo(anchorLineRef.current, { scaleY: 0, opacity: 0 }, { scaleY: 1, opacity: 1, duration: 0.6, ease: 'power2.out' }, 0.4);
       }
 
       // 4. Luxury label appears
       if (luxuryLabelRef.current) {
-        tl.fromTo(
-          luxuryLabelRef.current,
-          { x: -40, opacity: 0 },
-          {
-            x: 0,
-            opacity: 1,
-            duration: 0.5,
-            ease: 'power2.out',
-          },
-          0.5
-        );
+        tl.fromTo(luxuryLabelRef.current, { x: -40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }, 0.5);
       }
 
       // 5. Content reveal sequence
       if (revealRef.current) {
-        tl.to(
-          revealRef.current,
-          {
-            opacity: 1,
-            duration: 0.1,
-          },
-          0.6
-        );
+        tl.to(revealRef.current, { opacity: 1, duration: 0.1 }, 0.6);
       }
 
       // "A VISION OF" label appears FIRST
       if (visionLabelRef.current) {
-        tl.fromTo(
-          visionLabelRef.current,
-          {
-            opacity: 0,
-            y: 20,
-            filter: 'blur(4px)',
-          },
-          {
-            opacity: 1,
-            y: 0,
-            filter: 'blur(0px)',
-            duration: 0.5,
-            ease: 'power2.out',
-          },
-          0.7
-        );
+        tl.fromTo(visionLabelRef.current, { opacity: 0, y: 20, filter: 'blur(4px)' }, { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.5, ease: 'power2.out' }, 0.7);
       }
 
-      // "Timeless" word appears SECOND
+      // "Timeless" word appears SECOND (slower, more graceful)
       if (timelessRef.current) {
-        tl.fromTo(
-          timelessRef.current,
-          {
-            opacity: 0,
-            y: 50,
-            clipPath: 'inset(0 0 100% 0)',
-          },
-          {
-            opacity: 1,
-            y: 0,
-            clipPath: 'inset(0 0 0 0)',
-            duration: 0.8,
-            ease: 'power2.out',
-          },
-          0.8
-        );
+        tl.fromTo(timelessRef.current, { opacity: 0, y: 50, clipPath: 'inset(0 0 100% 0)' }, { opacity: 1, y: 0, clipPath: 'inset(0 0 0 0)', duration: 1.2, ease: 'power2.out' }, 0.8);
       }
 
-      // "Elegance" word appears THIRD
+      // "Architecture" word appears THIRD (slower, more graceful)
       if (eleganceRef.current) {
-        tl.fromTo(
-          eleganceRef.current,
-          {
-            opacity: 0,
-            y: 50,
-            clipPath: 'inset(0 0 100% 0)',
-          },
-          {
-            opacity: 1,
-            y: 0,
-            clipPath: 'inset(0 0 0 0)',
-            duration: 0.8,
-            ease: 'power2.out',
-          },
-          1.1
-        );
+        tl.fromTo(eleganceRef.current, { opacity: 0, y: 50, clipPath: 'inset(0 0 100% 0)' }, { opacity: 1, y: 0, clipPath: 'inset(0 0 0 0)', duration: 1.2, ease: 'power2.out' }, 1.1);
       }
 
-      // Gold Divider appears
+      // Divider appears
       if (goldDividerRef.current) {
-        tl.fromTo(
-          goldDividerRef.current,
-          {
-            opacity: 0,
-            scaleX: 0,
-          },
-          {
-            opacity: 1,
-            scaleX: 1,
-            duration: 0.6,
-            ease: 'power2.out',
-          },
-          1.2
-        );
+        tl.fromTo(goldDividerRef.current, { opacity: 0, scaleX: 0 }, { opacity: 1, scaleX: 1, duration: 0.6, ease: 'power2.out' }, 1.2);
       }
 
       // Description text appears FOURTH
       if (revealSubRef.current) {
-        tl.fromTo(
-          revealSubRef.current,
-          {
-            opacity: 0,
-            y: 30,
-            filter: 'blur(4px)',
-          },
-          {
-            opacity: 1,
-            y: 0,
-            filter: 'blur(0px)',
-            duration: 0.7,
-            ease: 'power2.out',
-          },
-          1.4
-        );
+        tl.fromTo(revealSubRef.current, { opacity: 0, y: 30, filter: 'blur(4px)' }, { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.7, ease: 'power2.out' }, 1.4);
       }
 
-      // 6. Once revealed, stay visible forever
-      if (revealRef.current) {
-        tl.to(
-          revealRef.current,
-          {
-            opacity: 1,
-            duration: 0.01,
-          },
-          1.5
-        );
-      }
+      // 6. Ensure visibility
+      if (revealRef.current) tl.to(revealRef.current, { opacity: 1, duration: 0.01 }, 1.5);
+      if (timelessRef.current) tl.to(timelessRef.current, { opacity: 1, duration: 0.01 }, 1.5);
+      if (eleganceRef.current) tl.to(eleganceRef.current, { opacity: 1, duration: 0.01 }, 1.5);
+      if (revealSubRef.current) tl.to(revealSubRef.current, { opacity: 1, duration: 0.01 }, 1.5);
 
-      if (timelessRef.current) {
-        tl.to(
-          timelessRef.current,
-          {
-            opacity: 1,
-            duration: 0.01,
-          },
-          1.5
-        );
-      }
-
-      if (eleganceRef.current) {
-        tl.to(
-          eleganceRef.current,
-          {
-            opacity: 1,
-            duration: 0.01,
-          },
-          1.5
-        );
-      }
-
-      if (revealSubRef.current) {
-        tl.to(
-          revealSubRef.current,
-          {
-            opacity: 1,
-            duration: 0.01,
-          },
-          1.5
-        );
-      }
-
-      // 7. Subtle parallax effects after everything is revealed
-      if (revealRef.current) {
-        tl.to(
-          revealRef.current,
-          {
-            y: '-5%',
-            duration: 1,
-            ease: 'none',
-          },
-          2.0
-        );
-      }
-
-      if (videoContainerRef.current) {
-        tl.to(
-          videoContainerRef.current,
-          {
-            y: '2%',
-            scale: 0.98,
-            duration: 1,
-            ease: 'none',
-          },
-          2.0
-        );
-      }
+      // 7. Subtle parallax
+      if (revealRef.current) tl.to(revealRef.current, { y: '-5%', duration: 1, ease: 'none' }, 2.0);
+      if (videoContainerRef.current) tl.to(videoContainerRef.current, { y: '2%', scale: 0.98, duration: 1, ease: 'none' }, 2.0);
 
     }, sectionRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [isMobile]);
 
   // Video autoplay fix
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
-
     const playVideo = async () => {
       try {
         video.muted = true;
@@ -316,225 +151,187 @@ export default function HeroVideoParallax() {
         console.log('Autoplay prevented:', err);
       }
     };
-
     playVideo();
-
-    // Smooth fade in on load
-    if (video) {
-      gsap.fromTo(video,
-        { opacity: 0 },
-        { opacity: 1, duration: 1.5, ease: 'power2.inOut' }
-      );
+    if (!isMobile && video) {
+      gsap.fromTo(video, { opacity: 0 }, { opacity: 1, duration: 1.5, ease: 'power2.inOut' });
     }
-  }, []);
+  }, [isMobile]);
 
   return (
     <section
       ref={sectionRef}
-      className="relative h-screen w-full overflow-hidden bg-gradient-to-br from-[#0B1C19] via-[#0A1613] to-[#050F0D] text-white"
+      className={`relative ${isMobile ? 'h-auto min-h-screen flex flex-col' : 'h-screen w-full overflow-hidden'} text-white`}
+      style={{ background: 'linear-gradient(to bottom right, #0B1C19, #0A1613, #050F0D)' }}
     >
-      {/* Video Container */}
-      <div
-        ref={videoContainerRef}
-        className="absolute z-20 overflow-hidden bg-black/20 w-full h-full right-0 top-0 rounded-none shadow-none md:w-full md:h-full md:right-0 md:top-0"
-      >
-        <div className="relative h-full w-full overflow-hidden">
-          <video
-            ref={videoRef}
-            className="h-full w-full object-cover"
-            autoPlay
-            loop
-            muted
-            playsInline
-            preload="auto"
-          >
-            <source src="/hero-videos/hero1.mp4" type="video/mp4" />
-            <source src="https://cdn.coverr.co/videos/coverr-sunrise-over-the-sea-9163/1080p.mp4" type="video/mp4" />
-          </video>
-          {/* Video Overlay Gradients */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0B1C19]/90 via-[#0B1C19]/30 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0B1C19]/40 via-transparent to-transparent" />
-        </div>
-      </div>
-
-      {/* Left Content Panel - EDITORIAL BLOCK LAYOUT */}
-      <div
-        ref={revealRef}
-        className="absolute left-0 top-0 z-30 flex h-full w-full items-center justify-start pl-[5%] md:pl-[10%] pr-[5%] md:pr-[52%] opacity-0"
-      >
-        {/* Centered Editorial Block Container */}
-        <div className="relative w-full max-w-2xl">
-
-          {/* Top Luxury Label */}
-          <div
-            ref={luxuryLabelRef}
-            className="mb-12 opacity-0 absolute -top-24 left-0"
-          >
-            <div className="flex items-center gap-4">
-              <div className="h-[1px] w-12 bg-gradient-to-r from-[#D4AF37] to-[#D4AF37]/40" />
-              <span className="text-[10px] tracking-[0.35em] text-[#D4AF37] font-sans uppercase font-medium">
-                LAVITA MALAM JABBA
-              </span>
+      {/* ==================== MOBILE LAYOUT ==================== */}
+      {isMobile ? (
+        <>
+          {/* VIDEO SECTION - Top 60% */}
+          <div className="relative h-[60vh] w-full overflow-hidden">
+            <div className="absolute inset-0">
+              <video
+                ref={videoRef}
+                className="h-full w-full object-cover"
+                autoPlay loop muted playsInline preload="auto"
+              >
+                <source src="/hero-videos/hero1.mp4" type="video/mp4" />
+                <source src="https://cdn.coverr.co/videos/coverr-sunrise-over-the-sea-9163/1080p.mp4" type="video/mp4" />
+              </video>
+              <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(13, 21, 18, 0.9), rgba(13, 21, 18, 0.3), transparent)' }} />
             </div>
           </div>
 
-          {/* TIGHT EDITORIAL BLOCK */}
-          <div className="flex flex-col justify-center">
-
-            {/* Vision Label - TIGHT spacing */}
-            <div
-              ref={visionLabelRef}
-              className="mb-6 opacity-0"
-            >
-              <span
-                className="text-xs tracking-[0.25em] text-white/70 font-sans uppercase font-light"
-              >
-                A VISION OF
-              </span>
-            </div>
-
-            {/* Main Headline - TIGHT STACK */}
-            <div className="mb-6 overflow-visible">
-              {/* "Timeless" */}
-              <h2
-                ref={timelessRef}
-                className="text-5xl md:text-6xl lg:text-7xl leading-[1.05] italic text-[#D4AF37] font-light font-serif opacity-0 overflow-visible"
-                style={{
-                  textShadow: '0 4px 12px rgba(0, 0, 0, 0.5)',
-                }}
-              >
-                Timeless
-              </h2>
-
-              {/* "Elegance" - TIGHT spacing */}
-              <h2
-                ref={eleganceRef}
-                className="text-5xl md:text-6xl lg:text-7xl leading-[1.05] text-white font-light font-serif opacity-0 overflow-visible mt-2"
-                style={{
-                  textShadow: '0 4px 12px rgba(0, 0, 0, 0.5)',
-                }}
-              >
-                Architecture
-              </h2>
-            </div>
-
-            {/* GOLD DIVIDER - Elegant separation */}
-            <div
-              ref={goldDividerRef}
-              className="h-[1px] w-20 md:w-24 bg-gradient-to-r from-[#D4AF37] to-[#D4AF37]/60 my-6 md:my-8 opacity-0 transform origin-left scale-x-0"
-            />
-
-            {/* Body Text - TIGHT spacing, limited width */}
-            <p
-              ref={revealSubRef}
-              className="max-w-md text-base md:text-[1.125rem] leading-relaxed md:leading-[1.7] text-white/85 font-light opacity-0"
-              style={{
-                letterSpacing: '0.01em'
-              }}
-            >
-              Where the Hindu Kush touches the clouds, and every sunrise paints a new masterpiece on the canvas of your life.
-            </p>
-
-            {/* Bottom Accent - Positioned after block */}
-            <div className="mt-12 md:mt-16 flex items-center gap-6 group cursor-pointer">
-              <div className="h-[1px] w-12 bg-gradient-to-r from-[#D4AF37] to-transparent transition-all duration-700 group-hover:w-16" />
-              <span className="text-[10px] tracking-[0.35em] text-white/50 uppercase font-sans font-light transition-all duration-300 group-hover:text-white/70 group-hover:tracking-[0.4em]">
-                EXPLORE BELOW
-              </span>
+          {/* TEXT SECTION - Bottom 40% */}
+          <div className="flex-1 flex flex-col justify-center items-start px-6 py-10" style={{ backgroundColor: '#0D1512' }}>
+            <div className="w-full max-w-md text-left">
+              <div className="mb-8">
+                <span className="text-xs tracking-[0.3em] text-white/90 font-sans uppercase font-light">
+                  THE FIRST GLASS-DOME RESORT
+                </span>
+              </div>
+              <h1 className="mb-6 font-serif text-4xl font-medium leading-tight text-white">
+                <span className="block mb-2">The Sanctuary</span>
+                <span className="block italic text-3xl" style={{ color: '#F2F4F6' }}>In The Clouds</span>
+              </h1>
+              <p className="text-xs tracking-[0.3em] text-white/80 font-sans uppercase font-light mb-8">
+                9,200FT ELEVATION • HINDU KUSH
+              </p>
+              <div className="h-[1px] w-24 my-6" style={{ background: 'linear-gradient(to right, #C89B7B, rgba(200, 155, 123, 0.3))' }} />
+              <div className="mb-4">
+                <span className="text-xs tracking-[0.25em] font-sans uppercase font-light" style={{ color: '#C89B7B' }}>A VISION OF</span>
+              </div>
+              <div className="mb-8">
+                <h2 className="text-3xl italic font-light font-serif mb-2" style={{ color: '#F2F4F6', textShadow: '0 4px 20px rgba(0,0,0,0.5)' }}>Timeless</h2>
+                <h2 className="text-3xl font-light font-serif" style={{ color: '#F2F4F6', textShadow: '0 4px 20px rgba(0,0,0,0.5)' }}>Architecture</h2>
+              </div>
+              <p className="font-light font-sans" style={{ color: 'rgba(242, 244, 246, 0.8)', lineHeight: '1.8' }}>
+                A masterpiece of design and nature, Lavita is Pakistan's first Glass-Dome Sanctuary. Experience five-star living at 9,200ft.
+              </p>
+              <div className="flex items-center justify-start gap-4 group cursor-pointer">
+                <div className="h-[1px] w-8 transition-all duration-700 ease-out group-hover:w-16" style={{ background: 'linear-gradient(to right, #C89B7B, transparent)' }} />
+                <span className="text-[10px] tracking-[0.35em] uppercase font-sans font-light transition-all duration-700 ease-out group-hover:translate-x-1" style={{ color: '#C89B7B' }}>EXPLORE BELOW</span>
+                <div className="h-[1px] w-8 transition-all duration-700 ease-out" style={{ background: 'linear-gradient(to right, transparent, #C89B7B)' }} />
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-
-      {/* Initial Full Screen Overlay */}
-      <div
-        ref={overlayRef}
-        className="absolute inset-0 z-40 flex flex-col items-center justify-center pointer-events-none pb-12 md:pb-16"
-      >
-        {/* Dark gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-
-        <div className="text-center px-4 relative z-10 w-full">
-          {/* Main Headline - Punchy & Commanding */}
-          <h1 className="mb-6 md:mb-8 font-serif text-4xl md:text-6xl lg:text-7xl font-medium leading-[0.95] text-white px-4">
-            <span
-              className="block mb-3 md:mb-4 tracking-tight"
-              style={{
-                textShadow: '0 2px 12px rgba(0, 0, 0, 0.6)'
-              }}
-            >
-              ABOVE THE CLOUDS.
-            </span>
-            <span
-              className="block tracking-tight"
-              style={{
-                textShadow: '0 2px 12px rgba(0, 0, 0, 0.6)'
-              }}
-            >
-              BEYOND THE ORDINARY.
-            </span>
-          </h1>
-
-          {/* Sub-Headline */}
-          <p
-            className="mx-auto max-w-lg text-sm md:text-base leading-relaxed text-white/85 font-light px-4 mb-8 md:mb-10"
-            style={{
-              textShadow: '0 1px 6px rgba(0, 0, 0, 0.5)'
-            }}
-          >
-            Pakistan's first glass-dome sanctuary. Experience five-star living at 9,200ft.
-          </p>
-
-          {/* Optional CTA Button */}
-          <div className="flex justify-center">
-            <a
-              href="#discover"
-              className="group inline-flex items-center gap-3 px-8 py-3.5 border border-[#D4AF37]/40 rounded-sm bg-[#D4AF37]/10 backdrop-blur-sm hover:bg-[#D4AF37]/20 hover:border-[#D4AF37]/60 transition-all duration-300"
-            >
-              <span className="text-white text-xs tracking-[0.2em] uppercase font-medium">
-                DISCOVER LAVITA
-              </span>
-              <svg
-                className="w-4 h-4 text-[#D4AF37] transition-transform duration-300 group-hover:translate-x-1"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
+        </>
+      ) : (
+        /* ==================== DESKTOP LAYOUT ==================== */
+        <>
+          <div ref={videoContainerRef} className="absolute z-20 overflow-hidden bg-black/20 w-full h-full right-0 top-0 rounded-none shadow-none">
+            <div className="relative h-full w-full overflow-hidden">
+              <video
+                ref={videoRef}
+                className="h-full w-full object-cover"
+                autoPlay loop muted playsInline preload="auto"
               >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </a>
+                <source src="/hero-videos/hero1.mp4" type="video/mp4" />
+                <source src="https://cdn.coverr.co/videos/coverr-sunrise-over-the-sea-9163/1080p.mp4" type="video/mp4" />
+              </video>
+              <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(11, 28, 25, 0.9), rgba(11, 28, 25, 0.3), transparent)' }} />
+              <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, rgba(11, 28, 25, 0.4), transparent, transparent)' }} />
+            </div>
           </div>
-        </div>
-      </div>
 
-      {/* Vertical Anchor Line - Hidden on mobile */}
-      <div
-        ref={anchorLineRef}
-        className="hidden md:block absolute left-1/2 top-1/2 z-20 h-0 w-[1px] -translate-x-1/2 -translate-y-1/2 bg-gradient-to-b from-transparent via-[#D4AF37]/20 to-transparent opacity-0"
-      />
+          <div ref={revealRef} className="absolute left-0 top-0 z-30 flex h-full w-full items-center justify-start pl-[5%] md:pl-[10%] pr-[5%] md:pr-[52%] opacity-0">
+            <div className="relative w-full max-w-2xl text-left">
 
-      {/* Scroll Indicator */}
-      <div
-        ref={scrollIndicatorRef}
-        className="absolute bottom-8 md:bottom-12 left-1/2 z-50 -translate-x-1/2"
-      >
-        <div className="flex flex-col items-center">
-          <span
-            className="mb-3 md:mb-4 text-[10px] md:text-xs tracking-[0.25em] md:tracking-[0.3em] text-white/50 font-sans uppercase font-light"
-            style={{
-              textShadow: '0 1px 4px rgba(0, 0, 0, 0.5)'
-            }}
-          >
-            EXPLORE
-          </span>
-          <div className="relative h-10 md:h-16 w-[1px] overflow-hidden bg-white/10 backdrop-blur-sm">
-            <div className="absolute top-0 h-5 md:h-8 w-full bg-gradient-to-b from-[#D4AF37] to-transparent animate-scroll-indicator" />
+              <div ref={luxuryLabelRef} className="mb-12 opacity-0 absolute -top-24 left-0">
+                <div className="flex items-center gap-4">
+                  <div className="h-[1px] w-12" style={{ background: 'linear-gradient(to right, #C89B7B, rgba(200, 155, 123, 0.3))' }} />
+                  <span className="text-[10px] tracking-[0.35em] font-sans uppercase font-medium" style={{ color: '#C89B7B' }}>
+                    LAVITA MALAM JABBA
+                  </span>
+                </div>
+              </div>
+
+              <div className="flex flex-col justify-center items-start">
+                <div ref={visionLabelRef} className="mb-6 opacity-0">
+                  <span className="text-xs tracking-[0.25em] font-sans uppercase font-light" style={{ color: '#C89B7B' }}>A VISION OF</span>
+                </div>
+
+                <div className="mb-10 overflow-visible">
+                  <h2
+                    ref={timelessRef}
+                    className="text-6xl md:text-7xl lg:text-8xl tracking-tight leading-[0.9] italic font-light font-serif opacity-0 overflow-visible"
+                    style={{ color: '#F2F4F6', textShadow: '0 4px 20px rgba(0, 0, 0, 0.5)' }}
+                  >
+                    Timeless
+                  </h2>
+                  <h2
+                    ref={eleganceRef}
+                    className="text-6xl md:text-7xl lg:text-8xl tracking-tight leading-[0.9] font-light font-serif opacity-0 overflow-visible mt-3"
+                    style={{ color: '#F2F4F6', textShadow: '0 4px 20px rgba(0, 0, 0, 0.5)' }}
+                  >
+                    Architecture
+                  </h2>
+                </div>
+
+                <div
+                  ref={goldDividerRef}
+                  className="h-[1px] w-20 md:w-24 my-8 md:my-10 opacity-0 transform origin-left scale-x-0"
+                  style={{ background: 'linear-gradient(to right, #C89B7B, rgba(200, 155, 123, 0.3))' }}
+                />
+
+                <p
+                  ref={revealSubRef}
+                  className="max-w-md text-base md:text-[1.125rem] font-light font-sans opacity-0"
+                  style={{ color: 'rgba(242, 244, 246, 0.8)', lineHeight: '1.8', letterSpacing: '0.01em' }}
+                >
+                  A masterpiece of design and nature, Lavita is Pakistan's first Glass-Dome Sanctuary. Experience five-star living at 9,200ft.
+                </p>
+
+                <div className="mt-14 md:mt-20 flex items-center gap-6 group cursor-pointer">
+                  <div className="h-[1px] w-12 transition-all duration-700 ease-out group-hover:w-16" style={{ background: 'linear-gradient(to right, #C89B7B, transparent)' }} />
+                  <span className="text-[10px] tracking-[0.35em] uppercase font-sans font-light transition-all duration-700 ease-out group-hover:translate-x-1 group-hover:tracking-[0.4em]" style={{ color: '#C89B7B' }}>
+                    EXPLORE BELOW
+                  </span>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
 
-      {/* Bottom Gradient Fade - Seamless Transition to Intro Section */}
-      <div className="absolute bottom-0 left-0 right-0 h-48 md:h-56 bg-gradient-to-b from-transparent via-[#0D1512]/70 to-[#0D1512] pointer-events-none z-10" />
+          {/* Seamless Gradient to Next Section - Subtle vignette */}
+          <div className="absolute bottom-0 left-0 right-0 h-56 z-25 pointer-events-none" style={{ background: 'linear-gradient(to bottom, transparent, rgba(13, 21, 18, 0.4), #0D1512)' }} />
+
+          {/* Initial Full Screen Overlay - LEFT ALIGNED */}
+          <div ref={overlayRef} className="absolute inset-0 z-40 flex flex-col items-start justify-center pointer-events-none pb-12 md:pb-16 pl-[5%] md:pl-[10%]">
+            <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.2), transparent)' }} />
+
+            <div className="text-left px-4 relative z-10 w-full">
+              <div className="mb-8 md:mb-10">
+                <span className="text-xs md:text-sm tracking-[0.3em] text-white/90 font-sans uppercase font-light">
+                  THE FIRST GLASS-DOME RESORT
+                </span>
+              </div>
+              <h1 className="mb-8 md:mb-10 font-serif text-4xl md:text-6xl lg:text-7xl font-medium leading-[0.9] text-white px-4">
+                <span className="block mb-4 md:mb-6" style={{ textShadow: '0 2px 12px rgba(0, 0, 0, 0.6)' }}>
+                  The Sanctuary
+                </span>
+                <span className="block italic font-semibold text-3xl md:text-5xl lg:text-6xl" style={{ color: '#F2F4F6', textShadow: '0 4px 20px rgba(0, 0, 0, 0.6)' }}>
+                  In The Clouds
+                </span>
+              </h1>
+              <p className="max-w-xs md:max-w-md text-xs tracking-[0.3em] text-white/80 font-sans uppercase font-light mt-12 md:mt-14" style={{ textShadow: '0 1px 6px rgba(0, 0, 0, 0.5)' }}>
+                9,200FT ELEVATION • HINDU KUSH
+              </p>
+            </div>
+          </div>
+
+          <div ref={anchorLineRef} className="absolute left-1/2 top-1/2 z-20 h-0 -translate-x-1/2 -translate-y-1/2 opacity-0" style={{ width: '0.5px', background: 'linear-gradient(to bottom, transparent, rgba(200, 155, 123, 0.3), transparent)' }} />
+
+          <div ref={scrollIndicatorRef} className="absolute bottom-8 md:bottom-12 left-1/2 z-50 -translate-x-1/2">
+            <div className="flex flex-col items-center">
+              <span className="mb-3 md:mb-4 text-[10px] md:text-xs tracking-[0.25em] md:tracking-[0.3em] font-sans uppercase font-light" style={{ color: '#C89B7B', textShadow: '0 1px 4px rgba(0, 0, 0, 0.5)' }}>
+                EXPLORE
+              </span>
+              <div className="relative h-10 md:h-16 overflow-hidden bg-white/10 backdrop-blur-sm" style={{ width: '0.5px' }}>
+                <div className="absolute top-0 h-5 md:h-8 w-full animate-scroll-indicator" style={{ background: 'linear-gradient(to bottom, #C89B7B, transparent)' }} />
+              </div>
+            </div>
+          </div>
+        </>
+      )}
     </section>
   );
 }
