@@ -1,101 +1,196 @@
 'use client';
+'use client';
 
-import { Gamepad2, Building2, Trees } from 'lucide-react';
+import { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import Image from 'next/image';
 
-const bentoItems = [
+const experienceItems = [
   {
-    id: 'hbk-arcade',
-    title: 'The HBK Arcade',
-    subtitle: 'VR Zones & Soft Play Arena',
-    label: 'FAMILY ENTERTAINMENT',
-    icon: Gamepad2,
-    size: 'large',
-    image: 'https://images.unsplash.com/photo-1555864326-5cf22ef123cf?q=80&w=2067&auto=format&fit=crop',
+    id: 1,
+    url: '/lifestyle-hero.png',
+    title: 'SKIING',
+    label: 'World-Class Slopes',
+    description: 'Experience Pakistan\'s premier ski destination',
   },
   {
-    id: 'corporate',
-    title: 'Sky-High Retreats',
-    subtitle: 'Executive Halls with Panoramic Views',
-    label: 'CORPORATE EVENTS',
-    icon: Building2,
-    size: 'small',
-    image: '/images/corporate.png',
+    id: 2,
+    url: '/lifestyle-hero.png',
+    title: 'WELLNESS',
+    label: 'Alpine Spa',
+    description: 'Rejuvenate at 9,200ft elevation',
   },
   {
-    id: 'adventure',
-    title: 'Alpine Adventures',
-    subtitle: '800m Zipline & Night Skiing',
-    label: 'MALAM JABBA EXCLUSIVE',
-    icon: Trees,
-    size: 'small',
-    image: 'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?q=80&w=2070&auto=format&fit=crop',
+    id: 3,
+    url: '/lifestyle-hero.png',
+    title: 'DINING',
+    label: 'Culinary Excellence',
+    description: 'Gourmet cuisine with mountain views',
+  },
+  {
+    id: 4,
+    url: '/lifestyle-hero.png',
+    title: 'SUITES',
+    label: 'Glass Dome Living',
+    description: 'Architecture meets the sky',
   },
 ];
 
-export default function BentoGrid() {
+export default function HorizontalScrollCarousel() {
+  const targetRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: targetRef,
+  });
+
+  // Optimized scroll range - prevents jump at end
+  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-75%"]);
+
   return (
-    <section className="relative bg-[var(--midnight-pine)] px-6 py-24 lg:px-8 lg:py-40 before:content-[''] before:absolute before:inset-0 before:pointer-events-none" style={{ '::before': { background: 'radial-gradient(ellipse 100% 50% at 50% 0%, rgba(200, 155, 123, 0.03) 0%, transparent 50%)' } }}>
-      <div className="max-w-[1200px] mx-auto relative z-[1]">
-        {/* Section Header */}
-        <div className="text-center mb-16 md:mb-20">
-          <div className="flex items-center justify-center gap-5 mb-5">
-            <span className="w-10 h-px opacity-60" style={{ background: 'linear-gradient(90deg, transparent 0%, var(--brushed-copper) 100%)' }} />
-            <span className="font-[family-name:var(--font-manrope)] text-[0.6875rem] tracking-[0.25em] uppercase text-[var(--brushed-copper)] font-semibold">Experiences</span>
-            <span className="w-10 h-px opacity-60" style={{ background: 'linear-gradient(90deg, var(--brushed-copper) 0%, transparent 100%)' }} />
-          </div>
-          <h2 className="font-[family-name:var(--font-playfair)] text-[2.25rem] md:text-[2.75rem] font-medium text-[var(--text-light)] mb-3">Resort Lifestyle</h2>
-          <p className="font-[family-name:var(--font-manrope)] text-base text-[rgba(245,245,245,0.5)] font-normal">
-            Curated experiences that transcend the ordinary
-          </p>
+    <section
+      ref={targetRef}
+      className="relative bg-[#0D1512]"
+      style={{ height: '400vh' }}
+    >
+      {/* Sticky Container */}
+      <div className="sticky top-0 h-screen overflow-hidden">
+        {/* Static Background - No Animation for Performance */}
+        <div className="absolute inset-0">
+          <Image
+            src="/lifestyle-hero.png"
+            alt="Background"
+            fill
+            className="object-cover opacity-20"
+            style={{ filter: 'blur(8px) brightness(0.3)' }}
+            priority
+          />
+          <div className="absolute inset-0 bg-[#0D1512]/70" />
         </div>
 
-        {/* Bento Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 md:grid-rows-2 gap-5 md:gap-6">
-          {bentoItems.map((item) => {
-            const IconComponent = item.icon;
+        {/* Noise Texture */}
+        <div
+          className="absolute inset-0 opacity-[0.02] pointer-events-none mix-blend-overlay"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' /%3E%3C/svg%3E")`,
+          }}
+        />
+
+        {/* Section Header - Top Left */}
+        <div className="absolute top-12 left-8 md:left-16 lg:left-24 z-30">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="h-[1px] w-10 bg-gradient-to-r from-[#C89B7B] to-transparent" />
+            <span className="text-[#C89B7B] text-[10px] tracking-[0.35em] uppercase font-medium">
+              Resort Lifestyle
+            </span>
+          </div>
+          <h2 className="font-playfair text-3xl md:text-4xl font-light tracking-tight text-white/90">
+            Curated Experiences
+          </h2>
+        </div>
+
+        {/* Horizontal Scrolling Track - Optimized with will-change */}
+        <motion.div
+          style={{ x, willChange: 'transform' }}
+          className="absolute inset-0 flex items-center gap-0 pl-[10vw]"
+        >
+          {experienceItems.map((item, index) => {
+            // Alternate between portrait and landscape
+            const isPortrait = index % 2 === 0;
+
             return (
               <div
                 key={item.id}
-                className={`group relative overflow-hidden cursor-pointer min-h-[320px] md:min-h-[240px] flex flex-col justify-end p-8 rounded-2xl bg-cover bg-center bg-no-repeat transition-all duration-[600ms] cubic-bezier(0.16,1,0.3,1) hover:translate-y-[-10px] before:content-[''] before:absolute before:inset-0 before:border before:border-[rgba(255,255,255,0.08)] before:rounded-2xl before:transition-all before:duration-400 before:z-[3] before:pointer-events-none hover:before:border-[rgba(200,155,123,0.4)] hover:before:shadow-[0_30px_60px_rgba(0,0,0,0.5),0_0_40px_rgba(200,155,123,0.15),inset_0_1px_0_rgba(255,255,255,0.05)] ${item.size === 'large' ? 'min-h-[360px] md:row-span-2 md:min-h-auto' : ''
-                  }`}
+                className="relative flex-shrink-0 flex items-center"
+                style={{
+                  marginRight: isPortrait ? 'clamp(60px, 10vw, 120px)' : 'clamp(100px, 15vw, 200px)',
+                }}
               >
-                {/* Background Image with Zoom Effect */}
-                <div
-                  className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-700 ease-out group-hover:scale-110 z-0"
-                  style={{ backgroundImage: `url(${item.image})` }}
-                />
-                {/* Gradient overlay - Darkens on hover for "Deep Focus" */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[rgba(0,0,0,0.9)] via-[rgba(0,0,0,0.6)] via-40% to-[rgba(0,0,0,0.2)] z-[1] transition-all duration-500 ease-out group-hover:from-[rgba(0,0,0,0.95)] group-hover:via-[rgba(0,0,0,0.7)]" />
+                {/* Vertical Text for Portrait, Horizontal for Landscape */}
+                {isPortrait ? (
+                  // Portrait Layout - Vertical Text
+                  <div className="relative flex-shrink-0 h-[70vh] flex items-center justify-center mr-6 md:mr-10" style={{ width: '15vh' }}>
+                    <h3
+                      className="font-playfair text-[10vh] md:text-[12vh] font-light text-white/10 whitespace-nowrap select-none absolute"
+                      style={{
+                        writingMode: 'vertical-rl',
+                        textOrientation: 'mixed',
+                        transform: 'rotate(180deg)',
+                        letterSpacing: '0.05em',
+                      }}
+                    >
+                      {item.title}
+                    </h3>
+                  </div>
+                ) : (
+                  // Landscape Layout - Horizontal Text Above
+                  <div className="absolute -top-24 left-0 z-10">
+                    <h3 className="font-playfair text-5xl md:text-6xl lg:text-7xl font-light text-white/10 whitespace-nowrap select-none tracking-tight">
+                      {item.title}
+                    </h3>
+                  </div>
+                )}
 
-                {/* Label badge - Frosted Glass */}
-                <div className="absolute top-7 left-7 z-[3]">
-                  <span className="font-[family-name:var(--font-manrope)] text-[0.625rem] font-semibold tracking-[0.2em] uppercase text-[var(--brushed-copper)] px-[0.875rem] py-2 backdrop-blur-md bg-white/5 border border-[rgba(200,155,123,0.2)] rounded-[2rem] transition-all duration-300">
-                    {item.label}
-                  </span>
+                {/* Image Card - Varied Aspect Ratios */}
+                <div className="relative flex-shrink-0 group">
+                  <div
+                    className="relative overflow-hidden rounded-sm"
+                    style={{
+                      width: isPortrait ? 'min(40vw, 450px)' : 'min(55vw, 700px)',
+                      aspectRatio: isPortrait ? '3/4' : '16/9',
+                    }}
+                  >
+                    {/* Image */}
+                    <Image
+                      src={item.url}
+                      alt={item.title}
+                      fill
+                      className="object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
+                      sizes={isPortrait ? "(max-width: 768px) 40vw, 450px" : "(max-width: 768px) 55vw, 700px"}
+                    />
+
+                    {/* Subtle Border */}
+                    <div className="absolute inset-0 border border-white/10 group-hover:border-[#C89B7B]/20 transition-colors duration-700" />
+
+                    {/* Minimal Gradient on Hover */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                  </div>
+
+                  {/* Caption Below Image */}
+                  <div className="mt-6" style={{ maxWidth: isPortrait ? 'min(40vw, 450px)' : 'min(55vw, 700px)' }}>
+                    <div className="mb-2">
+                      <span className="text-[#C89B7B] text-xs tracking-[0.25em] uppercase font-medium">
+                        {item.label}
+                      </span>
+                    </div>
+                    <p className="text-white/60 text-sm font-light leading-relaxed">
+                      {item.description}
+                    </p>
+                  </div>
                 </div>
-
-                {/* Icon - Diamond Shape (Alpine Noir) */}
-                <div className="absolute top-7 right-7 w-[52px] h-[52px] rotate-45 bg-[rgba(255,255,255,0.08)] backdrop-blur-[8px] border border-white/10 flex items-center justify-center z-[3] transition-all duration-[400ms] cubic-bezier(0.16,1,0.3,1)">
-                  <IconComponent className="w-[22px] h-[22px] text-[var(--brushed-copper)] -rotate-45" />
-                </div>
-
-                {/* Content at bottom */}
-                <div className="relative z-[2]">
-                  <h3 className={`font-[family-name:var(--font-playfair)] text-[1.625rem] ${item.size === 'large' ? 'md:text-[2rem]' : ''} font-medium text-[var(--text-light)] mb-2 transition-all duration-300 shadow-[0_2px_10px_rgba(0,0,0,0.5)]`}>
-                    {item.title}
-                  </h3>
-                  <p className="font-[family-name:var(--font-manrope)] text-[0.9375rem] text-[rgba(245,245,245,0.7)] font-normal tracking-[0.02em] shadow-[0_1px_8px_rgba(0,0,0,0.5)]">
-                    {item.subtitle}
-                  </p>
-                </div>
-
-                {/* Hover overlay */}
-                <div className="absolute inset-0 opacity-0 transition-opacity duration-500 z-[1]" style={{ background: 'radial-gradient(ellipse at bottom, rgba(200, 155, 123, 0.15) 0%, transparent 60%)' }} />
               </div>
             );
           })}
+
+          {/* End Spacer - Ensures last card is fully visible */}
+          <div className="flex-shrink-0 w-[40vw]" />
+        </motion.div>
+
+        {/* Scroll Progress Indicator - Bottom Right */}
+        <div className="absolute bottom-12 right-8 md:right-16 z-30">
+          <div className="flex items-center gap-4">
+            <span className="text-white/30 text-[10px] tracking-[0.3em] uppercase font-medium">
+              Scroll to Explore
+            </span>
+            <div className="relative w-20 h-[1px] bg-white/10">
+              <motion.div
+                className="absolute inset-y-0 left-0 bg-[#C89B7B]"
+                style={{
+                  width: useTransform(scrollYProgress, [0, 1], ["0%", "100%"]),
+                }}
+              />
+            </div>
+          </div>
         </div>
       </div>
-    </section >
+    </section>
   );
 }
