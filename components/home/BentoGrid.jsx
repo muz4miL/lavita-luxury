@@ -8,31 +8,51 @@ import Image from 'next/image';
 const experienceItems = [
   {
     id: 1,
-    url: '/lifestyle-hero.png',
-    title: 'SKIING',
-    label: 'World-Class Slopes',
-    description: 'Experience Pakistan\'s premier ski destination',
+    // Portrait orientation - Index 0 (even)
+    url: '/amenities/sky-pool-portrait.png',
+    title: 'SKY POOL',
+    label: 'Heated Rooftop Infinity Pool',
+    description: 'Swim among the clouds with 28-30°C water and panoramic mountain views all year round.',
   },
   {
     id: 2,
-    url: '/lifestyle-hero.png',
-    title: 'WELLNESS',
-    label: 'Alpine Spa',
-    description: 'Rejuvenate at 9,200ft elevation',
+    // Landscape orientation - Index 1 (odd)
+    url: '/amenities/panorama-dining.png',
+    title: 'DINING',
+    label: 'Panorama Restaurant',
+    description: 'Fine dining featuring local specialties and international cuisine with spectacular 360° vistas.',
   },
   {
     id: 3,
-    url: '/lifestyle-hero.png',
-    title: 'DINING',
-    label: 'Culinary Excellence',
-    description: 'Gourmet cuisine with mountain views',
+    // Portrait orientation - Index 2 (even)
+    url: '/amenities/wellness-vertical.png',
+    title: 'WELLNESS',
+    label: 'Health Club & Spa',
+    description: 'State-of-the-art gym, serene yoga studio, and rejuvenating sauna facilities.',
   },
   {
     id: 4,
-    url: '/lifestyle-hero.png',
-    title: 'SUITES',
-    label: 'Glass Dome Living',
-    description: 'Architecture meets the sky',
+    // Landscape orientation - Index 3 (odd)
+    url: '/amenities/kids-zone.png',
+    title: 'FAMILY',
+    label: 'Kids Activity Zone',
+    description: 'A safe, supervised world of fun with VR gaming, indoor playgrounds, and storytelling nights.',
+  },
+  {
+    id: 5,
+    // Portrait orientation - Index 4 (even)
+    url: '/amenities/events-vertical.png',
+    title: 'EVENTS',
+    label: 'Celebrations & Bonfires',
+    description: 'Memorable events with scenic backdrops, from traditional Attan nights to corporate retreats.',
+  },
+  {
+    id: 6,
+    // Landscape orientation - Index 5 (odd)
+    url: '/amenities/adventure.png',
+    title: 'ADVENTURE',
+    label: 'Alpine Exploration',
+    description: 'Thrilling outdoor experiences including guided trekking, wildlife viewing, and seasonal winter sports.',
   },
 ];
 
@@ -42,14 +62,14 @@ export default function HorizontalScrollCarousel() {
     target: targetRef,
   });
 
-  // Optimized scroll range - prevents jump at end
-  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-75%"]);
+  // Optimized scroll range for 6 items - calibrated to show all items without overshooting
+  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-130%"]);
 
   return (
     <section
       ref={targetRef}
       className="relative bg-[#0D1512]"
-      style={{ height: '400vh' }}
+      style={{ height: '500vh' }}
     >
       {/* Sticky Container */}
       <div className="sticky top-0 h-screen overflow-hidden">
@@ -79,7 +99,7 @@ export default function HorizontalScrollCarousel() {
           <div className="flex items-center gap-3 mb-4">
             <div className="h-[1px] w-10 bg-gradient-to-r from-[#C89B7B] to-transparent" />
             <span className="text-[#C89B7B] text-[10px] tracking-[0.35em] uppercase font-medium">
-              Resort Lifestyle
+              Club Privileges
             </span>
           </div>
           <h2 className="font-playfair text-3xl md:text-4xl font-light tracking-tight text-white/90">
@@ -90,7 +110,7 @@ export default function HorizontalScrollCarousel() {
         {/* Horizontal Scrolling Track - Optimized with will-change */}
         <motion.div
           style={{ x, willChange: 'transform' }}
-          className="absolute inset-0 flex items-center gap-0 pl-[15vw]"
+          className="absolute inset-0 flex items-end pb-20 gap-0 pl-[15vw]"
         >
           {experienceItems.map((item, index) => {
             // Alternate between portrait and landscape
@@ -151,20 +171,20 @@ export default function HorizontalScrollCarousel() {
                     {/* Subtle Border */}
                     <div className="absolute inset-0 border border-white/10 group-hover:border-[#C89B7B]/20 transition-colors duration-700" />
 
-                    {/* Minimal Gradient on Hover */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                  </div>
+                    {/* Gradient Overlay for Text Readability */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-100 group-hover:opacity-100 transition-opacity duration-700" />
 
-                  {/* Caption Below Image */}
-                  <div className="mt-4" style={{ maxWidth: isPortrait ? 'min(25vw, 320px)' : 'min(40vw, 500px)' }}>
-                    <div className="mb-1">
-                      <span className="text-[#C89B7B] text-[10px] tracking-[0.25em] uppercase font-medium">
-                        {item.label}
-                      </span>
+                    {/* Text Overlay ON Image - Casa Angelina Style */}
+                    <div className="absolute bottom-0 left-0 right-0 p-6 z-10">
+                      <div className="mb-2">
+                        <span className="text-[#C89B7B] group-hover:text-[#D4AF8A] text-[10px] tracking-[0.25em] uppercase font-medium transition-colors duration-500">
+                          {item.label}
+                        </span>
+                      </div>
+                      <p className="text-white/70 group-hover:text-white text-xs md:text-sm font-light leading-relaxed transition-colors duration-500">
+                        {item.description}
+                      </p>
                     </div>
-                    <p className="text-white/60 text-xs md:text-sm font-light leading-relaxed">
-                      {item.description}
-                    </p>
                   </div>
                 </div>
               </div>
@@ -172,7 +192,7 @@ export default function HorizontalScrollCarousel() {
           })}
 
           {/* End Spacer - Ensures last card is fully visible */}
-          <div className="flex-shrink-0 w-[40vw]" />
+          <div className="flex-shrink-0 w-[50vw]" />
         </motion.div>
 
         {/* Scroll Progress Indicator - Bottom Right */}
