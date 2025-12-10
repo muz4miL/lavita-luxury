@@ -3,6 +3,7 @@
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import Image from 'next/image';
+import { Snowflake, Coffee, Waves, Landmark } from 'lucide-react';
 
 export default function LavitaLifestyle() {
     const sectionRef = useRef(null);
@@ -124,36 +125,20 @@ export default function LavitaLifestyle() {
                         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 hidden lg:flex gap-6 items-center justify-center w-full">
                             {[
                                 {
-                                    label: "Winter",
-                                    icon: (
-                                        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-                                        </svg>
-                                    )
+                                    label: "ACADEMY",
+                                    icon: <Snowflake className="w-5 h-5" strokeWidth={1.5} />
                                 },
                                 {
-                                    label: "Thrills",
-                                    icon: (
-                                        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                                        </svg>
-                                    )
+                                    label: "THE HEARTH",
+                                    icon: <Coffee className="w-5 h-5" strokeWidth={1.5} />
                                 },
                                 {
-                                    label: "Luxury",
-                                    icon: (
-                                        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7" />
-                                        </svg>
-                                    )
+                                    label: "WELLNESS",
+                                    icon: <Waves className="w-5 h-5" strokeWidth={1.5} />
                                 },
                                 {
-                                    label: "Heritage",
-                                    icon: (
-                                        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                                        </svg>
-                                    )
+                                    label: "HERITAGE",
+                                    icon: <Landmark className="w-5 h-5" strokeWidth={1.5} />
                                 },
                             ].map((item, i) => (
                                 <div key={i} className="group relative cursor-pointer w-20 h-20 flex items-center justify-center">
@@ -182,10 +167,10 @@ export default function LavitaLifestyle() {
                         variants={staggerContainer}
                     >
                         {[
-                            { label: "Winter", sub: "Premier Alpine Sports" },
-                            { label: "Thrills", sub: "Adventure Park" },
-                            { label: "Luxury", sub: "Wellness & Leisure" },
-                            { label: "Heritage", sub: "Buddhist Sites" },
+                            { label: "ACADEMY", sub: "Ski & Snowboard School" },
+                            { label: "THE HEARTH", sub: "Cigar & Coffee Lounge" },
+                            { label: "WELLNESS", sub: "Heated Pool & Spa" },
+                            { label: "HERITAGE", sub: "Swat Cultural Centre" },
                         ].map((item, i) => (
                             <motion.div
                                 key={i}

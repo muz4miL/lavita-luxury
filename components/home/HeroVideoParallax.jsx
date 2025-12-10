@@ -186,12 +186,12 @@ export default function HeroVideoParallax() {
             <div className="w-full max-w-md text-left">
               <div className="mb-8">
                 <span className="text-xs tracking-[0.3em] text-white/90 font-sans uppercase font-light">
-                  THE FIRST GLASS-DOME RESORT
+                  THE PREMIER MOUNTAIN CLUB OF THE NORTH
                 </span>
               </div>
               <h1 className="mb-6 font-serif text-4xl font-medium leading-tight text-white">
                 <span className="block mb-2">The Sanctuary</span>
-                <span className="block italic text-3xl" style={{ color: '#F2F4F6' }}>In The Clouds</span>
+                <span className="block italic text-3xl" style={{ color: '#F2F4F6' }}>An Exclusive Alpine Community</span>
               </h1>
               <p className="text-xs tracking-[0.3em] text-white/80 font-sans uppercase font-light mb-8">
                 9,200FT ELEVATION • HINDU KUSH
@@ -205,7 +205,7 @@ export default function HeroVideoParallax() {
                 <h2 className="text-3xl font-light font-serif" style={{ color: '#F2F4F6', textShadow: '0 4px 20px rgba(0,0,0,0.5)' }}>Architecture</h2>
               </div>
               <p className="font-light font-sans" style={{ color: 'rgba(242, 244, 246, 0.8)', lineHeight: '1.8' }}>
-                A masterpiece of design and nature, Lavita is Pakistan's first Glass-Dome Sanctuary. Experience five-star living at 9,200ft.
+                Where heritage meets the horizon. Experience Pakistan's first glass-dome services club, perched at 9,200ft in the Hindu Kush.
               </p>
               <div className="flex items-center justify-start gap-4 group cursor-pointer">
                 <div className="h-[1px] w-8 transition-all duration-700 ease-out group-hover:w-16" style={{ background: 'linear-gradient(to right, #C89B7B, transparent)' }} />
@@ -278,7 +278,7 @@ export default function HeroVideoParallax() {
                   className="max-w-md text-base md:text-[1.125rem] font-light font-sans opacity-0"
                   style={{ color: 'rgba(242, 244, 246, 0.8)', lineHeight: '1.8', letterSpacing: '0.01em' }}
                 >
-                  A masterpiece of design and nature, Lavita is Pakistan's first Glass-Dome Sanctuary. Experience five-star living at 9,200ft.
+                  Where heritage meets the horizon. Experience Pakistan's first glass-dome services club, perched at 9,200ft in the Hindu Kush.
                 </p>
 
                 <div className="mt-14 md:mt-20 flex items-center gap-6 group cursor-pointer">
@@ -301,7 +301,7 @@ export default function HeroVideoParallax() {
             <div className="text-left px-4 relative z-10 w-full">
               <div className="mb-8 md:mb-10">
                 <span className="text-xs md:text-sm tracking-[0.3em] text-white/90 font-sans uppercase font-light">
-                  THE FIRST GLASS-DOME RESORT
+                  THE PREMIER MOUNTAIN CLUB OF THE NORTH
                 </span>
               </div>
               <h1 className="mb-8 md:mb-10 font-serif text-4xl md:text-6xl lg:text-7xl font-medium leading-[0.9] text-white px-4">
@@ -309,7 +309,7 @@ export default function HeroVideoParallax() {
                   The Sanctuary
                 </span>
                 <span className="block italic font-semibold text-3xl md:text-5xl lg:text-6xl" style={{ color: '#F2F4F6', textShadow: '0 4px 20px rgba(0, 0, 0, 0.6)' }}>
-                  In The Clouds
+                  An Exclusive Alpine Community
                 </span>
               </h1>
               <p className="max-w-xs md:max-w-md text-xs tracking-[0.3em] text-white/80 font-sans uppercase font-light mt-12 md:mt-14" style={{ textShadow: '0 1px 6px rgba(0, 0, 0, 0.5)' }}>

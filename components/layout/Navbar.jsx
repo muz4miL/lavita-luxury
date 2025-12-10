@@ -119,7 +119,7 @@ export default function Navbar() {
             href="/reserve"
             className="inline-flex items-center justify-center px-10 py-[0.9rem] bg-[#c89b7b] text-[#0f2522] font-[family-name:var(--font-manrope)] text-[0.78rem] font-semibold tracking-[0.25em] uppercase rounded-full border border-[#c89b7b] transition-all duration-300 hover:bg-transparent hover:text-[#c89b7b]"
           >
-            Book Your Stay
+            Explore Membership
           </Link>
         </div>
 
@@ -199,7 +199,7 @@ export default function Navbar() {
             onClick={closeDrawer}
             className="block w-full text-center p-4 rounded-full bg-[#c89b7b] text-[#05110e] font-[family-name:var(--font-manrope)] tracking-[0.2em] uppercase text-[0.85rem]"
           >
-            Book Your Stay
+            Explore Membership
           </Link>
         </div>
       </aside>

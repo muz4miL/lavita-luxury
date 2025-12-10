@@ -165,9 +165,9 @@ export default function Intro() {
               variants={textVariants}
             >
               <h2 className="text-3xl md:text-4xl lg:text-5xl text-white leading-[1.1]">
-                The Lavita
+                A Legacy of
                 <br />
-                <span className="italic text-white/90 text-[1.1em]">Sanctuary</span>
+                <span className="italic text-white/90 text-[1.1em]">Leisure & Luxury</span>
               </h2>
             </motion.div>
 
@@ -178,7 +178,7 @@ export default function Intro() {
               variants={textVariants}
             >
               <p className="text-white/80 text-base font-light leading-relaxed max-w-full lg:max-w-xl mx-auto lg:mx-0">
-                Nestled at 9,200ft in the breathtaking Swat Valley, Lavita is the region's only fully-serviced luxury hotel apartment complex.
+                More than a destination, Lavita is a community. Nestled in the breathtaking Swat Valley, we offer a curated lifestyle for those who seek the extraordinary. From world-class skiing to executive networking, Lavita is the region's only fully-serviced mountain club.
               </p>
             </motion.div>
 
