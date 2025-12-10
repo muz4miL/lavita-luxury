@@ -22,7 +22,7 @@ const manrope = Manrope({
 
 // The metadata block now correctly follows the font definitions
 export const metadata = {
-  title: "Lavita",
+  title: "Lavita Services Club",
   description: "The only Glass-Dome Resort in Swat Valley. 2804 meters above ordinary. Experience the sanctuary in the Hindu Kush mountains.",
   keywords: "luxury resort, Malam Jabba, Swat Valley, glass dome, mountain resort, Pakistan tourism",
 
