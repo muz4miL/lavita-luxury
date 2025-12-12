@@ -25,75 +25,94 @@ const starPositions = [
 
 export default function OpenSky() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center px-6 py-20 lg:px-8 lg:py-32 overflow-hidden">
-      {/* Parallax Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#020508] via-[#050d18] via-20% via-[#0a1628] via-40% via-[#0d1f24] via-70% to-[var(--midnight-pine)] z-0">
-        {/* Stars */}
-        <div className="absolute inset-0 overflow-hidden">
-          {starPositions.map((pos, i) => (
-            <span
+    <section className="relative min-h-[85vh] flex items-center justify-center px-4 py-16 overflow-hidden bg-[#020508]">
+
+      {/* 1. SEAMLESS FLOW GRADIENT (Critical for blending) */}
+      {/* This creates a long fade from the previous section's Dark Green (#0D1512) into the Space Black */}
+      <div className="absolute top-0 left-0 right-0 h-64 bg-gradient-to-b from-[#0D1512] via-[#0D1512]/80 to-transparent z-10 pointer-events-none" />
+
+      {/* 2. ATMOSPHERIC BACKGROUND (The "Nebula" Glow) */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#1a2e35]/20 via-[#020508] to-[#020508]" />
+      </div>
+
+      {/* 3. PREMIUM STAR FIELD */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        {starPositions.map((pos, i) => {
+          // Varied star sizes and opacities for depth
+          const size = i % 3 === 0 ? 'w-[2px] h-[2px]' : 'w-[1px] h-[1px]';
+          const opacity = i % 2 === 0 ? 'opacity-40' : 'opacity-80';
+          const animation = i % 5 === 0 ? 'animate-pulse' : '';
+
+          return (
+            <div
               key={i}
-              className={`absolute w-0.5 h-0.5 bg-white rounded-full opacity-40 animate-[twinkle_4s_ease-in-out_infinite] shadow-[0_0_6px_1px_rgba(255,255,255,0.3)] ${i % 2 === 1 ? 'w-[3px] h-[3px] opacity-70 shadow-[0_0_8px_2px_rgba(255,255,255,0.4)]' : ''
-                } ${i % 3 === 0 ? 'bg-[var(--brushed-copper)] opacity-60 shadow-[0_0_10px_2px_rgba(200,155,123,0.4)]' : ''
-                } ${i % 5 === 0 ? 'w-1 h-1 [animation-duration:5s]' : ''
-                }`}
+              className={`absolute bg-white rounded-full ${size} ${opacity} ${animation}`}
               style={{
                 left: `${pos.left}%`,
                 top: `${pos.top}%`,
-                animationDelay: `${(i * 0.06).toFixed(2)}s`,
+                // Occasional "Glow" effect on random stars
+                boxShadow: i % 15 === 0 ? '0 0 10px 2px rgba(255, 255, 255, 0.4)' : 'none',
+                animationDuration: `${3 + Math.random() * 4}s`
               }}
             />
-          ))}
-        </div>
-        {/* Shooting star */}
-        <div className="absolute top-[20%] left-0 w-[100px] h-0.5 rounded-full opacity-0 animate-[shoot_8s_ease-in-out_infinite]" style={{ background: 'linear-gradient(90deg, var(--brushed-copper), transparent)' }} />
+          );
+        })}
+        {/* Shooting Star */}
+        <div className="absolute top-1/3 left-[10%] w-[200px] h-[1px] bg-gradient-to-r from-transparent via-white/50 to-transparent opacity-0 animate-[shoot_8s_ease-in-out_infinite]" />
       </div>
 
-      {/* Content Card */}
-      <div className="relative z-10 w-full max-w-[600px] mx-auto">
-        <div className="relative bg-[rgba(255,255,255,0.05)] backdrop-blur-[12px] border border-[rgba(255,255,255,0.1)] rounded-[2rem] px-8 py-12 md:px-12 md:py-16 text-center overflow-hidden shadow-[0_25px_50px_-12px_rgba(0,0,0,0.6),0_0_0_1px_rgba(255,255,255,0.05)_inset,0_0_80px_rgba(200,155,123,0.08)] before:content-[''] before:absolute before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 before:w-[150%] before:h-[150%] before:z-[-1] before:pointer-events-none" style={{ '::before': { background: 'radial-gradient(ellipse at center, rgba(200, 155, 123, 0.1) 0%, transparent 60%)' } }}>
-          {/* Decorative top border */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[100px] h-[3px]" style={{ background: 'linear-gradient(90deg, transparent 0%, var(--brushed-copper) 50%, transparent 100%)' }} />
+      {/* 4. THE LUXURY GLASS CARD (Compact & Panoramic) */}
+      <div className="relative z-20 w-full max-w-4xl mx-auto">
+        <div className="relative bg-[#0D1512]/40 backdrop-blur-xl border border-white/10 rounded-3xl p-8 md:p-12 text-center shadow-[0_0_50px_rgba(0,0,0,0.5)]">
 
-          {/* Section Label */}
-          <div className="inline-flex items-center gap-2 font-[family-name:var(--font-manrope)] text-xs tracking-[0.15em] uppercase text-[var(--brushed-copper)] mb-6">
-            <Star className="w-4 h-4 text-[var(--brushed-copper)]" />
-            <span>Signature Experience</span>
+          {/* Bronze Accent Line */}
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-[1px] bg-gradient-to-r from-transparent via-[#C89B7B] to-transparent" />
+
+          {/* Label */}
+          <div className="inline-flex items-center gap-3 mb-6">
+            <Star className="w-3 h-3 text-[#C89B7B]" />
+            <span className="text-[#C89B7B] text-[10px] tracking-[0.3em] uppercase font-medium">9,200ft Elevation</span>
+            <Star className="w-3 h-3 text-[#C89B7B]" />
           </div>
 
-          {/* Heading */}
-          <h2 className="font-[family-name:var(--font-playfair)] text-[2.25rem] md:text-5xl font-semibold text-[var(--text-light)] leading-[1.2] mb-6">
-            Sleep Under
-            <br />
-            <span className="text-[var(--brushed-copper)] inline-block">the Stars</span>
+          {/* Cinematic Typography */}
+          <h2 className="text-4xl md:text-5xl lg:text-6xl text-white font-playfair font-light leading-[1.1] mb-6">
+            A Window to <br />
+            <span className="italic text-[#C89B7B] opacity-90">The Universe</span>
           </h2>
 
-          {/* Description */}
-          <p className="font-[family-name:var(--font-manrope)] text-base leading-[1.8] text-[rgba(245,245,245,0.8)] mb-8 max-w-[450px] mx-auto">
-            Our Triple-Glazed Heated Glass Domes ensure a clear view of the
-            Milky Way, with instant hot water rainfall showers. Experience
-            the cosmos in absolute comfort.
+          {/* Description - Wider max-width for better reading flow */}
+          <p className="text-white/70 text-sm md:text-base font-light leading-relaxed max-w-2xl mx-auto mb-10">
+            Far above the haze, the night sky of Malam Jabba reveals the Milky Way in high-definition clarity.
+            Our Triple-Glazed Heated Glass Domes offer a front-row seat to the cosmos in absolute warmth and comfort.
           </p>
 
-          {/* Features */}
-          <div className="flex flex-col min-[480px]:flex-row justify-center gap-4 min-[480px]:gap-8 mb-8">
-            <div className="flex items-center gap-3 justify-center">
-              <div className="w-10 h-10 rounded-full bg-[rgba(200,155,123,0.15)] flex items-center justify-center text-[var(--brushed-copper)] shrink-0">
-                <Droplets className="w-5 h-5" />
-              </div>
-              <div className="flex flex-col text-left">
-                <span className="font-[family-name:var(--font-manrope)] text-sm font-semibold text-[var(--text-light)]">Rainfall Showers</span>
-                <span className="font-[family-name:var(--font-manrope)] text-xs text-[rgba(245,245,245,0.6)]">Instant hot water</span>
-              </div>
+          {/* Feature Icons (Minimalist Horizontal Row) */}
+          <div className="flex justify-center items-center gap-8 md:gap-16 mb-10 border-t border-white/5 pt-8">
+            <div className="flex flex-col items-center gap-2 group cursor-default">
+              <ThermometerSun className="w-5 h-5 text-[#C89B7B]/80 group-hover:text-[#C89B7B] transition-colors" />
+              <span className="text-[10px] uppercase tracking-widest text-white/60">Climate Control</span>
             </div>
-          </div >
+            <div className="flex flex-col items-center gap-2 group cursor-default">
+              <div className="w-[1px] h-8 bg-white/10" /> {/* Vertical Divider */}
+            </div>
+            <div className="flex flex-col items-center gap-2 group cursor-default">
+              <Droplets className="w-5 h-5 text-[#C89B7B]/80 group-hover:text-[#C89B7B] transition-colors" />
+              <span className="text-[10px] uppercase tracking-widest text-white/60">Rainfall Shower</span>
+            </div>
+          </div>
 
-          {/* CTA */}
-          < button className="inline-block px-8 py-4 bg-[var(--brushed-copper)] text-[var(--midnight-pine)] font-[family-name:var(--font-manrope)] text-sm font-semibold tracking-[0.05em] uppercase border-none rounded-lg cursor-pointer transition-all duration-300 hover:bg-[#d4a98a] hover:translate-y-[-2px] hover:shadow-[0_10px_30px_rgba(200,155,123,0.3)]" >
-            Book a Dome Experience
-          </button >
-        </div >
-      </div >
-    </section >
+          {/* Elegant Button */}
+          <button className="group relative px-10 py-3.5 bg-[#C89B7B]/10 hover:bg-[#C89B7B]/20 border border-[#C89B7B]/30 rounded-sm transition-all duration-500 overflow-hidden">
+            <span className="relative text-[#C89B7B] text-xs tracking-[0.2em] uppercase font-semibold group-hover:text-white transition-colors z-10">
+              Reserve A Dome
+            </span>
+            <div className="absolute inset-0 bg-[#C89B7B] opacity-0 group-hover:opacity-10 transition-opacity duration-500 z-0" />
+          </button>
+
+        </div>
+      </div>
+    </section>
   );
 }
