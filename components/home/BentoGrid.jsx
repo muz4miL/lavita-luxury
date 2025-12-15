@@ -244,13 +244,14 @@ function MobileExperience() {
         }}
       />
 
-      {/* Section Header - Top */}
-      <div className="relative z-20 pt-12 pb-8 px-6">
+      {/* Section Header - Centered */}
+      <div className="relative z-20 pt-12 pb-8 px-6 flex flex-col items-center text-center">
         <div className="flex items-center gap-3 mb-3">
-          <div className="h-[1px] w-8 bg-gradient-to-r from-[#C89B7B] to-transparent" />
+          <div className="h-[1px] w-8 bg-gradient-to-r from-transparent via-[#C89B7B] to-[#C89B7B]" />
           <span className="text-[#C89B7B] text-[9px] tracking-[0.35em] uppercase font-medium">
             Club Privileges
           </span>
+          <div className="h-[1px] w-8 bg-gradient-to-l from-transparent via-[#C89B7B] to-[#C89B7B]" />
         </div>
         <h2 className="font-playfair text-2xl font-light tracking-tight text-white/90">
           Curated Experiences
@@ -273,42 +274,39 @@ function MobileExperience() {
               className="flex-shrink-0 snap-center"
               style={{ width: '80vw' }}
             >
-              {/* Card */}
-              <div className="relative h-[65vh] rounded-sm overflow-hidden">
-                {/* Image */}
-                <Image
-                  src={item.url}
-                  alt={item.title}
-                  fill
-                  className="object-cover"
-                  sizes="80vw"
-                />
+              {/* Magazine-Style Card */}
+              <div className="flex flex-col bg-[#0D1512]/60 backdrop-blur-sm rounded-sm overflow-hidden border border-white/5">
 
-                {/* Subtle Border */}
-                <div className="absolute inset-0 border border-white/10" />
+                {/* Image Container - Clean, No Overlays */}
+                <div className="relative h-[40vh] overflow-hidden">
+                  <Image
+                    src={item.url}
+                    alt={item.title}
+                    fill
+                    className="object-cover"
+                    sizes="80vw"
+                  />
+                </div>
 
-                {/* Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+                {/* Text Container - Below Image */}
+                <div className="bg-[#0D1512] p-6 space-y-4">
+                  {/* Title */}
+                  <h3 className="font-playfair text-3xl font-light text-white/90 tracking-tight">
+                    {item.title}
+                  </h3>
 
-                {/* Content Overlay */}
-                <div className="absolute inset-0 flex flex-col justify-between p-6">
-                  {/* Top - Title */}
-                  <div>
-                    <h3 className="font-playfair text-5xl font-light text-white/10 tracking-tight">
-                      {item.title}
-                    </h3>
-                  </div>
+                  {/* Separator Line */}
+                  <div className="h-[1px] w-12 bg-[#C89B7B]/60" />
 
-                  {/* Bottom - Label & Description */}
-                  <div className="space-y-3">
-                    <div className="h-[1px] w-12 bg-[#C89B7B]/60" />
-                    <span className="block text-[#C89B7B] text-[10px] tracking-[0.25em] uppercase font-medium">
-                      {item.label}
-                    </span>
-                    <p className="text-white/80 text-sm font-light leading-relaxed">
-                      {item.description}
-                    </p>
-                  </div>
+                  {/* Label */}
+                  <span className="block text-[#C89B7B] text-[10px] tracking-[0.25em] uppercase font-medium">
+                    {item.label}
+                  </span>
+
+                  {/* Description */}
+                  <p className="text-white/70 text-sm font-light leading-relaxed">
+                    {item.description}
+                  </p>
                 </div>
               </div>
 
