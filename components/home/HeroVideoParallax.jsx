@@ -190,34 +190,28 @@ export default function HeroVideoParallax() {
               <h1 className="text-3xl font-serif font-light text-white mb-2" style={{ textShadow: '0 4px 16px rgba(0, 0, 0, 0.9)' }}>
                 Lavita Services Club
               </h1>
-              <p className="text-xl italic font-serif text-gray-200 font-light" style={{ textShadow: '0 4px 16px rgba(0, 0, 0, 0.9)' }}>
+              <p className="text-xl italic font-serif text-[#C89B7B] font-light" style={{ textShadow: '0 4px 16px rgba(0, 0, 0, 0.9)' }}>
                 An Exclusive Legacy in the North
               </p>
             </div>
           </div>
 
+
+
           {/* ARCHITECTURE STORY - Bottom Section */}
-          <div className="flex-1 flex flex-col justify-center items-start px-6 py-16" style={{ backgroundColor: '#0D1512' }}>
-            <div className="w-full max-w-md text-left">
-              <p className="text-xs tracking-[0.3em] text-white/80 font-sans uppercase font-light mb-8">
-                9,200FT ELEVATION • HINDU KUSH
-              </p>
-              <div className="h-[1px] w-24 my-6" style={{ background: 'linear-gradient(to right, #C89B7B, rgba(200, 155, 123, 0.3))' }} />
+          <div className="flex-1 flex flex-col justify-center items-center px-6 py-24" style={{ backgroundColor: '#0D1512' }}>
+            <div className="w-full max-w-md text-center">
+              <div className="h-[1px] w-24 mb-6 mx-auto" style={{ background: 'linear-gradient(to right, #C89B7B, rgba(200, 155, 123, 0.3))' }} />
               <div className="mb-4">
                 <span className="text-xs tracking-[0.25em] font-sans uppercase font-light" style={{ color: '#C89B7B' }}>A LANDMARK AT 9,200FT</span>
               </div>
               <div className="mb-8">
                 <h2 className="text-3xl font-light font-serif mb-2" style={{ color: '#F2F4F6', textShadow: '0 4px 20px rgba(0,0,0,0.5)' }}>Sculpted by</h2>
-                <h2 className="text-3xl italic font-light font-serif" style={{ color: '#F2F4F6', textShadow: '0 4px 20px rgba(0,0,0,0.5)' }}>The Sky</h2>
+                <h2 className="text-3xl italic font-light font-serif" style={{ color: '#C89B7B', textShadow: '0 4px 20px rgba(0,0,0,0.5)' }}>The Sky</h2>
               </div>
-              <p className="font-light font-sans mb-8" style={{ color: 'rgba(242, 244, 246, 0.8)', lineHeight: '1.8' }}>
+              <p className="font-light font-sans" style={{ color: 'rgba(242, 244, 246, 0.8)', lineHeight: '1.8' }}>
                 Where modern design meets the eternal mountain. Experience Pakistan's first glass-dome sanctuary, redefining the skyline of the Hindu Kush.
               </p>
-              <div className="flex items-center justify-start gap-4 group cursor-pointer">
-                <div className="h-[1px] w-8 transition-all duration-700 ease-out group-hover:w-16" style={{ background: 'linear-gradient(to right, #C89B7B, transparent)' }} />
-                <span className="text-[10px] tracking-[0.35em] uppercase font-sans font-light transition-all duration-700 ease-out group-hover:translate-x-1" style={{ color: '#C89B7B' }}>EXPLORE THE DESIGN</span>
-                <div className="h-[1px] w-8 transition-all duration-700 ease-out" style={{ background: 'linear-gradient(to right, transparent, #C89B7B)' }} />
-              </div>
             </div>
           </div>
         </>
@@ -267,7 +261,7 @@ export default function HeroVideoParallax() {
                   <h2
                     ref={eleganceRef}
                     className="text-5xl md:text-6xl lg:text-7xl tracking-tight leading-tight italic font-light font-serif opacity-0 overflow-visible mt-3"
-                    style={{ color: '#F2F4F6', textShadow: '0 4px 20px rgba(0, 0, 0, 0.5)' }}
+                    style={{ color: '#C89B7B', textShadow: '0 4px 20px rgba(0, 0, 0, 0.5)' }}
                   >
                     The Sky
                   </h2>
@@ -314,7 +308,7 @@ export default function HeroVideoParallax() {
                 <span className="block mb-4 md:mb-6" style={{ textShadow: '0 2px 12px rgba(0, 0, 0, 0.6)' }}>
                   Lavita Services Club
                 </span>
-                <span className="block italic font-light text-2xl md:text-3xl lg:text-4xl" style={{ color: '#F2F4F6', textShadow: '0 4px 20px rgba(0, 0, 0, 0.6)' }}>
+                <span className="block italic font-light text-2xl md:text-3xl lg:text-4xl text-[#C89B7B]" style={{ textShadow: '0 4px 20px rgba(0, 0, 0, 0.6)' }}>
                   An Exclusive Legacy in the North
                 </span>
               </h1>
@@ -337,7 +331,8 @@ export default function HeroVideoParallax() {
             </div>
           </div>
         </>
-      )}
-    </section>
+      )
+      }
+    </section >
   );
 }
