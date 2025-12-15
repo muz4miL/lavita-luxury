@@ -190,19 +190,19 @@ export default function HeroVideoParallax() {
                 </span>
               </div>
               <h1 className="mb-6 font-serif text-4xl font-medium leading-tight text-white">
-                <span className="block mb-2">The Sanctuary</span>
-                <span className="block italic text-3xl" style={{ color: '#F2F4F6' }}>An Exclusive Alpine Community</span>
+                <span className="block mb-2">Lavita Services Club</span>
+                <span className="hidden md:block italic text-3xl" style={{ color: '#F2F4F6' }}>An Exclusive Alpine Community</span>
               </h1>
               <p className="text-xs tracking-[0.3em] text-white/80 font-sans uppercase font-light mb-8">
                 9,200FT ELEVATION • HINDU KUSH
               </p>
               <div className="h-[1px] w-24 my-6" style={{ background: 'linear-gradient(to right, #C89B7B, rgba(200, 155, 123, 0.3))' }} />
               <div className="mb-4">
-                <span className="text-xs tracking-[0.25em] font-sans uppercase font-light" style={{ color: '#C89B7B' }}>A VISION OF</span>
+                <span className="text-xs tracking-[0.25em] font-sans uppercase font-light" style={{ color: '#C89B7B' }}>A LANDMARK AT 9,200FT</span>
               </div>
               <div className="mb-8">
                 <h2 className="text-3xl italic font-light font-serif mb-2" style={{ color: '#F2F4F6', textShadow: '0 4px 20px rgba(0,0,0,0.5)' }}>Timeless</h2>
-                <h2 className="text-3xl font-light font-serif" style={{ color: '#F2F4F6', textShadow: '0 4px 20px rgba(0,0,0,0.5)' }}>Architecture</h2>
+                <h2 className="text-3xl font-light font-serif" style={{ color: '#F2F4F6', textShadow: '0 4px 20px rgba(0,0,0,0.5)' }}>Elevation</h2>
               </div>
               <p className="font-light font-sans" style={{ color: 'rgba(242, 244, 246, 0.8)', lineHeight: '1.8' }}>
                 Where heritage meets the horizon. Experience Pakistan's first glass-dome services club, perched at 9,200ft in the Hindu Kush.
@@ -263,7 +263,7 @@ export default function HeroVideoParallax() {
                     className="text-6xl md:text-7xl lg:text-8xl tracking-tight leading-[0.9] font-light font-serif opacity-0 overflow-visible mt-3"
                     style={{ color: '#F2F4F6', textShadow: '0 4px 20px rgba(0, 0, 0, 0.5)' }}
                   >
-                    Architecture
+                    Elevation
                   </h2>
                 </div>
 
@@ -306,10 +306,7 @@ export default function HeroVideoParallax() {
               </div>
               <h1 className="mb-8 md:mb-10 font-serif text-4xl md:text-6xl lg:text-7xl font-medium leading-[0.9] text-white px-4">
                 <span className="block mb-4 md:mb-6" style={{ textShadow: '0 2px 12px rgba(0, 0, 0, 0.6)' }}>
-                  The Sanctuary
-                </span>
-                <span className="block italic font-semibold text-3xl md:text-5xl lg:text-6xl" style={{ color: '#F2F4F6', textShadow: '0 4px 20px rgba(0, 0, 0, 0.6)' }}>
-                  An Exclusive Alpine Community
+                  Lavita Services Club
                 </span>
               </h1>
               <p className="max-w-xs md:max-w-md text-xs tracking-[0.3em] text-white/80 font-sans uppercase font-light mt-12 md:mt-14" style={{ textShadow: '0 1px 6px rgba(0, 0, 0, 0.5)' }}>
