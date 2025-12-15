@@ -31,11 +31,16 @@ export default function OpenSky() {
   };
 
   return (
-    <section className="relative min-h-[85vh] flex items-center justify-center px-4 py-16 overflow-hidden bg-[#020508]">
+    <section className="relative min-h-[85vh] flex items-center justify-center px-4 py-16 overflow-hidden bg-[#020508] -mt-2">
 
-      {/* 1. SEAMLESS FLOW GRADIENT (Critical for blending) */}
-      {/* This creates a long fade from the previous section's Dark Green (#0D1512) into the Space Black */}
-      <div className="absolute top-0 left-0 right-0 h-64 bg-gradient-to-b from-[#0D1512] via-[#0D1512]/80 to-transparent z-10 pointer-events-none" />
+      {/* 1. SEAMLESS FLOW GRADIENT - Deep Push Technique */}
+      {/* Solid green for first 250px (covers seam completely), then slow imperceptible fade to space black */}
+      <div
+        className="absolute top-0 left-0 right-0 z-10 pointer-events-none h-[90vh]"
+        style={{
+          background: 'linear-gradient(to bottom, #0D1512 0%, #0D1512 250px, #020508 100%)'
+        }}
+      />
 
       {/* 2. ATMOSPHERIC BACKGROUND (The "Nebula" Glow) */}
       <div className="absolute inset-0 z-0">
