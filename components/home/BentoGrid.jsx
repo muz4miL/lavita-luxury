@@ -261,7 +261,7 @@ function MobileExperience() {
       <div className="relative flex-1 z-10">
         <div
           ref={scrollRef}
-          className="flex gap-4 overflow-x-auto px-6 h-full items-center snap-x snap-mandatory scrollbar-hide"
+          className="flex gap-4 overflow-x-auto px-6 h-full items-center snap-x snap-mandatory no-scrollbar"
           style={{
             scrollBehavior: 'smooth',
             WebkitOverflowScrolling: 'touch',
@@ -272,9 +272,6 @@ function MobileExperience() {
               key={item.id}
               className="flex-shrink-0 snap-center"
               style={{ width: '80vw' }}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             >
               {/* Card */}
               <div className="relative h-[65vh] rounded-sm overflow-hidden">
@@ -343,32 +340,29 @@ function MobileExperience() {
           </span>
         </div>
       </div>
-
-      {/* Custom CSS for hiding scrollbar */}
-      <style jsx>{`
-        .scrollbar-hide::-webkit-scrollbar {
-          display: none;
-        }
-        .scrollbar-hide {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-      `}</style>
     </section>
   );
 }
+
 
 // ============================================================================
 // MAIN COMPONENT - RENDERS DESKTOP OR MOBILE BASED ON SCREEN SIZE
 // ============================================================================
 export default function HorizontalScrollCarousel() {
   const targetRef = useRef(null);
+  const [isMounted, setIsMounted] = useState(false);
+
   const { scrollYProgress } = useScroll({
     target: targetRef,
   });
 
   const x = useTransform(scrollYProgress, [0, 1], ["0%", "-130%"]);
 
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  // Render both components but let CSS handle visibility to avoid hydration issues
   return (
     <>
       {/* DESKTOP: Original scroll-based horizontal animation */}
