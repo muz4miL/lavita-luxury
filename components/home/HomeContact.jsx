@@ -1,6 +1,6 @@
 'use client';
 
-import { Star, Droplets, ThermometerSun } from 'lucide-react';
+import { Star } from 'lucide-react';
 
 // Pre-defined star positions and animation durations to avoid hydration mismatch
 const starPositions = [
@@ -24,6 +24,12 @@ const starPositions = [
 ];
 
 export default function OpenSky() {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Handle form submission logic here
+    console.log('Form submitted');
+  };
+
   return (
     <section className="relative min-h-[85vh] flex items-center justify-center px-4 py-16 overflow-hidden bg-[#020508]">
 
@@ -62,54 +68,94 @@ export default function OpenSky() {
         <div className="absolute top-1/3 left-[10%] w-[200px] h-[1px] bg-gradient-to-r from-transparent via-white/50 to-transparent opacity-0 animate-[shoot_8s_ease-in-out_infinite]" />
       </div>
 
-      {/* 4. THE LUXURY GLASS CARD (Compact & Panoramic) */}
-      <div className="relative z-20 w-full max-w-4xl mx-auto">
-        <div className="relative bg-[#0D1512]/40 backdrop-blur-xl border border-white/10 rounded-3xl p-8 md:p-12 text-center shadow-[0_0_50px_rgba(0,0,0,0.5)]">
+      {/* 4. THE VIP INVITATION CARD */}
+      <div className="relative z-20 w-full max-w-lg mx-auto">
+        <div className="relative bg-[#050A08]/60 backdrop-blur-xl border border-white/10 rounded-3xl px-8 py-10 md:px-10 md:py-12 text-center shadow-[0_0_50px_rgba(0,0,0,0.5),inset_0_0_20px_rgba(255,255,255,0.02)]">
 
           {/* Bronze Accent Line */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-[1px] bg-gradient-to-r from-transparent via-[#C89B7B] to-transparent" />
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-[1px] bg-gradient-to-r from-transparent via-[#C89B7B] to-transparent" />
 
           {/* Label */}
-          <div className="inline-flex items-center gap-3 mb-6">
+          <div className="inline-flex items-center gap-2 mb-4">
             <Star className="w-3 h-3 text-[#C89B7B]" />
-            <span className="text-[#C89B7B] text-[10px] tracking-[0.3em] uppercase font-medium">9,200ft Elevation</span>
+            <span className="text-[#C89B7B] text-[9px] tracking-[0.35em] uppercase font-medium">Concierge Service</span>
             <Star className="w-3 h-3 text-[#C89B7B]" />
           </div>
 
-          {/* Cinematic Typography */}
-          <h2 className="text-4xl md:text-5xl lg:text-6xl text-white font-playfair font-light leading-[1.1] mb-6">
-            A Window to <br />
-            <span className="italic text-[#C89B7B] opacity-90">The Universe</span>
+          {/* Elegant Typography */}
+          <h2 className="text-3xl md:text-4xl text-white font-playfair font-light leading-tight mb-3">
+            Begin Your <br />
+            <span className="italic text-[#C89B7B] opacity-90">Journey</span>
           </h2>
 
-          {/* Description - Wider max-width for better reading flow */}
-          <p className="text-white/70 text-sm md:text-base font-light leading-relaxed max-w-2xl mx-auto mb-10">
-            Far above the haze, the night sky of Malam Jabba reveals the Milky Way in high-definition clarity.
-            Our Triple-Glazed Heated Glass Domes offer a front-row seat to the cosmos in absolute warmth and comfort.
+          {/* Subtle Description */}
+          <p className="text-white/50 text-xs md:text-sm font-light leading-relaxed mb-8">
+            Leave us a message. Our team will contact you shortly.
           </p>
 
-          {/* Feature Icons (Minimalist Horizontal Row) */}
-          <div className="flex justify-center items-center gap-8 md:gap-16 mb-10 border-t border-white/5 pt-8">
-            <div className="flex flex-col items-center gap-2 group cursor-default">
-              <ThermometerSun className="w-5 h-5 text-[#C89B7B]/80 group-hover:text-[#C89B7B] transition-colors" />
-              <span className="text-[10px] uppercase tracking-widest text-white/60">Climate Control</span>
-            </div>
-            <div className="flex flex-col items-center gap-2 group cursor-default">
-              <div className="w-[1px] h-8 bg-white/10" /> {/* Vertical Divider */}
-            </div>
-            <div className="flex flex-col items-center gap-2 group cursor-default">
-              <Droplets className="w-5 h-5 text-[#C89B7B]/80 group-hover:text-[#C89B7B] transition-colors" />
-              <span className="text-[10px] uppercase tracking-widest text-white/60">Rainfall Shower</span>
-            </div>
-          </div>
+          {/* Ghost Contact Form */}
+          <form onSubmit={handleSubmit} className="space-y-5 text-left">
 
-          {/* Elegant Button */}
-          <button className="group relative px-10 py-3.5 bg-[#C89B7B]/10 hover:bg-[#C89B7B]/20 border border-[#C89B7B]/30 rounded-sm transition-all duration-500 overflow-hidden">
-            <span className="relative text-[#C89B7B] text-xs tracking-[0.2em] uppercase font-semibold group-hover:text-white transition-colors z-10">
-              Reserve A Dome
-            </span>
-            <div className="absolute inset-0 bg-[#C89B7B] opacity-0 group-hover:opacity-10 transition-opacity duration-500 z-0" />
-          </button>
+            {/* Name Field */}
+            <div>
+              <input
+                type="text"
+                name="name"
+                placeholder="Full Name"
+                required
+                className="w-full bg-transparent border-0 border-b border-white/10 focus:border-[#C89B7B] text-white/80 placeholder:text-white/20 px-0 py-2.5 outline-none transition-all duration-500 text-sm font-light tracking-wide"
+              />
+            </div>
+
+            {/* Email and Phone Row */}
+            <div className="grid grid-cols-2 gap-4">
+              {/* Email */}
+              <div>
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Email"
+                  required
+                  className="w-full bg-transparent border-0 border-b border-white/10 focus:border-[#C89B7B] text-white/80 placeholder:text-white/20 px-0 py-2.5 outline-none transition-all duration-500 text-sm font-light tracking-wide"
+                />
+              </div>
+
+              {/* Phone */}
+              <div>
+                <input
+                  type="tel"
+                  name="phone"
+                  placeholder="Phone"
+                  required
+                  className="w-full bg-transparent border-0 border-b border-white/10 focus:border-[#C89B7B] text-white/80 placeholder:text-white/20 px-0 py-2.5 outline-none transition-all duration-500 text-sm font-light tracking-wide"
+                />
+              </div>
+            </div>
+
+            {/* Message Field */}
+            <div>
+              <textarea
+                name="message"
+                placeholder="Your Message"
+                rows="3"
+                required
+                className="w-full bg-transparent border-0 border-b border-white/10 focus:border-[#C89B7B] text-white/80 placeholder:text-white/20 px-0 py-2.5 outline-none transition-all duration-500 resize-none text-sm font-light tracking-wide"
+              ></textarea>
+            </div>
+
+            {/* Submit Button */}
+            <div className="text-center pt-3">
+              <button
+                type="submit"
+                className="group relative px-8 py-3 bg-[#C89B7B]/10 hover:bg-[#C89B7B]/20 border border-[#C89B7B]/30 rounded-sm transition-all duration-500 overflow-hidden"
+              >
+                <span className="relative text-[#C89B7B] text-[10px] tracking-[0.25em] uppercase font-semibold group-hover:text-white transition-colors z-10">
+                  Send Inquiry
+                </span>
+                <div className="absolute inset-0 bg-[#C89B7B] opacity-0 group-hover:opacity-10 transition-opacity duration-500 z-0" />
+              </button>
+            </div>
+          </form>
 
         </div>
       </div>
