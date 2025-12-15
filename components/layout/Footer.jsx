@@ -29,75 +29,104 @@ const socialIcons = [
   { icon: Music, href: 'https://tiktok.com', label: 'TikTok' },
 ];
 
-const offices = [
-  {
-    label: 'ISLAMABAD OFFICE',
-    address: 'Office 30, 2nd Floor, Aslam Plaza, E11/2',
-  },
-  {
-    label: 'PESHAWAR OFFICE',
-    address: 'Office 333, 3rd Floor, Uhad Tower, Phase 3 Chowk',
-  },
-  {
-    label: 'SWAT SITE OFFICE',
-    address: 'Lavita Malam Jabba, Main Malam Chowk',
-  },
-];
-
 export default function Footer() {
   return (
-    <footer className="bg-[#05110e] text-[#f5f5f5] px-6 pt-24 pb-16 border-t border-[rgba(255,255,255,0.08)]">
-      <div className="max-w-[1200px] mx-auto flex flex-col gap-12">
-        <section className="flex flex-col lg:flex-row gap-8 lg:justify-between lg:items-center border-b border-[rgba(255,255,255,0.08)] pb-10">
-          <div className="flex items-center gap-7">
-            <div className="flex items-center shrink-0">
+    <footer className="relative bg-gradient-to-t from-black to-[#05110e] text-[#f5f5f5] pt-16 pb-8">
+      {/* Golden Horizon Border */}
+      <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#C89B7B]/40 to-transparent" />
+
+      <div className="max-w-[1200px] mx-auto px-6">
+
+        {/* SECTION 1: IDENTITY & SOCIALS */}
+        <section className="flex flex-col md:flex-row gap-8 md:justify-between md:items-start pb-12">
+          {/* Left: Logo + Headline */}
+          <div className="flex items-start gap-6 border-l border-[#C89B7B]/30 pl-6">
+            <div className="flex-shrink-0">
               <Image
                 src="/logo/logo.png"
                 alt="Lavita"
-                width={70}
-                height={87}
+                width={60}
+                height={75}
               />
             </div>
-            <div>
-              <p className="font-[family-name:var(--font-playfair)] text-[clamp(1.5rem,3vw,2.5rem)] font-medium tracking-[-0.01em]">Prestigious High-End Hotel Suites Delivering Luxury.</p>
-              <p className="font-[family-name:var(--font-manrope)] text-[0.85rem] text-[rgba(245,245,245,0.55)] mt-[0.35rem]">Powered by Shelton Group of Hotels</p>
+            <div className="flex-1">
+              <h3 className="font-playfair italic text-2xl text-white/90 leading-relaxed">
+                Prestigious High-End Hotel Suites Delivering Luxury.
+              </h3>
+              <p className="text-xs text-white/40 mt-2 font-light">
+                Powered by Shelton Group of Hotels
+              </p>
             </div>
           </div>
-          <div className="flex gap-4">
+
+          {/* Right: Social Icons */}
+          <div className="flex gap-3 md:justify-end justify-center md:mt-0">
             {socialIcons.map(({ icon: Icon, href, label }) => (
-              <Link key={label} href={href} aria-label={`Visit Lavita on ${label}`} className="w-12 h-12 rounded-full border border-[rgba(200,155,123,0.4)] text-[#c89b7b] flex items-center justify-center transition-all duration-300 hover:bg-[#c89b7b] hover:text-[#05110e]">
-                <Icon size={18} />
+              <Link
+                key={label}
+                href={href}
+                aria-label={`Visit Lavita on ${label}`}
+                className="w-11 h-11 rounded-full border border-[#c89b7b]/40 text-[#c89b7b] flex items-center justify-center transition-all duration-300 hover:bg-[#c89b7b] hover:text-[#05110e] hover:border-[#c89b7b]"
+              >
+                <Icon size={17} />
               </Link>
             ))}
           </div>
         </section>
 
-        <section className="grid grid-cols-[repeat(auto-fit,minmax(220px,1fr))] gap-8 pt-8 border-b border-[rgba(255,255,255,0.08)] pb-10">
+        {/* Divider */}
+        <div className="border-t border-white/5" />
+
+        {/* SECTION 2: NAVIGATION LINKS */}
+        <section className="grid grid-cols-2 md:grid-cols-3 gap-8 pt-12 pb-12">
+          {/* Explore */}
           <div>
-            <p className="font-[family-name:var(--font-playfair)] text-[#c89b7b] text-base tracking-[0.2em] uppercase">Explore</p>
-            <div className="mt-4 flex flex-col gap-2">
+            <p className="font-playfair text-[#C89B7B] text-[10px] tracking-[0.25em] uppercase mb-4">
+              Explore
+            </p>
+            <div className="flex flex-col gap-2.5">
               {exploreLinks.map((link) => (
-                <Link key={link.label} href={link.href} className="font-[family-name:var(--font-manrope)] text-[rgba(245,245,245,0.85)] no-underline text-[0.95rem] hover:text-[#c89b7b]">
+                <Link
+                  key={link.label}
+                  href={link.href}
+                  className="text-white/70 text-sm font-light hover:translate-x-1 hover:text-[#C89B7B] transition-all duration-300"
+                >
                   {link.label}
                 </Link>
               ))}
             </div>
           </div>
+
+          {/* Unique Features */}
           <div>
-            <p className="font-[family-name:var(--font-playfair)] text-[#c89b7b] text-base tracking-[0.2em] uppercase">Unique Features</p>
-            <div className="mt-4 flex flex-col gap-2">
+            <p className="font-playfair text-[#C89B7B] text-[10px] tracking-[0.25em] uppercase mb-4">
+              Unique Features
+            </p>
+            <div className="flex flex-col gap-2.5">
               {featuresLinks.map((link) => (
-                <Link key={link.label} href={link.href} className="font-[family-name:var(--font-manrope)] text-[rgba(245,245,245,0.85)] no-underline text-[0.95rem] hover:text-[#c89b7b]">
+                <Link
+                  key={link.label}
+                  href={link.href}
+                  className="text-white/70 text-sm font-light hover:translate-x-1 hover:text-[#C89B7B] transition-all duration-300"
+                >
                   {link.label}
                 </Link>
               ))}
             </div>
           </div>
+
+          {/* Adventures */}
           <div>
-            <p className="font-[family-name:var(--font-playfair)] text-[#c89b7b] text-base tracking-[0.2em] uppercase">Adventures</p>
-            <div className="mt-4 flex flex-col gap-2">
+            <p className="font-playfair text-[#C89B7B] text-[10px] tracking-[0.25em] uppercase mb-4">
+              Adventures
+            </p>
+            <div className="flex flex-col gap-2.5">
               {adventuresLinks.map((link) => (
-                <Link key={link.label} href={link.href} className="font-[family-name:var(--font-manrope)] text-[rgba(245,245,245,0.85)] no-underline text-[0.95rem] hover:text-[#c89b7b]">
+                <Link
+                  key={link.label}
+                  href={link.href}
+                  className="text-white/70 text-sm font-light hover:translate-x-1 hover:text-[#C89B7B] transition-all duration-300"
+                >
                   {link.label}
                 </Link>
               ))}
@@ -105,29 +134,29 @@ export default function Footer() {
           </div>
         </section>
 
-        <section className="grid grid-cols-[repeat(auto-fit,minmax(220px,1fr))] border-b border-[rgba(255,255,255,0.08)] pb-10">
-          {offices.map((office) => (
-            <div key={office.label} className="p-6 border-l border-[rgba(255,255,255,0.08)] first:border-l-0 max-md:border-l-0 max-md:border-t max-md:first:border-t-0">
-              <p className="font-[Space_Mono,Courier_New,monospace] text-[0.78rem] tracking-[0.35em] text-[rgba(245,245,245,0.65)] mb-3">{office.label}</p>
-              <p className="font-[family-name:var(--font-manrope)] text-[0.95rem] text-[rgba(245,245,245,0.85)]">{office.address}</p>
-            </div>
-          ))}
-        </section>
+        {/* Divider */}
+        <div className="border-t border-white/5" />
 
-        <div className="flex flex-col sm:flex-row gap-2 sm:justify-between sm:items-center border-b border-[rgba(255,255,255,0.08)] pb-8">
-          <a href="mailto:info@lavitamalamjabba.com" className="font-[family-name:var(--font-manrope)] text-[rgba(245,245,245,0.8)] no-underline">info@lavitamalamjabba.com</a>
-          <span className="font-[family-name:var(--font-manrope)] text-[rgba(245,245,245,0.8)]">www.lavitamalamjabba.com</span>
-        </div>
-
-        <section className="flex flex-col md:flex-row gap-4 md:items-center md:justify-between text-[rgba(160,174,192,0.9)] font-[family-name:var(--font-manrope)] text-[0.9rem]">
+        {/* SECTION 3: LEGAL */}
+        <section className="flex flex-col md:flex-row gap-4 md:items-center md:justify-between pt-8 text-xs text-white/30">
           <p>© 2025 Lavita Malam Jabba. All Rights Reserved.</p>
           <div className="flex gap-6">
-            <Link href="/privacy" className="text-[rgba(245,245,245,0.85)] no-underline hover:text-[#c89b7b]">Privacy Policy</Link>
-            <Link href="/terms" className="text-[rgba(245,245,245,0.85)] no-underline hover:text-[#c89b7b]">Terms of Service</Link>
+            <Link
+              href="/privacy"
+              className="hover:text-[#c89b7b] transition-colors duration-300"
+            >
+              Privacy Policy
+            </Link>
+            <Link
+              href="/terms"
+              className="hover:text-[#c89b7b] transition-colors duration-300"
+            >
+              Terms of Service
+            </Link>
           </div>
         </section>
+
       </div>
     </footer>
   );
 }
-
