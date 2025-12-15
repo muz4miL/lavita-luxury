@@ -1,74 +1,69 @@
 'use client';
-'use client';
 
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import Image from 'next/image';
 
 const experienceItems = [
   {
     id: 1,
-    // Portrait orientation - Index 0 (even)
     url: '/amenities/sky-pool-portrait.png',
     title: 'SKY POOL',
     label: 'Heated Rooftop Infinity Pool',
     description: 'Swim among the clouds with 28-30°C water and panoramic mountain views all year round.',
+    isPortrait: true,
   },
   {
     id: 2,
-    // Landscape orientation - Index 1 (odd)
     url: '/amenities/panorama-dining.png',
     title: 'DINING',
     label: 'Panorama Restaurant',
     description: 'Fine dining featuring local specialties and international cuisine with spectacular 360° vistas.',
+    isPortrait: false,
   },
   {
     id: 3,
-    // Portrait orientation - Index 2 (even)
     url: '/amenities/wellness-vertical.png',
     title: 'WELLNESS',
     label: 'Health Club & Spa',
     description: 'State-of-the-art gym, serene yoga studio, and rejuvenating sauna facilities.',
+    isPortrait: true,
   },
   {
     id: 4,
-    // Landscape orientation - Index 3 (odd)
     url: '/amenities/kids-zone.png',
     title: 'FAMILY',
     label: 'Kids Activity Zone',
     description: 'A safe, supervised world of fun with VR gaming, indoor playgrounds, and storytelling nights.',
+    isPortrait: false,
   },
   {
     id: 5,
-    // Portrait orientation - Index 4 (even)
     url: '/amenities/events-vertical.png',
     title: 'EVENTS',
     label: 'Celebrations & Bonfires',
     description: 'Memorable events with scenic backdrops, from traditional Attan nights to corporate retreats.',
+    isPortrait: true,
   },
   {
     id: 6,
-    // Landscape orientation - Index 5 (odd)
     url: '/amenities/adventure.png',
     title: 'ADVENTURE',
     label: 'Alpine Exploration',
     description: 'Thrilling outdoor experiences including guided trekking, wildlife viewing, and seasonal winter sports.',
+    isPortrait: false,
   },
 ];
 
-export default function HorizontalScrollCarousel() {
-  const targetRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: targetRef,
-  });
-
-  // Optimized scroll range for 6 items - calibrated to show all items without overshooting
-  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-130%"]);
-
+// ============================================================================
+// DESKTOP EXPERIENCE - SCROLL-BASED HORIZONTAL ANIMATION
+// DO NOT MODIFY - This is the original, perfect desktop experience
+// ============================================================================
+function DesktopExperience({ targetRef, scrollYProgress, x }) {
   return (
     <section
       ref={targetRef}
-      className="relative bg-[#0D1512]"
+      className="relative bg-[#0D1512] hidden md:block"
       style={{ height: '500vh' }}
     >
       {/* Sticky Container */}
@@ -113,8 +108,7 @@ export default function HorizontalScrollCarousel() {
           className="absolute inset-0 flex items-end pb-20 gap-0 pl-[15vw]"
         >
           {experienceItems.map((item, index) => {
-            // Alternate between portrait and landscape
-            const isPortrait = index % 2 === 0;
+            const isPortrait = item.isPortrait;
 
             return (
               <div
@@ -126,7 +120,6 @@ export default function HorizontalScrollCarousel() {
               >
                 {/* Vertical Text for Portrait, Horizontal for Landscape */}
                 {isPortrait ? (
-                  // Portrait Layout - Vertical Text
                   <div className="relative flex-shrink-0 h-[50vh] flex items-center justify-center mr-6 md:mr-8" style={{ width: '10vh' }}>
                     <h3
                       className="font-playfair text-[8vh] md:text-[9vh] font-light text-white/10 whitespace-nowrap select-none absolute"
@@ -141,7 +134,6 @@ export default function HorizontalScrollCarousel() {
                     </h3>
                   </div>
                 ) : (
-                  // Landscape Layout - Horizontal Text Above
                   <div className="absolute -top-16 left-0 z-10">
                     <h3 className="font-playfair text-4xl md:text-5xl lg:text-6xl font-light text-white/10 whitespace-nowrap select-none tracking-tight">
                       {item.title}
@@ -149,17 +141,15 @@ export default function HorizontalScrollCarousel() {
                   </div>
                 )}
 
-                {/* Image Card - Varied Aspect Ratios - SMALLER SIZES */}
+                {/* Image Card */}
                 <div className="relative flex-shrink-0 group">
                   <div
                     className="relative overflow-hidden rounded-sm"
                     style={{
-                      // Significantly reduced widths for that "petite" premium look
                       width: isPortrait ? 'min(25vw, 320px)' : 'min(40vw, 500px)',
                       aspectRatio: isPortrait ? '3/4' : '16/9',
                     }}
                   >
-                    {/* Image */}
                     <Image
                       src={item.url}
                       alt={item.title}
@@ -167,14 +157,8 @@ export default function HorizontalScrollCarousel() {
                       className="object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
                       sizes={isPortrait ? "(max-width: 768px) 30vw, 320px" : "(max-width: 768px) 45vw, 500px"}
                     />
-
-                    {/* Subtle Border */}
                     <div className="absolute inset-0 border border-white/10 group-hover:border-[#C89B7B]/20 transition-colors duration-700" />
-
-                    {/* Gradient Overlay for Text Readability */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-100 group-hover:opacity-100 transition-opacity duration-700" />
-
-                    {/* Text Overlay ON Image - Casa Angelina Style */}
                     <div className="absolute bottom-0 left-0 right-0 p-6 z-10">
                       <div className="mb-2">
                         <span className="text-[#C89B7B] group-hover:text-[#D4AF8A] text-[10px] tracking-[0.25em] uppercase font-medium transition-colors duration-500">
@@ -190,12 +174,10 @@ export default function HorizontalScrollCarousel() {
               </div>
             );
           })}
-
-          {/* End Spacer - Ensures last card is fully visible */}
           <div className="flex-shrink-0 w-[50vw]" />
         </motion.div>
 
-        {/* Scroll Progress Indicator - Bottom Right */}
+        {/* Scroll Progress Indicator */}
         <div className="absolute bottom-12 right-8 md:right-16 z-30">
           <div className="flex items-center gap-4">
             <span className="text-white/30 text-[10px] tracking-[0.3em] uppercase font-medium">
@@ -213,5 +195,191 @@ export default function HorizontalScrollCarousel() {
         </div>
       </div>
     </section>
+  );
+}
+
+// ============================================================================
+// MOBILE EXPERIENCE - PREMIUM SWIPER CAROUSEL
+// Luxury horizontal swipe with snap, peek, and minimal progress indicator
+// ============================================================================
+function MobileExperience() {
+  const scrollRef = useRef(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const container = scrollRef.current;
+    if (!container) return;
+
+    const handleScroll = () => {
+      const scrollLeft = container.scrollLeft;
+      const cardWidth = container.offsetWidth * 0.8; // 80vw card width
+      const newIndex = Math.round(scrollLeft / cardWidth);
+      setCurrentIndex(newIndex);
+    };
+
+    container.addEventListener('scroll', handleScroll);
+    return () => container.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  return (
+    <section className="relative bg-[#0D1512] md:hidden min-h-screen flex flex-col">
+      {/* Static Background */}
+      <div className="absolute inset-0">
+        <Image
+          src="/lifestyle-hero.png"
+          alt="Background"
+          fill
+          className="object-cover opacity-20"
+          style={{ filter: 'blur(8px) brightness(0.3)' }}
+          priority
+        />
+        <div className="absolute inset-0 bg-[#0D1512]/70" />
+      </div>
+
+      {/* Noise Texture */}
+      <div
+        className="absolute inset-0 opacity-[0.02] pointer-events-none mix-blend-overlay"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' /%3E%3C/svg%3E")`,
+        }}
+      />
+
+      {/* Section Header - Top */}
+      <div className="relative z-20 pt-12 pb-8 px-6">
+        <div className="flex items-center gap-3 mb-3">
+          <div className="h-[1px] w-8 bg-gradient-to-r from-[#C89B7B] to-transparent" />
+          <span className="text-[#C89B7B] text-[9px] tracking-[0.35em] uppercase font-medium">
+            Club Privileges
+          </span>
+        </div>
+        <h2 className="font-playfair text-2xl font-light tracking-tight text-white/90">
+          Curated Experiences
+        </h2>
+      </div>
+
+      {/* Swipeable Carousel Container */}
+      <div className="relative flex-1 z-10">
+        <div
+          ref={scrollRef}
+          className="flex gap-4 overflow-x-auto px-6 h-full items-center snap-x snap-mandatory scrollbar-hide"
+          style={{
+            scrollBehavior: 'smooth',
+            WebkitOverflowScrolling: 'touch',
+          }}
+        >
+          {experienceItems.map((item, index) => (
+            <motion.div
+              key={item.id}
+              className="flex-shrink-0 snap-center"
+              style={{ width: '80vw' }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            >
+              {/* Card */}
+              <div className="relative h-[65vh] rounded-sm overflow-hidden">
+                {/* Image */}
+                <Image
+                  src={item.url}
+                  alt={item.title}
+                  fill
+                  className="object-cover"
+                  sizes="80vw"
+                />
+
+                {/* Subtle Border */}
+                <div className="absolute inset-0 border border-white/10" />
+
+                {/* Gradient Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+
+                {/* Content Overlay */}
+                <div className="absolute inset-0 flex flex-col justify-between p-6">
+                  {/* Top - Title */}
+                  <div>
+                    <h3 className="font-playfair text-5xl font-light text-white/10 tracking-tight">
+                      {item.title}
+                    </h3>
+                  </div>
+
+                  {/* Bottom - Label & Description */}
+                  <div className="space-y-3">
+                    <div className="h-[1px] w-12 bg-[#C89B7B]/60" />
+                    <span className="block text-[#C89B7B] text-[10px] tracking-[0.25em] uppercase font-medium">
+                      {item.label}
+                    </span>
+                    <p className="text-white/80 text-sm font-light leading-relaxed">
+                      {item.description}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Peek Spacer - Creates the slight peek effect */}
+              {index < experienceItems.length - 1 && (
+                <div className="absolute right-0 top-0 bottom-0 w-4 pointer-events-none" />
+              )}
+            </motion.div>
+          ))}
+        </div>
+      </div>
+
+      {/* Minimal Progress Indicator - Bottom */}
+      <div className="relative z-20 py-8 px-6">
+        <div className="flex items-center justify-center gap-3">
+          {/* Thin Luxury Line Indicator */}
+          <div className="relative w-32 h-[1px] bg-white/10">
+            <motion.div
+              className="absolute inset-y-0 left-0 bg-[#C89B7B]"
+              animate={{
+                width: `${((currentIndex + 1) / experienceItems.length) * 100}%`,
+              }}
+              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            />
+          </div>
+          {/* Counter */}
+          <span className="text-white/30 text-[10px] tracking-[0.3em] uppercase font-medium tabular-nums">
+            {String(currentIndex + 1).padStart(2, '0')} / {String(experienceItems.length).padStart(2, '0')}
+          </span>
+        </div>
+      </div>
+
+      {/* Custom CSS for hiding scrollbar */}
+      <style jsx>{`
+        .scrollbar-hide::-webkit-scrollbar {
+          display: none;
+        }
+        .scrollbar-hide {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+      `}</style>
+    </section>
+  );
+}
+
+// ============================================================================
+// MAIN COMPONENT - RENDERS DESKTOP OR MOBILE BASED ON SCREEN SIZE
+// ============================================================================
+export default function HorizontalScrollCarousel() {
+  const targetRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: targetRef,
+  });
+
+  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-130%"]);
+
+  return (
+    <>
+      {/* DESKTOP: Original scroll-based horizontal animation */}
+      <DesktopExperience
+        targetRef={targetRef}
+        scrollYProgress={scrollYProgress}
+        x={x}
+      />
+
+      {/* MOBILE: Premium swiper carousel */}
+      <MobileExperience />
+    </>
   );
 }

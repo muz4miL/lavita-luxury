@@ -2,25 +2,25 @@
 
 import { Star, Droplets, ThermometerSun } from 'lucide-react';
 
-// Pre-defined star positions to avoid hydration mismatch
+// Pre-defined star positions and animation durations to avoid hydration mismatch
 const starPositions = [
-  { left: 5, top: 12 }, { left: 15, top: 8 }, { left: 25, top: 22 },
-  { left: 35, top: 5 }, { left: 45, top: 18 }, { left: 55, top: 3 },
-  { left: 65, top: 25 }, { left: 75, top: 10 }, { left: 85, top: 20 },
-  { left: 95, top: 7 }, { left: 10, top: 35 }, { left: 20, top: 42 },
-  { left: 30, top: 30 }, { left: 40, top: 48 }, { left: 50, top: 38 },
-  { left: 60, top: 45 }, { left: 70, top: 32 }, { left: 80, top: 50 },
-  { left: 90, top: 40 }, { left: 3, top: 55 }, { left: 12, top: 62 },
-  { left: 22, top: 58 }, { left: 32, top: 68 }, { left: 42, top: 52 },
-  { left: 52, top: 72 }, { left: 62, top: 60 }, { left: 72, top: 78 },
-  { left: 82, top: 65 }, { left: 92, top: 70 }, { left: 8, top: 82 },
-  { left: 18, top: 88 }, { left: 28, top: 75 }, { left: 38, top: 92 },
-  { left: 48, top: 85 }, { left: 58, top: 95 }, { left: 68, top: 80 },
-  { left: 78, top: 90 }, { left: 88, top: 77 }, { left: 98, top: 88 },
-  { left: 2, top: 15 }, { left: 97, top: 28 }, { left: 7, top: 47 },
-  { left: 93, top: 55 }, { left: 17, top: 73 }, { left: 87, top: 33 },
-  { left: 27, top: 95 }, { left: 77, top: 4 }, { left: 47, top: 67 },
-  { left: 67, top: 15 },
+  { left: 5, top: 12, duration: 5.2 }, { left: 15, top: 8, duration: 4.8 }, { left: 25, top: 22, duration: 6.3 },
+  { left: 35, top: 5, duration: 3.7 }, { left: 45, top: 18, duration: 5.9 }, { left: 55, top: 3, duration: 4.1 },
+  { left: 65, top: 25, duration: 6.7 }, { left: 75, top: 10, duration: 5.4 }, { left: 85, top: 20, duration: 3.9 },
+  { left: 95, top: 7, duration: 4.6 }, { left: 10, top: 35, duration: 6.1 }, { left: 20, top: 42, duration: 5.8 },
+  { left: 30, top: 30, duration: 4.3 }, { left: 40, top: 48, duration: 6.5 }, { left: 50, top: 38, duration: 3.5 },
+  { left: 60, top: 45, duration: 5.1 }, { left: 70, top: 32, duration: 4.9 }, { left: 80, top: 50, duration: 6.8 },
+  { left: 90, top: 40, duration: 5.6 }, { left: 3, top: 55, duration: 3.3 }, { left: 12, top: 62, duration: 4.4 },
+  { left: 22, top: 58, duration: 6.2 }, { left: 32, top: 68, duration: 5.7 }, { left: 42, top: 52, duration: 3.8 },
+  { left: 52, top: 72, duration: 4.7 }, { left: 62, top: 60, duration: 6.4 }, { left: 72, top: 78, duration: 5.3 },
+  { left: 82, top: 65, duration: 3.6 }, { left: 92, top: 70, duration: 4.5 }, { left: 8, top: 82, duration: 6.9 },
+  { left: 18, top: 88, duration: 5.5 }, { left: 28, top: 75, duration: 3.4 }, { left: 38, top: 92, duration: 4.2 },
+  { left: 48, top: 85, duration: 6.6 }, { left: 58, top: 95, duration: 5.0 }, { left: 68, top: 80, duration: 3.2 },
+  { left: 78, top: 90, duration: 4.0 }, { left: 88, top: 77, duration: 6.0 }, { left: 98, top: 88, duration: 5.2 },
+  { left: 2, top: 15, duration: 4.8 }, { left: 97, top: 28, duration: 6.3 }, { left: 7, top: 47, duration: 3.7 },
+  { left: 93, top: 55, duration: 5.9 }, { left: 17, top: 73, duration: 4.1 }, { left: 87, top: 33, duration: 6.7 },
+  { left: 27, top: 95, duration: 5.4 }, { left: 77, top: 4, duration: 3.9 }, { left: 47, top: 67, duration: 4.6 },
+  { left: 67, top: 15, duration: 6.1 },
 ];
 
 export default function OpenSky() {
@@ -53,7 +53,7 @@ export default function OpenSky() {
                 top: `${pos.top}%`,
                 // Occasional "Glow" effect on random stars
                 boxShadow: i % 15 === 0 ? '0 0 10px 2px rgba(255, 255, 255, 0.4)' : 'none',
-                animationDuration: `${3 + Math.random() * 4}s`
+                animationDuration: `${pos.duration}s`
               }}
             />
           );
