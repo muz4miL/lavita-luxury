@@ -166,7 +166,7 @@ export default function HeroVideoParallax() {
       {/* ==================== MOBILE LAYOUT ==================== */}
       {isMobile ? (
         <>
-          {/* VIDEO SECTION - Top 60% */}
+          {/* VIDEO SECTION - Top 60% with Brand Identity Overlay */}
           <div className="relative h-[60vh] w-full overflow-hidden">
             <div className="absolute inset-0">
               <video
@@ -177,22 +177,28 @@ export default function HeroVideoParallax() {
                 <source src="/hero-videos/hero1.mp4" type="video/mp4" />
                 <source src="https://cdn.coverr.co/videos/coverr-sunrise-over-the-sea-9163/1080p.mp4" type="video/mp4" />
               </video>
-              <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(13, 21, 18, 0.9), rgba(13, 21, 18, 0.3), transparent)' }} />
+              <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent)' }} />
             </div>
-          </div>
 
-          {/* TEXT SECTION - Bottom 40% */}
-          <div className="flex-1 flex flex-col justify-center items-start px-6 py-10" style={{ backgroundColor: '#0D1512' }}>
-            <div className="w-full max-w-md text-left">
-              <div className="mb-8">
-                <span className="text-xs tracking-[0.3em] text-white/90 font-sans uppercase font-light">
+            {/* Brand Identity Overlay */}
+            <div className="absolute bottom-0 left-0 right-0 p-6 z-10">
+              <div className="mb-4">
+                <span className="text-[10px] tracking-[0.3em] text-white/90 font-sans uppercase font-light" style={{ textShadow: '0 2px 8px rgba(0, 0, 0, 0.8)' }}>
                   THE PREMIER MOUNTAIN CLUB OF THE NORTH
                 </span>
               </div>
-              <h1 className="mb-6 font-serif text-4xl font-medium leading-tight text-white">
-                <span className="block mb-2">Lavita Services Club</span>
-                <span className="hidden md:block italic text-3xl" style={{ color: '#F2F4F6' }}>An Exclusive Alpine Community</span>
+              <h1 className="text-3xl font-serif font-light text-white mb-2" style={{ textShadow: '0 4px 16px rgba(0, 0, 0, 0.9)' }}>
+                Lavita Services Club
               </h1>
+              <p className="text-xl italic font-serif text-gray-200 font-light" style={{ textShadow: '0 4px 16px rgba(0, 0, 0, 0.9)' }}>
+                An Exclusive Legacy in the North
+              </p>
+            </div>
+          </div>
+
+          {/* ARCHITECTURE STORY - Bottom Section */}
+          <div className="flex-1 flex flex-col justify-center items-start px-6 py-16" style={{ backgroundColor: '#0D1512' }}>
+            <div className="w-full max-w-md text-left">
               <p className="text-xs tracking-[0.3em] text-white/80 font-sans uppercase font-light mb-8">
                 9,200FT ELEVATION • HINDU KUSH
               </p>
@@ -201,15 +207,15 @@ export default function HeroVideoParallax() {
                 <span className="text-xs tracking-[0.25em] font-sans uppercase font-light" style={{ color: '#C89B7B' }}>A LANDMARK AT 9,200FT</span>
               </div>
               <div className="mb-8">
-                <h2 className="text-3xl italic font-light font-serif mb-2" style={{ color: '#F2F4F6', textShadow: '0 4px 20px rgba(0,0,0,0.5)' }}>Timeless</h2>
-                <h2 className="text-3xl font-light font-serif" style={{ color: '#F2F4F6', textShadow: '0 4px 20px rgba(0,0,0,0.5)' }}>Elevation</h2>
+                <h2 className="text-3xl font-light font-serif mb-2" style={{ color: '#F2F4F6', textShadow: '0 4px 20px rgba(0,0,0,0.5)' }}>Sculpted by</h2>
+                <h2 className="text-3xl italic font-light font-serif" style={{ color: '#F2F4F6', textShadow: '0 4px 20px rgba(0,0,0,0.5)' }}>The Sky</h2>
               </div>
-              <p className="font-light font-sans" style={{ color: 'rgba(242, 244, 246, 0.8)', lineHeight: '1.8' }}>
-                Where heritage meets the horizon. Experience Pakistan's first glass-dome services club, perched at 9,200ft in the Hindu Kush.
+              <p className="font-light font-sans mb-8" style={{ color: 'rgba(242, 244, 246, 0.8)', lineHeight: '1.8' }}>
+                Where modern design meets the eternal mountain. Experience Pakistan's first glass-dome sanctuary, redefining the skyline of the Hindu Kush.
               </p>
               <div className="flex items-center justify-start gap-4 group cursor-pointer">
                 <div className="h-[1px] w-8 transition-all duration-700 ease-out group-hover:w-16" style={{ background: 'linear-gradient(to right, #C89B7B, transparent)' }} />
-                <span className="text-[10px] tracking-[0.35em] uppercase font-sans font-light transition-all duration-700 ease-out group-hover:translate-x-1" style={{ color: '#C89B7B' }}>EXPLORE BELOW</span>
+                <span className="text-[10px] tracking-[0.35em] uppercase font-sans font-light transition-all duration-700 ease-out group-hover:translate-x-1" style={{ color: '#C89B7B' }}>EXPLORE THE DESIGN</span>
                 <div className="h-[1px] w-8 transition-all duration-700 ease-out" style={{ background: 'linear-gradient(to right, transparent, #C89B7B)' }} />
               </div>
             </div>
@@ -247,23 +253,23 @@ export default function HeroVideoParallax() {
 
               <div className="flex flex-col justify-center items-start">
                 <div ref={visionLabelRef} className="mb-6 opacity-0">
-                  <span className="text-xs tracking-[0.25em] font-sans uppercase font-light" style={{ color: '#C89B7B' }}>A VISION OF</span>
+                  <span className="text-xs tracking-[0.25em] font-sans uppercase font-light" style={{ color: '#C89B7B' }}>A LANDMARK AT 9,200FT</span>
                 </div>
 
-                <div className="mb-10 overflow-visible">
+                <div className="mb-10 overflow-visible pb-4">
                   <h2
                     ref={timelessRef}
-                    className="text-6xl md:text-7xl lg:text-8xl tracking-tight leading-[0.9] italic font-light font-serif opacity-0 overflow-visible"
+                    className="text-5xl md:text-6xl lg:text-7xl tracking-tight leading-tight font-light font-serif opacity-0 overflow-visible"
                     style={{ color: '#F2F4F6', textShadow: '0 4px 20px rgba(0, 0, 0, 0.5)' }}
                   >
-                    Timeless
+                    Sculpted by
                   </h2>
                   <h2
                     ref={eleganceRef}
-                    className="text-6xl md:text-7xl lg:text-8xl tracking-tight leading-[0.9] font-light font-serif opacity-0 overflow-visible mt-3"
+                    className="text-5xl md:text-6xl lg:text-7xl tracking-tight leading-tight italic font-light font-serif opacity-0 overflow-visible mt-3"
                     style={{ color: '#F2F4F6', textShadow: '0 4px 20px rgba(0, 0, 0, 0.5)' }}
                   >
-                    Elevation
+                    The Sky
                   </h2>
                 </div>
 
@@ -278,13 +284,13 @@ export default function HeroVideoParallax() {
                   className="max-w-md text-base md:text-[1.125rem] font-light font-sans opacity-0"
                   style={{ color: 'rgba(242, 244, 246, 0.8)', lineHeight: '1.8', letterSpacing: '0.01em' }}
                 >
-                  Where heritage meets the horizon. Experience Pakistan's first glass-dome services club, perched at 9,200ft in the Hindu Kush.
+                  Where modern design meets the eternal mountain. Experience Pakistan's first glass-dome sanctuary, redefining the skyline of the Hindu Kush.
                 </p>
 
                 <div className="mt-14 md:mt-20 flex items-center gap-6 group cursor-pointer">
                   <div className="h-[1px] w-12 transition-all duration-700 ease-out group-hover:w-16" style={{ background: 'linear-gradient(to right, #C89B7B, transparent)' }} />
                   <span className="text-[10px] tracking-[0.35em] uppercase font-sans font-light transition-all duration-700 ease-out group-hover:translate-x-1 group-hover:tracking-[0.4em]" style={{ color: '#C89B7B' }}>
-                    EXPLORE BELOW
+                    EXPLORE THE DESIGN
                   </span>
                 </div>
               </div>
@@ -307,6 +313,9 @@ export default function HeroVideoParallax() {
               <h1 className="mb-8 md:mb-10 font-serif text-4xl md:text-6xl lg:text-7xl font-medium leading-[0.9] text-white px-4">
                 <span className="block mb-4 md:mb-6" style={{ textShadow: '0 2px 12px rgba(0, 0, 0, 0.6)' }}>
                   Lavita Services Club
+                </span>
+                <span className="block italic font-light text-2xl md:text-3xl lg:text-4xl" style={{ color: '#F2F4F6', textShadow: '0 4px 20px rgba(0, 0, 0, 0.6)' }}>
+                  An Exclusive Legacy in the North
                 </span>
               </h1>
               <p className="max-w-xs md:max-w-md text-xs tracking-[0.3em] text-white/80 font-sans uppercase font-light mt-12 md:mt-14" style={{ textShadow: '0 1px 6px rgba(0, 0, 0, 0.5)' }}>
