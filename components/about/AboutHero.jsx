@@ -14,7 +14,8 @@ export default function AboutHero() {
     });
 
     const y = useTransform(scrollYProgress, [0, 1], ['0%', '50%']);
-    const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+    const opacity = useTransform(scrollYProgress, [0, 0.3, 0.8], [1, 1, 0]);
+    const scale = useTransform(scrollYProgress, [0, 1], [1, 0.9]);
     const opacityIndicator = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
 
     return (
@@ -58,8 +59,8 @@ export default function AboutHero() {
 
             {/* CONTENT CONTAINER - Centered with Parallax on Desktop */}
             <motion.div
-                style={{ y, opacity }}
-                className="absolute inset-0 z-30 flex flex-col justify-center items-center h-screen px-6 md:px-12"
+                style={{ y, opacity, scale }}
+                className="absolute inset-0 z-30 flex flex-col justify-center items-center h-screen px-6 md:px-12 will-change-transform"
             >
                 {/* LABEL - Gold */}
                 <motion.p
