@@ -1,11 +1,23 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import Image from 'next/image';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
 export default function AboutHero() {
     const containerRef = useRef(null);
+
+    // Mobile detection for performance optimization
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
 
     // Desktop parallax effect - text moves faster than scroll
     const { scrollYProgress } = useScroll({
@@ -59,7 +71,7 @@ export default function AboutHero() {
 
             {/* CONTENT CONTAINER - Centered with Parallax on Desktop */}
             <motion.div
-                style={{ y, opacity, scale }}
+                style={isMobile ? {} : { y, opacity, scale }}
                 className="absolute inset-0 z-30 flex flex-col justify-center items-center h-screen px-6 md:px-12 will-change-transform"
             >
                 {/* LABEL - Gold */}
@@ -99,7 +111,7 @@ export default function AboutHero() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 1.2, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                style={{ opacity: opacityIndicator }}
+                style={isMobile ? {} : { opacity: opacityIndicator }}
                 className="absolute bottom-12 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center"
             >
                 {/* Floating Chevron Arrow */}
