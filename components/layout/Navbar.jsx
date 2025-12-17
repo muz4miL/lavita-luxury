@@ -9,13 +9,7 @@ import NavDropdown from './NavDropdown';
 const navConfig = [
   { label: 'Home', href: '/' },
   {
-    label: 'The Resort',
-    items: [
-      { label: 'Our Story', href: '/#our-story' },
-      { label: 'Vertical Garden', href: '/#vertical-garden' },
-      { label: 'Mini Museum', href: '/#mini-museum' },
-      { label: 'Gallery', href: '/#gallery' },
-    ],
+    label: 'About', href: '/about',
   },
   { label: 'Suites & Investment', href: '/suites' },
   {
