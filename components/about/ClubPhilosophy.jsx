@@ -1,0 +1,137 @@
+'use client';
+
+import { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import Image from 'next/image';
+
+const philosophyData = [
+    {
+        id: 1,
+        title: "Silence as a Service",
+        subtitle: "THE SANCTUARY",
+        description: "In a noisy world, Lavita offers the rarest luxury: quiet. Our suites are designed as private retreats, insulated from the elements, opening only to the valley views.",
+        image: "/about/philosophy1.png", // The Sanctuary Image
+    },
+    {
+        id: 2,
+        title: "Alpine Gastronomy",
+        subtitle: "THE TABLE",
+        description: "The warmth of a stone hearth and the aroma of fresh roasting coffee. Our culinary philosophy brings the heart of Peshawar’s hospitality to the peaks of the North.",
+        image: "/about/philosophy2.png", // The Table Image
+    },
+    {
+        id: 3,
+        title: "Curated Adventure",
+        subtitle: "THE WILD",
+        description: "From private ski instructors to guided treks in the Hindu Kush. We don't just host you; we guide you through the mountains.",
+        image: "/about/philosophy3.png", // The Wild Image
+    }
+];
+
+export default function ClubPhilosophy() {
+    const targetRef = useRef(null);
+
+    // SCROLL LOGIC (Desktop)
+    const { scrollYProgress } = useScroll({
+        target: targetRef,
+    });
+
+    // Slide the cards horizontally based on vertical scroll
+    // mapping scroll 0% -> 100% to x-axis 0% -> -66% (to show all 3 cards)
+    const x = useTransform(scrollYProgress, [0, 1], ["1%", "-65%"]);
+
+    return (
+        <section ref={targetRef} className="relative bg-[#0D1512] text-white">
+
+            {/* ================= DESKTOP LAYOUT (Horizontal Scroll) ================= */}
+            <div className="hidden lg:block h-[300vh] relative">
+                <div className="sticky top-0 flex h-screen items-center overflow-hidden">
+
+                    {/* Horizontal Track */}
+                    <motion.div style={{ x }} className="flex gap-12 pl-24 pr-24">
+                        {/* Intro Text Block (First item in scroll) */}
+                        <div className="min-w-[400px] flex flex-col justify-center">
+                            <p className="font-sans text-sm text-[#C89B7B] tracking-[0.3em] mb-6">
+                                THE PHILOSOPHY
+                            </p>
+                            <h2 className="font-serif text-6xl font-light leading-tight mb-8">
+                                The Art of <br />
+                                <span className="italic text-[#C89B7B]">Living Well</span>
+                            </h2>
+                            <p className="font-sans text-lg text-gray-300 leading-relaxed max-w-sm">
+                                Beyond the architecture lies the experience. A collection of moments curated for those who seek depth in their travels.
+                            </p>
+                        </div>
+
+                        {/* The Cards */}
+                        {philosophyData.map((item) => (
+                            <div key={item.id} className="relative h-[70vh] w-[60vh] min-w-[60vh] rounded-2xl overflow-hidden border border-white/10 group">
+                                <Image
+                                    src={item.image}
+                                    alt={item.title}
+                                    fill
+                                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                                />
+                                {/* Gradient Overlay */}
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
+
+                                {/* Content */}
+                                <div className="absolute bottom-0 left-0 p-10 w-full">
+                                    <p className="font-sans text-xs text-[#C89B7B] tracking-[0.25em] mb-3 uppercase">
+                                        {item.subtitle}
+                                    </p>
+                                    <h3 className="font-serif text-3xl mb-4 text-white">
+                                        {item.title}
+                                    </h3>
+                                    <p className="font-sans text-sm text-gray-300 leading-relaxed opacity-0 transform translate-y-4 transition-all duration-500 group-hover:opacity-100 group-hover:translate-y-0">
+                                        {item.description}
+                                    </p>
+                                </div>
+                            </div>
+                        ))}
+                    </motion.div>
+                </div>
+            </div>
+
+            {/* ================= MOBILE LAYOUT (Swipe Carousel) ================= */}
+            <div className="lg:hidden py-24 px-6">
+                <div className="mb-12">
+                    <p className="font-sans text-xs text-[#C89B7B] tracking-[0.3em] mb-4 text-center">
+                        THE PHILOSOPHY
+                    </p>
+                    <h2 className="font-serif text-4xl text-center font-light">
+                        The Art of <br /><span className="italic text-[#C89B7B]">Living Well</span>
+                    </h2>
+                </div>
+
+                {/* Scroll Container */}
+                <div className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-8 -mx-6 px-6 no-scrollbar">
+                    {philosophyData.map((item) => (
+                        <div key={item.id} className="snap-center shrink-0 w-[85vw] relative aspect-[3/4] rounded-xl overflow-hidden border border-white/10">
+                            <Image
+                                src={item.image}
+                                alt={item.title}
+                                fill
+                                className="object-cover"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
+
+                            <div className="absolute bottom-0 left-0 p-8 w-full">
+                                <p className="font-sans text-[10px] text-[#C89B7B] tracking-[0.25em] mb-2 uppercase">
+                                    {item.subtitle}
+                                </p>
+                                <h3 className="font-serif text-2xl mb-3 text-white">
+                                    {item.title}
+                                </h3>
+                                <p className="font-sans text-sm text-gray-300 leading-relaxed">
+                                    {item.description}
+                                </p>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+
+        </section>
+    );
+}
