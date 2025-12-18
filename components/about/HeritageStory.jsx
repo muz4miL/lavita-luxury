@@ -9,27 +9,27 @@ const heritageData = [
         year: '1985',
         title: 'Stewards of the Valley',
         body: 'For over three decades, the Shelton Group has been the defining name in Swat\'s hospitality. From the bustling streets of Mingora to the quiet peaks, we have hosted generations with the warmth of Pashtun culture.',
-        image: '/about/heritage1.png', // Origin/Land
+        image: '/about/heritage.png', // Origin/Land
     },
     {
         year: '2024',
         title: 'Reviving the Services Club',
         body: 'Lavita is not a hotel. It is a return to the era of the Services Club—exclusive sanctuaries built for privacy, protocol, and community. Modeled after the historic clubs of Peshawar, this is a place of belonging.',
-        image: '/lifestyle-hero.png', // Hospitality interior
+        image: '/about/heritage2.png', // Hospitality interior
     },
     {
         year: '2025',
         title: 'Architecture Against the Odds',
         body: 'Constructing a triple-glazed glass dome at 9,200ft was deemed impossible. Designed by HMI Architects, Lavita stands as an engineering marvel, suspended between the rock and the sky.',
-        image: '/intro.png', // Architecture/Final result
+        image: '/about/heritage3.png', // Architecture/Final result
     },
 ];
 
 const HeritageBlock = ({ data, index, activeIndex, onActivate }) => {
     const ref = useRef(null);
     const isInView = useInView(ref, {
-        margin: '-40% 0px -40% 0px',
-        amount: 0.5
+        margin: '-20% 0px -20% 0px',
+        amount: 0.3
     });
 
     useEffect(() => {
@@ -39,65 +39,95 @@ const HeritageBlock = ({ data, index, activeIndex, onActivate }) => {
     }, [isInView, index, onActivate]);
 
     return (
-        <motion.div
-            ref={ref}
-            className="relative min-h-[60vh] lg:min-h-screen flex items-center"
-        >
-            {/* Timeline Indicator */}
-            <div className="absolute left-0 top-0 bottom-0 w-px">
-                <motion.div
-                    className="absolute left-0 top-0 bottom-0 w-px bg-[#C89B7B]"
-                    initial={{ scaleY: 0 }}
-                    animate={{ scaleY: isInView ? 1 : 0 }}
-                    transition={{ duration: 0.6, ease: 'easeOut' }}
-                    style={{ transformOrigin: 'top' }}
-                />
-                <motion.div
-                    className="absolute left-[-3px] top-1/2 -translate-y-1/2 w-[7px] h-[7px] rounded-full bg-[#C89B7B]"
-                    initial={{ scale: 0, opacity: 0 }}
-                    animate={{
-                        scale: isInView ? 1 : 0,
-                        opacity: isInView ? 1 : 0
-                    }}
-                    transition={{ duration: 0.4, delay: 0.3 }}
-                />
-            </div>
-
-            {/* Content */}
-            <div className="pl-12 lg:pl-16 pr-8">
-                <motion.div
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{
-                        opacity: isInView ? 1 : 0.5,
-                        x: isInView ? 0 : -20
-                    }}
-                    transition={{ duration: 0.6 }}
-                >
-                    {/* Year Label */}
-                    <motion.p
-                        className="font-sans text-sm lg:text-base text-[#C89B7B] tracking-[0.3em] mb-6 lg:mb-8"
+        <>
+            {/* DESKTOP VIEW - Original Timeline Design */}
+            <motion.div
+                ref={ref}
+                className="hidden lg:flex relative min-h-[70vh] items-center"
+            >
+                {/* Timeline Indicator */}
+                <div className="absolute left-0 top-0 bottom-0 w-px">
+                    <motion.div
+                        className="absolute left-0 top-0 bottom-0 w-px bg-[#C89B7B]"
+                        initial={{ scaleY: 0 }}
+                        animate={{ scaleY: isInView ? 1 : 0 }}
+                        transition={{ duration: 0.6, ease: 'easeOut' }}
+                        style={{ transformOrigin: 'top' }}
+                    />
+                    <motion.div
+                        className="absolute left-[-3px] top-1/2 -translate-y-1/2 w-[7px] h-[7px] rounded-full bg-[#C89B7B]"
+                        initial={{ scale: 0, opacity: 0 }}
                         animate={{
-                            opacity: isInView ? 1 : 0.5
+                            scale: isInView ? 1.2 : 0,
+                            opacity: isInView ? 1 : 0
                         }}
+                        transition={{ duration: 0.4, delay: 0.3 }}
+                    />
+                </div>
+
+                {/* Desktop Content */}
+                <div className="pl-12 lg:pl-16 pr-8">
+                    <motion.div
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{
+                            opacity: isInView ? 1 : 0.2,
+                            x: isInView ? 0 : -20
+                        }}
+                        transition={{ duration: 0.6 }}
                     >
-                        {data.year}
-                    </motion.p>
+                        {/* Year Label */}
+                        <motion.p
+                            className="font-sans text-sm lg:text-base text-[#C89B7B] tracking-[0.3em] mb-6 lg:mb-8"
+                            animate={{
+                                opacity: isInView ? 1 : 0.5
+                            }}
+                        >
+                            {data.year}
+                        </motion.p>
 
-                    {/* Title */}
-                    <h3 className="font-serif text-4xl lg:text-5xl xl:text-6xl text-white font-light mb-6 lg:mb-8 leading-tight">
-                        {data.title}
-                    </h3>
+                        {/* Title */}
+                        <h3 className="font-serif text-4xl lg:text-5xl xl:text-6xl text-white font-light mb-6 lg:mb-8 leading-tight">
+                            {data.title}
+                        </h3>
 
-                    {/* Body */}
-                    <p className="font-sans text-base lg:text-lg text-gray-300 leading-relaxed max-w-xl">
-                        {data.body}
-                    </p>
-                </motion.div>
+                        {/* Body */}
+                        <p className="font-sans text-lg text-gray-100 font-normal leading-relaxed max-w-xl opacity-90">
+                            {data.body}
+                        </p>
+                    </motion.div>
+                </div>
+            </motion.div>
 
-                {/* Mobile Image */}
+            {/* MOBILE VIEW - Premium Glass Card Design */}
+            <motion.div
+                className="lg:hidden relative p-6 mb-12 rounded-2xl bg-gradient-to-b from-white/5 to-transparent border border-white/5 backdrop-blur-sm"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-100px' }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+            >
+                {/* Year Badge */}
+                <span className="inline-block text-xs font-serif text-[#C89B7B] border border-[#C89B7B]/30 px-3 py-1 rounded-full mb-4">
+                    {data.year}
+                </span>
+
+                {/* Title */}
+                <h3 className="text-3xl font-serif text-white font-light mb-4 leading-tight">
+                    {data.title}
+                </h3>
+
+                {/* Body */}
+                <p className="text-sm text-gray-300 leading-relaxed mb-6">
+                    {data.body}
+                </p>
+
+                {/* Premium Photo Frame */}
                 <motion.div
-                    className="lg:hidden mt-12 relative aspect-video overflow-hidden rounded-lg"
-                    initial={{ opacity: 1, y: 0 }}
+                    className="relative w-full h-64 sm:h-80 rounded-lg overflow-hidden border border-white/10 shadow-2xl"
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true, margin: '-50px' }}
+                    transition={{ duration: 0.5, delay: 0.2 }}
                 >
                     <Image
                         src={data.image}
@@ -105,16 +135,18 @@ const HeritageBlock = ({ data, index, activeIndex, onActivate }) => {
                         fill
                         className="object-cover"
                     />
+                    {/* Subtle vignette for depth */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
                 </motion.div>
-            </div>
-        </motion.div>
+            </motion.div>
+        </>
     );
 };
 
 const StickyImageContainer = ({ activeIndex }) => {
     return (
         <div className="sticky top-0 h-screen flex flex-col justify-center p-8 lg:p-12">
-            <div className="relative w-full aspect-video rounded-xl shadow-2xl overflow-hidden">
+            <div className="relative w-full aspect-[4/3] rounded-xl shadow-2xl overflow-hidden border border-white/10">
                 {heritageData.map((data, index) => (
                     <motion.div
                         key={index}
@@ -198,23 +230,17 @@ export default function HeritageStory() {
                     <StickyImageContainer activeIndex={activeIndex} />
                 </div>
 
-                {/* Mobile: Vertical Stack */}
-                <div className="lg:hidden relative">
-                    {/* Vertical Timeline Base Line */}
-                    <div className="absolute left-0 top-0 bottom-0 w-px bg-white/10" />
-
-                    {/* Heritage Blocks */}
-                    <div className="space-y-16">
-                        {heritageData.map((data, index) => (
-                            <HeritageBlock
-                                key={index}
-                                data={data}
-                                index={index}
-                                activeIndex={activeIndex}
-                                onActivate={setActiveIndex}
-                            />
-                        ))}
-                    </div>
+                {/* Mobile: Glass Card Stack */}
+                <div className="lg:hidden">
+                    {heritageData.map((data, index) => (
+                        <HeritageBlock
+                            key={index}
+                            data={data}
+                            index={index}
+                            activeIndex={activeIndex}
+                            onActivate={setActiveIndex}
+                        />
+                    ))}
                 </div>
             </div>
         </section>
